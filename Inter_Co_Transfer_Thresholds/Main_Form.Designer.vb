@@ -22,14 +22,14 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        lblListingID = New Label()
+        lblICTListingID = New Label()
         lblICTListing = New Label()
         btnAdd = New Button()
         btnDelete = New Button()
         lblDateID = New Label()
-        lblTotalChildren = New Label()
-        lblTotReceived = New Label()
-        lblTotSent = New Label()
+        lblTotICTChildren = New Label()
+        lblTotICTReceived = New Label()
+        lblTotICTSent = New Label()
         Label5 = New Label()
         Label6 = New Label()
         Label7 = New Label()
@@ -46,24 +46,24 @@ Partial Class frmMain
         Label1 = New Label()
         Label2 = New Label()
         Label3 = New Label()
-        Label4 = New Label()
-        Label10 = New Label()
-        Label11 = New Label()
+        lblTotICJSent = New Label()
+        lblTotICJReceived = New Label()
+        lblTotICJChildren = New Label()
         btnICJDelete = New Button()
         brnICJAdd = New Button()
-        Label12 = New Label()
+        lblICJListingID = New Label()
         SuspendLayout()
         ' 
-        ' lblListingID
+        ' lblICTListingID
         ' 
-        lblListingID.AutoSize = True
-        lblListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblListingID.ForeColor = Color.Blue
-        lblListingID.Location = New Point(12, 4)
-        lblListingID.Name = "lblListingID"
-        lblListingID.Size = New Size(521, 32)
-        lblListingID.TabIndex = 0
-        lblListingID.Text = "Listing of Inter County Transfer Supervision:" & vbCrLf
+        lblICTListingID.AutoSize = True
+        lblICTListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblICTListingID.ForeColor = Color.Blue
+        lblICTListingID.Location = New Point(12, 4)
+        lblICTListingID.Name = "lblICTListingID"
+        lblICTListingID.Size = New Size(521, 32)
+        lblICTListingID.TabIndex = 0
+        lblICTListingID.Text = "Listing of Inter County Transfer Supervision:" & vbCrLf
         ' 
         ' lblICTListing
         ' 
@@ -105,35 +105,35 @@ Partial Class frmMain
         lblDateID.TabIndex = 5
         lblDateID.Text = "Today's Date:"
         ' 
-        ' lblTotalChildren
+        ' lblTotICTChildren
         ' 
-        lblTotalChildren.BorderStyle = BorderStyle.FixedSingle
-        lblTotalChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalChildren.Location = New Point(17, 282)
-        lblTotalChildren.Name = "lblTotalChildren"
-        lblTotalChildren.Size = New Size(102, 23)
-        lblTotalChildren.TabIndex = 7
-        lblTotalChildren.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICTChildren.BorderStyle = BorderStyle.FixedSingle
+        lblTotICTChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTChildren.Location = New Point(17, 282)
+        lblTotICTChildren.Name = "lblTotICTChildren"
+        lblTotICTChildren.Size = New Size(102, 23)
+        lblTotICTChildren.TabIndex = 7
+        lblTotICTChildren.TextAlign = ContentAlignment.MiddleCenter
         ' 
-        ' lblTotReceived
+        ' lblTotICTReceived
         ' 
-        lblTotReceived.BorderStyle = BorderStyle.FixedSingle
-        lblTotReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotReceived.Location = New Point(137, 282)
-        lblTotReceived.Name = "lblTotReceived"
-        lblTotReceived.Size = New Size(102, 23)
-        lblTotReceived.TabIndex = 8
-        lblTotReceived.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICTReceived.BorderStyle = BorderStyle.FixedSingle
+        lblTotICTReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTReceived.Location = New Point(137, 282)
+        lblTotICTReceived.Name = "lblTotICTReceived"
+        lblTotICTReceived.Size = New Size(102, 23)
+        lblTotICTReceived.TabIndex = 8
+        lblTotICTReceived.TextAlign = ContentAlignment.MiddleCenter
         ' 
-        ' lblTotSent
+        ' lblTotICTSent
         ' 
-        lblTotSent.BorderStyle = BorderStyle.FixedSingle
-        lblTotSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotSent.Location = New Point(264, 282)
-        lblTotSent.Name = "lblTotSent"
-        lblTotSent.Size = New Size(102, 23)
-        lblTotSent.TabIndex = 9
-        lblTotSent.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICTSent.BorderStyle = BorderStyle.FixedSingle
+        lblTotICTSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTSent.Location = New Point(264, 282)
+        lblTotICTSent.Name = "lblTotICTSent"
+        lblTotICTSent.Size = New Size(102, 23)
+        lblTotICTSent.TabIndex = 9
+        lblTotICTSent.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' Label5
         ' 
@@ -295,35 +295,35 @@ Partial Class frmMain
         Label3.TabIndex = 27
         Label3.Text = "Total ICJ Children:"
         ' 
-        ' Label4
+        ' lblTotICJSent
         ' 
-        Label4.BorderStyle = BorderStyle.FixedSingle
-        Label4.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(264, 534)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(102, 23)
-        Label4.TabIndex = 26
-        Label4.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICJSent.BorderStyle = BorderStyle.FixedSingle
+        lblTotICJSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICJSent.Location = New Point(264, 534)
+        lblTotICJSent.Name = "lblTotICJSent"
+        lblTotICJSent.Size = New Size(102, 23)
+        lblTotICJSent.TabIndex = 26
+        lblTotICJSent.TextAlign = ContentAlignment.MiddleCenter
         ' 
-        ' Label10
+        ' lblTotICJReceived
         ' 
-        Label10.BorderStyle = BorderStyle.FixedSingle
-        Label10.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label10.Location = New Point(137, 534)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(102, 23)
-        Label10.TabIndex = 25
-        Label10.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICJReceived.BorderStyle = BorderStyle.FixedSingle
+        lblTotICJReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICJReceived.Location = New Point(137, 534)
+        lblTotICJReceived.Name = "lblTotICJReceived"
+        lblTotICJReceived.Size = New Size(102, 23)
+        lblTotICJReceived.TabIndex = 25
+        lblTotICJReceived.TextAlign = ContentAlignment.MiddleCenter
         ' 
-        ' Label11
+        ' lblTotICJChildren
         ' 
-        Label11.BorderStyle = BorderStyle.FixedSingle
-        Label11.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(17, 534)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(102, 23)
-        Label11.TabIndex = 24
-        Label11.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICJChildren.BorderStyle = BorderStyle.FixedSingle
+        lblTotICJChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICJChildren.Location = New Point(17, 534)
+        lblTotICJChildren.Name = "lblTotICJChildren"
+        lblTotICJChildren.Size = New Size(102, 23)
+        lblTotICJChildren.TabIndex = 24
+        lblTotICJChildren.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' btnICJDelete
         ' 
@@ -345,16 +345,16 @@ Partial Class frmMain
         brnICJAdd.Text = "Add New"
         brnICJAdd.UseVisualStyleBackColor = False
         ' 
-        ' Label12
+        ' lblICJListingID
         ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label12.ForeColor = Color.Blue
-        Label12.Location = New Point(12, 343)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(503, 32)
-        Label12.TabIndex = 30
-        Label12.Text = "Listing of Inter State Compact Supervision:"
+        lblICJListingID.AutoSize = True
+        lblICJListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblICJListingID.ForeColor = Color.Blue
+        lblICJListingID.Location = New Point(12, 343)
+        lblICJListingID.Name = "lblICJListingID"
+        lblICJListingID.Size = New Size(503, 32)
+        lblICJListingID.TabIndex = 30
+        lblICJListingID.Text = "Listing of Inter State Compact Supervision:"
         ' 
         ' frmMain
         ' 
@@ -363,14 +363,14 @@ Partial Class frmMain
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = brnClose
         ClientSize = New Size(1135, 668)
-        Controls.Add(Label12)
+        Controls.Add(lblICJListingID)
         Controls.Add(btnICJSearch)
         Controls.Add(Label1)
         Controls.Add(Label2)
         Controls.Add(Label3)
-        Controls.Add(Label4)
-        Controls.Add(Label10)
-        Controls.Add(Label11)
+        Controls.Add(lblTotICJSent)
+        Controls.Add(lblTotICJReceived)
+        Controls.Add(lblTotICJChildren)
         Controls.Add(btnICJDelete)
         Controls.Add(brnICJAdd)
         Controls.Add(lblICJListing)
@@ -384,15 +384,15 @@ Partial Class frmMain
         Controls.Add(Label7)
         Controls.Add(Label6)
         Controls.Add(Label5)
-        Controls.Add(lblTotSent)
-        Controls.Add(lblTotReceived)
-        Controls.Add(lblTotalChildren)
+        Controls.Add(lblTotICTSent)
+        Controls.Add(lblTotICTReceived)
+        Controls.Add(lblTotICTChildren)
         Controls.Add(lblDateID)
         Controls.Add(brnClose)
         Controls.Add(btnDelete)
         Controls.Add(btnAdd)
         Controls.Add(lblICTListing)
-        Controls.Add(lblListingID)
+        Controls.Add(lblICTListingID)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Name = "frmMain"
         StartPosition = FormStartPosition.CenterScreen
@@ -401,14 +401,14 @@ Partial Class frmMain
         PerformLayout()
     End Sub
 
-    Friend WithEvents lblListingID As Label
+    Friend WithEvents lblICTListingID As Label
     Friend WithEvents lblICTListing As Label
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents lblDateID As Label
-    Friend WithEvents lblTotalChildren As Label
-    Friend WithEvents lblTotReceived As Label
-    Friend WithEvents lblTotSent As Label
+    Friend WithEvents lblTotICTChildren As Label
+    Friend WithEvents lblTotICTReceived As Label
+    Friend WithEvents lblTotICTSent As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
@@ -425,11 +425,11 @@ Partial Class frmMain
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label11 As Label
+    Friend WithEvents lblTotICJSent As Label
+    Friend WithEvents lblTotICJReceived As Label
+    Friend WithEvents lblTotICJChildren As Label
     Friend WithEvents btnICJDelete As Button
     Friend WithEvents brnICJAdd As Button
-    Friend WithEvents Label12 As Label
+    Friend WithEvents lblICJListingID As Label
 
 End Class

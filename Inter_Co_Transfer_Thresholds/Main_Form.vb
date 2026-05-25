@@ -195,9 +195,9 @@ Public Class frmMain
                 End If
             Next
 
-            lblTotalChildren.Text = (listing - 1).ToString
-            lblTotReceived.Text = recieve.ToString
-            lblTotSent.Text = sent.ToString
+            lblTotICTChildren.Text = (listing - 1).ToString
+            lblTotICTReceived.Text = recieve.ToString
+            lblTotICTSent.Text = sent.ToString
 
         Catch ex As Exception
             MessageBox.Show("An error occurred while pulling data: " &
