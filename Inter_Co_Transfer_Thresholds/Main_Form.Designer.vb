@@ -51,6 +51,7 @@ Partial Class frmMain
         Label11 = New Label()
         btnICJDelete = New Button()
         brnICJAdd = New Button()
+        Label12 = New Label()
         SuspendLayout()
         ' 
         ' lblListingID
@@ -58,18 +59,18 @@ Partial Class frmMain
         lblListingID.AutoSize = True
         lblListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblListingID.ForeColor = Color.Blue
-        lblListingID.Location = New Point(12, 15)
+        lblListingID.Location = New Point(12, 4)
         lblListingID.Name = "lblListingID"
-        lblListingID.Size = New Size(333, 32)
+        lblListingID.Size = New Size(521, 32)
         lblListingID.TabIndex = 0
-        lblListingID.Text = "Listing of Current Transfers:" & vbCrLf
+        lblListingID.Text = "Listing of Inter County Transfer Supervision:" & vbCrLf
         ' 
         ' lblICTListing
         ' 
         lblICTListing.BackColor = SystemColors.ActiveCaptionText
         lblICTListing.Font = New Font("Cascadia Mono", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblICTListing.ForeColor = SystemColors.Control
-        lblICTListing.Location = New Point(12, 59)
+        lblICTListing.Location = New Point(12, 36)
         lblICTListing.Name = "lblICTListing"
         lblICTListing.Size = New Size(1110, 213)
         lblICTListing.TabIndex = 1
@@ -77,7 +78,7 @@ Partial Class frmMain
         ' btnAdd
         ' 
         btnAdd.BackColor = Color.Green
-        btnAdd.Location = New Point(826, 286)
+        btnAdd.Location = New Point(826, 263)
         btnAdd.Name = "btnAdd"
         btnAdd.Size = New Size(75, 39)
         btnAdd.TabIndex = 1
@@ -87,7 +88,7 @@ Partial Class frmMain
         ' btnDelete
         ' 
         btnDelete.BackColor = Color.Red
-        btnDelete.Location = New Point(1047, 286)
+        btnDelete.Location = New Point(1047, 263)
         btnDelete.Name = "btnDelete"
         btnDelete.Size = New Size(75, 39)
         btnDelete.TabIndex = 3
@@ -98,7 +99,7 @@ Partial Class frmMain
         ' 
         lblDateID.AutoSize = True
         lblDateID.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblDateID.Location = New Point(18, 571)
+        lblDateID.Location = New Point(18, 609)
         lblDateID.Name = "lblDateID"
         lblDateID.Size = New Size(80, 15)
         lblDateID.TabIndex = 5
@@ -108,7 +109,7 @@ Partial Class frmMain
         ' 
         lblTotalChildren.BorderStyle = BorderStyle.FixedSingle
         lblTotalChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalChildren.Location = New Point(17, 305)
+        lblTotalChildren.Location = New Point(17, 282)
         lblTotalChildren.Name = "lblTotalChildren"
         lblTotalChildren.Size = New Size(102, 23)
         lblTotalChildren.TabIndex = 7
@@ -118,7 +119,7 @@ Partial Class frmMain
         ' 
         lblTotReceived.BorderStyle = BorderStyle.FixedSingle
         lblTotReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotReceived.Location = New Point(137, 305)
+        lblTotReceived.Location = New Point(137, 282)
         lblTotReceived.Name = "lblTotReceived"
         lblTotReceived.Size = New Size(102, 23)
         lblTotReceived.TabIndex = 8
@@ -128,7 +129,7 @@ Partial Class frmMain
         ' 
         lblTotSent.BorderStyle = BorderStyle.FixedSingle
         lblTotSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotSent.Location = New Point(264, 305)
+        lblTotSent.Location = New Point(264, 282)
         lblTotSent.Name = "lblTotSent"
         lblTotSent.Size = New Size(102, 23)
         lblTotSent.TabIndex = 9
@@ -138,7 +139,7 @@ Partial Class frmMain
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label5.Location = New Point(12, 286)
+        Label5.Location = New Point(12, 263)
         Label5.Name = "Label5"
         Label5.Size = New Size(107, 15)
         Label5.TabIndex = 12
@@ -148,7 +149,7 @@ Partial Class frmMain
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label6.Location = New Point(137, 286)
+        Label6.Location = New Point(137, 263)
         Label6.Name = "Label6"
         Label6.Size = New Size(106, 15)
         Label6.TabIndex = 13
@@ -158,7 +159,7 @@ Partial Class frmMain
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label7.Location = New Point(264, 286)
+        Label7.Location = New Point(264, 263)
         Label7.Name = "Label7"
         Label7.Size = New Size(87, 15)
         Label7.TabIndex = 14
@@ -168,7 +169,7 @@ Partial Class frmMain
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label8.Location = New Point(193, 571)
+        Label8.Location = New Point(193, 609)
         Label8.Name = "Label8"
         Label8.Size = New Size(119, 15)
         Label8.TabIndex = 15
@@ -178,7 +179,7 @@ Partial Class frmMain
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label9.Location = New Point(373, 571)
+        Label9.Location = New Point(373, 609)
         Label9.Name = "Label9"
         Label9.Size = New Size(126, 15)
         Label9.TabIndex = 16
@@ -189,7 +190,7 @@ Partial Class frmMain
         dtpNinety.Enabled = False
         dtpNinety.Font = New Font("Segoe UI", 11.25F)
         dtpNinety.Format = DateTimePickerFormat.Short
-        dtpNinety.Location = New Point(193, 589)
+        dtpNinety.Location = New Point(193, 627)
         dtpNinety.Name = "dtpNinety"
         dtpNinety.Size = New Size(131, 27)
         dtpNinety.TabIndex = 17
@@ -199,7 +200,7 @@ Partial Class frmMain
         dtpOneEighty.Enabled = False
         dtpOneEighty.Font = New Font("Segoe UI", 11.25F)
         dtpOneEighty.Format = DateTimePickerFormat.Short
-        dtpOneEighty.Location = New Point(373, 589)
+        dtpOneEighty.Location = New Point(373, 627)
         dtpOneEighty.Name = "dtpOneEighty"
         dtpOneEighty.Size = New Size(131, 27)
         dtpOneEighty.TabIndex = 18
@@ -209,7 +210,7 @@ Partial Class frmMain
         dtpToday.Enabled = False
         dtpToday.Font = New Font("Segoe UI", 11.25F)
         dtpToday.Format = DateTimePickerFormat.Short
-        dtpToday.Location = New Point(17, 589)
+        dtpToday.Location = New Point(17, 627)
         dtpToday.Name = "dtpToday"
         dtpToday.Size = New Size(131, 27)
         dtpToday.TabIndex = 19
@@ -217,7 +218,7 @@ Partial Class frmMain
         ' brnClose
         ' 
         brnClose.BackColor = Color.SkyBlue
-        brnClose.Location = New Point(1047, 571)
+        brnClose.Location = New Point(1047, 609)
         brnClose.Name = "brnClose"
         brnClose.Size = New Size(75, 39)
         brnClose.TabIndex = 4
@@ -227,7 +228,7 @@ Partial Class frmMain
         ' btnSearch
         ' 
         btnSearch.BackColor = Color.Gold
-        btnSearch.Location = New Point(935, 286)
+        btnSearch.Location = New Point(935, 263)
         btnSearch.Name = "btnSearch"
         btnSearch.Size = New Size(75, 39)
         btnSearch.TabIndex = 2
@@ -237,7 +238,7 @@ Partial Class frmMain
         ' btnRefresh
         ' 
         btnRefresh.BackColor = Color.DodgerBlue
-        btnRefresh.Location = New Point(935, 571)
+        btnRefresh.Location = New Point(935, 609)
         btnRefresh.Name = "btnRefresh"
         btnRefresh.Size = New Size(75, 39)
         btnRefresh.TabIndex = 0
@@ -249,7 +250,7 @@ Partial Class frmMain
         lblICJListing.BackColor = SystemColors.ActiveCaptionText
         lblICJListing.Font = New Font("Cascadia Mono", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblICJListing.ForeColor = SystemColors.Control
-        lblICJListing.Location = New Point(12, 355)
+        lblICJListing.Location = New Point(12, 375)
         lblICJListing.Name = "lblICJListing"
         lblICJListing.Size = New Size(1110, 127)
         lblICJListing.TabIndex = 20
@@ -257,7 +258,7 @@ Partial Class frmMain
         ' btnICJSearch
         ' 
         btnICJSearch.BackColor = Color.Gold
-        btnICJSearch.Location = New Point(935, 495)
+        btnICJSearch.Location = New Point(935, 515)
         btnICJSearch.Name = "btnICJSearch"
         btnICJSearch.Size = New Size(75, 39)
         btnICJSearch.TabIndex = 22
@@ -268,7 +269,7 @@ Partial Class frmMain
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label1.Location = New Point(264, 495)
+        Label1.Location = New Point(264, 515)
         Label1.Name = "Label1"
         Label1.Size = New Size(85, 15)
         Label1.TabIndex = 29
@@ -278,7 +279,7 @@ Partial Class frmMain
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label2.Location = New Point(137, 495)
+        Label2.Location = New Point(137, 515)
         Label2.Name = "Label2"
         Label2.Size = New Size(104, 15)
         Label2.TabIndex = 28
@@ -288,7 +289,7 @@ Partial Class frmMain
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label3.Location = New Point(12, 495)
+        Label3.Location = New Point(12, 515)
         Label3.Name = "Label3"
         Label3.Size = New Size(105, 15)
         Label3.TabIndex = 27
@@ -298,7 +299,7 @@ Partial Class frmMain
         ' 
         Label4.BorderStyle = BorderStyle.FixedSingle
         Label4.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(264, 514)
+        Label4.Location = New Point(264, 534)
         Label4.Name = "Label4"
         Label4.Size = New Size(102, 23)
         Label4.TabIndex = 26
@@ -308,7 +309,7 @@ Partial Class frmMain
         ' 
         Label10.BorderStyle = BorderStyle.FixedSingle
         Label10.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label10.Location = New Point(137, 514)
+        Label10.Location = New Point(137, 534)
         Label10.Name = "Label10"
         Label10.Size = New Size(102, 23)
         Label10.TabIndex = 25
@@ -318,7 +319,7 @@ Partial Class frmMain
         ' 
         Label11.BorderStyle = BorderStyle.FixedSingle
         Label11.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(17, 514)
+        Label11.Location = New Point(17, 534)
         Label11.Name = "Label11"
         Label11.Size = New Size(102, 23)
         Label11.TabIndex = 24
@@ -327,7 +328,7 @@ Partial Class frmMain
         ' btnICJDelete
         ' 
         btnICJDelete.BackColor = Color.Red
-        btnICJDelete.Location = New Point(1047, 495)
+        btnICJDelete.Location = New Point(1047, 515)
         btnICJDelete.Name = "btnICJDelete"
         btnICJDelete.Size = New Size(75, 39)
         btnICJDelete.TabIndex = 23
@@ -337,12 +338,23 @@ Partial Class frmMain
         ' brnICJAdd
         ' 
         brnICJAdd.BackColor = Color.Green
-        brnICJAdd.Location = New Point(826, 495)
+        brnICJAdd.Location = New Point(826, 515)
         brnICJAdd.Name = "brnICJAdd"
         brnICJAdd.Size = New Size(75, 39)
         brnICJAdd.TabIndex = 21
         brnICJAdd.Text = "Add New"
         brnICJAdd.UseVisualStyleBackColor = False
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label12.ForeColor = Color.Blue
+        Label12.Location = New Point(12, 343)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(503, 32)
+        Label12.TabIndex = 30
+        Label12.Text = "Listing of Inter State Compact Supervision:"
         ' 
         ' frmMain
         ' 
@@ -350,7 +362,8 @@ Partial Class frmMain
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = brnClose
-        ClientSize = New Size(1135, 625)
+        ClientSize = New Size(1135, 668)
+        Controls.Add(Label12)
         Controls.Add(btnICJSearch)
         Controls.Add(Label1)
         Controls.Add(Label2)
@@ -417,5 +430,6 @@ Partial Class frmMain
     Friend WithEvents Label11 As Label
     Friend WithEvents btnICJDelete As Button
     Friend WithEvents brnICJAdd As Button
+    Friend WithEvents Label12 As Label
 
 End Class
