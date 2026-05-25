@@ -116,7 +116,7 @@ Public Class frmDelete
 
         CleanForm()
         frmMain.Show()
-        frmMain.lblListing.Text = "Please Press Refresh to Update Data."
+        frmMain.lblICTListing.Text = "Please Press Refresh to Update Data."
         Me.Close()
 
     End Sub

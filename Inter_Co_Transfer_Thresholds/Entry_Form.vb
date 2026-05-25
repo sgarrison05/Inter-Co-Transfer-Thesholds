@@ -30,9 +30,9 @@
         ClearForm()
         cmbType.Items.Clear()
         cmbOfficer.Items.Clear()
-        frmMain.lblListing.Text = String.Empty
+        frmMain.lblICTListing.Text = String.Empty
         frmMain.Show()
-        frmMain.lblListing.Text = "Please Press Refresh to Update Data."
+        frmMain.lblICTListing.Text = "Please Press Refresh to Update Data."
         Me.Close()
 
     End Sub

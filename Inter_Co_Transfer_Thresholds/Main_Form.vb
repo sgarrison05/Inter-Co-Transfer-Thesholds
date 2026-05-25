@@ -189,7 +189,7 @@ Public Class frmMain
                         sent += 1
                     End If
 
-                    lblListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+                    lblICTListing.Text &= listing.ToString & ".)  " & display & vbCrLf
                     listing += 1
 
                 End If
@@ -213,7 +213,8 @@ Public Class frmMain
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
 
         Hide()
-        Using f As New frmEntry()
+
+        Using f As New frmEntry
             f.ShowDialog()
         End Using
 
@@ -228,7 +229,8 @@ Public Class frmMain
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
 
         Hide()
-        Using f As New frmSearch()
+
+        Using f As New frmSearch
             f.ShowDialog()
         End Using
 
@@ -237,7 +239,7 @@ Public Class frmMain
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
 
         ' Clear form before each pull to prevent duplication of listings.
-        lblListing.Text = String.Empty
+        lblICTListing.Text = String.Empty
 
         If RefreshFile() Then
             PullData()
@@ -246,8 +248,9 @@ Public Class frmMain
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Me.Hide()
-        Using f As New frmDelete()
+        Hide()
+
+        Using f As New frmDelete
             f.ShowDialog()
         End Using
     End Sub
