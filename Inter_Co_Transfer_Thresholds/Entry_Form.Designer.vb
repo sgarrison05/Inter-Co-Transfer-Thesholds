@@ -55,7 +55,7 @@ Partial Class frmEntry
         ' Label9
         ' 
         Label9.AutoSize = True
-        Label9.Location = New Point(555, 368)
+        Label9.Location = New Point(555, 275)
         Label9.Name = "Label9"
         Label9.Size = New Size(97, 15)
         Label9.TabIndex = 26
@@ -64,7 +64,7 @@ Partial Class frmEntry
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(170, 368)
+        Label8.Location = New Point(170, 275)
         Label8.Name = "Label8"
         Label8.Size = New Size(119, 15)
         Label8.TabIndex = 25
@@ -73,7 +73,7 @@ Partial Class frmEntry
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Location = New Point(205, 186)
+        Label7.Location = New Point(205, 93)
         Label7.Name = "Label7"
         Label7.Size = New Size(95, 15)
         Label7.TabIndex = 24
@@ -82,7 +82,7 @@ Partial Class frmEntry
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Location = New Point(395, 186)
+        Label6.Location = New Point(395, 93)
         Label6.Name = "Label6"
         Label6.Size = New Size(34, 15)
         Label6.TabIndex = 23
@@ -91,7 +91,7 @@ Partial Class frmEntry
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Location = New Point(592, 186)
+        Label5.Location = New Point(395, 24)
         Label5.Name = "Label5"
         Label5.Size = New Size(46, 15)
         Label5.TabIndex = 22
@@ -100,7 +100,7 @@ Partial Class frmEntry
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(203, 273)
+        Label4.Location = New Point(203, 180)
         Label4.Name = "Label4"
         Label4.Size = New Size(57, 15)
         Label4.TabIndex = 21
@@ -109,7 +109,7 @@ Partial Class frmEntry
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(411, 368)
+        Label3.Location = New Point(411, 275)
         Label3.Name = "Label3"
         Label3.Size = New Size(106, 15)
         Label3.TabIndex = 20
@@ -118,7 +118,7 @@ Partial Class frmEntry
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(15, 368)
+        Label2.Location = New Point(15, 275)
         Label2.Name = "Label2"
         Label2.Size = New Size(120, 15)
         Label2.TabIndex = 19
@@ -127,7 +127,7 @@ Partial Class frmEntry
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(16, 273)
+        Label1.Location = New Point(16, 180)
         Label1.Name = "Label1"
         Label1.Size = New Size(61, 15)
         Label1.TabIndex = 18
@@ -153,7 +153,7 @@ Partial Class frmEntry
         ' txbSendCo
         ' 
         txbSendCo.Font = New Font("Segoe UI", 12F)
-        txbSendCo.Location = New Point(205, 213)
+        txbSendCo.Location = New Point(205, 120)
         txbSendCo.Name = "txbSendCo"
         txbSendCo.Size = New Size(178, 29)
         txbSendCo.TabIndex = 2
@@ -162,7 +162,7 @@ Partial Class frmEntry
         ' 
         dtpStart.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         dtpStart.Format = DateTimePickerFormat.Short
-        dtpStart.Location = New Point(16, 291)
+        dtpStart.Location = New Point(16, 198)
         dtpStart.Name = "dtpStart"
         dtpStart.Size = New Size(137, 29)
         dtpStart.TabIndex = 5
@@ -171,7 +171,7 @@ Partial Class frmEntry
         ' 
         dtpEnd.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         dtpEnd.Format = DateTimePickerFormat.Short
-        dtpEnd.Location = New Point(203, 291)
+        dtpEnd.Location = New Point(203, 198)
         dtpEnd.Name = "dtpEnd"
         dtpEnd.Size = New Size(137, 29)
         dtpEnd.TabIndex = 6
@@ -180,7 +180,7 @@ Partial Class frmEntry
         ' 
         cmbType.Font = New Font("Segoe UI", 12F)
         cmbType.FormattingEnabled = True
-        cmbType.Location = New Point(395, 213)
+        cmbType.Location = New Point(395, 120)
         cmbType.Name = "cmbType"
         cmbType.Size = New Size(187, 29)
         cmbType.TabIndex = 3
@@ -189,7 +189,7 @@ Partial Class frmEntry
         ' 
         cmbOfficer.Font = New Font("Segoe UI", 12F)
         cmbOfficer.FormattingEnabled = True
-        cmbOfficer.Location = New Point(592, 212)
+        cmbOfficer.Location = New Point(395, 42)
         cmbOfficer.Name = "cmbOfficer"
         cmbOfficer.Size = New Size(126, 29)
         cmbOfficer.TabIndex = 4
@@ -197,7 +197,7 @@ Partial Class frmEntry
         ' lblProgRptDate
         ' 
         lblProgRptDate.BorderStyle = BorderStyle.FixedSingle
-        lblProgRptDate.Location = New Point(18, 392)
+        lblProgRptDate.Location = New Point(18, 299)
         lblProgRptDate.Name = "lblProgRptDate"
         lblProgRptDate.Size = New Size(103, 23)
         lblProgRptDate.TabIndex = 34
@@ -207,7 +207,7 @@ Partial Class frmEntry
         ' 
         lblDaysRemainProg.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainProg.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainProg.Location = New Point(173, 392)
+        lblDaysRemainProg.Location = New Point(173, 299)
         lblDaysRemainProg.Name = "lblDaysRemainProg"
         lblDaysRemainProg.Size = New Size(57, 23)
         lblDaysRemainProg.TabIndex = 35
@@ -216,7 +216,7 @@ Partial Class frmEntry
         ' lblTransThreshold
         ' 
         lblTransThreshold.BorderStyle = BorderStyle.FixedSingle
-        lblTransThreshold.Location = New Point(414, 392)
+        lblTransThreshold.Location = New Point(414, 299)
         lblTransThreshold.Name = "lblTransThreshold"
         lblTransThreshold.Size = New Size(103, 23)
         lblTransThreshold.TabIndex = 36
@@ -226,7 +226,7 @@ Partial Class frmEntry
         ' 
         lblDaysRemainTrns.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainTrns.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainTrns.Location = New Point(558, 392)
+        lblDaysRemainTrns.Location = New Point(558, 299)
         lblDaysRemainTrns.Name = "lblDaysRemainTrns"
         lblDaysRemainTrns.Size = New Size(57, 23)
         lblDaysRemainTrns.TabIndex = 37
@@ -234,7 +234,7 @@ Partial Class frmEntry
         ' 
         ' Label14
         ' 
-        Label14.Location = New Point(231, 393)
+        Label14.Location = New Point(231, 300)
         Label14.Name = "Label14"
         Label14.Size = New Size(47, 22)
         Label14.TabIndex = 38
@@ -243,7 +243,7 @@ Partial Class frmEntry
         ' 
         ' Label15
         ' 
-        Label15.Location = New Point(617, 392)
+        Label15.Location = New Point(617, 299)
         Label15.Name = "Label15"
         Label15.Size = New Size(47, 22)
         Label15.TabIndex = 39
@@ -274,7 +274,7 @@ Partial Class frmEntry
         ' 
         Label16.AutoSize = True
         Label16.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label16.Location = New Point(164, 298)
+        Label16.Location = New Point(164, 205)
         Label16.Name = "Label16"
         Label16.Size = New Size(30, 15)
         Label16.TabIndex = 42
@@ -283,7 +283,7 @@ Partial Class frmEntry
         ' txbReceiveCo
         ' 
         txbReceiveCo.Font = New Font("Segoe UI", 12F)
-        txbReceiveCo.Location = New Point(16, 212)
+        txbReceiveCo.Location = New Point(16, 119)
         txbReceiveCo.Name = "txbReceiveCo"
         txbReceiveCo.Size = New Size(178, 29)
         txbReceiveCo.TabIndex = 1
@@ -291,7 +291,7 @@ Partial Class frmEntry
         ' Label10
         ' 
         Label10.AutoSize = True
-        Label10.Location = New Point(16, 185)
+        Label10.Location = New Point(16, 92)
         Label10.Name = "Label10"
         Label10.Size = New Size(103, 15)
         Label10.TabIndex = 43
@@ -314,7 +314,7 @@ Partial Class frmEntry
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
-        ClientSize = New Size(738, 444)
+        ClientSize = New Size(738, 356)
         Controls.Add(btnClear)
         Controls.Add(txbReceiveCo)
         Controls.Add(Label10)
