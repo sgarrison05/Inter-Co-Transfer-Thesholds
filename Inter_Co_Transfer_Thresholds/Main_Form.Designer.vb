@@ -50,7 +50,7 @@ Partial Class frmMain
         lblTotICJReceived = New Label()
         lblTotICJChildren = New Label()
         btnICJDelete = New Button()
-        brnICJAdd = New Button()
+        btnICJAdd = New Button()
         lblICJListingID = New Label()
         SuspendLayout()
         ' 
@@ -335,15 +335,15 @@ Partial Class frmMain
         btnICJDelete.Text = "Delete"
         btnICJDelete.UseVisualStyleBackColor = False
         ' 
-        ' brnICJAdd
+        ' btnICJAdd
         ' 
-        brnICJAdd.BackColor = Color.Green
-        brnICJAdd.Location = New Point(826, 515)
-        brnICJAdd.Name = "brnICJAdd"
-        brnICJAdd.Size = New Size(75, 39)
-        brnICJAdd.TabIndex = 21
-        brnICJAdd.Text = "Add New"
-        brnICJAdd.UseVisualStyleBackColor = False
+        btnICJAdd.BackColor = Color.Green
+        btnICJAdd.Location = New Point(826, 515)
+        btnICJAdd.Name = "btnICJAdd"
+        btnICJAdd.Size = New Size(75, 39)
+        btnICJAdd.TabIndex = 21
+        btnICJAdd.Text = "Add New"
+        btnICJAdd.UseVisualStyleBackColor = False
         ' 
         ' lblICJListingID
         ' 
@@ -372,7 +372,7 @@ Partial Class frmMain
         Controls.Add(lblTotICJReceived)
         Controls.Add(lblTotICJChildren)
         Controls.Add(btnICJDelete)
-        Controls.Add(brnICJAdd)
+        Controls.Add(btnICJAdd)
         Controls.Add(lblICJListing)
         Controls.Add(btnRefresh)
         Controls.Add(btnSearch)
@@ -429,7 +429,7 @@ Partial Class frmMain
     Friend WithEvents lblTotICJReceived As Label
     Friend WithEvents lblTotICJChildren As Label
     Friend WithEvents btnICJDelete As Button
-    Friend WithEvents brnICJAdd As Button
+    Friend WithEvents btnICJAdd As Button
     Friend WithEvents lblICJListingID As Label
 
 End Class

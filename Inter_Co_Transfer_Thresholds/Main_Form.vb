@@ -254,4 +254,13 @@ Public Class frmMain
             f.ShowDialog()
         End Using
     End Sub
+
+    Private Sub btnICJAdd_Click(sender As Object, e As EventArgs) Handles btnICJAdd.Click
+
+        Hide()
+        Using f As New frmICJEntry
+            f.ShowDialog()
+        End Using
+
+    End Sub
 End Class
