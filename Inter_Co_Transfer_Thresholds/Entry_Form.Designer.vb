@@ -50,7 +50,7 @@ Partial Class frmEntry
         txbReceiveCo = New TextBox()
         Label10 = New Label()
         btnClear = New Button()
-        lblFormID = New Label()
+        lblICTFormID = New Label()
         SuspendLayout()
         ' 
         ' Label9
@@ -308,16 +308,16 @@ Partial Class frmEntry
         btnClear.Text = "Clear"
         btnClear.UseVisualStyleBackColor = False
         ' 
-        ' lblFormID
+        ' lblICTFormID
         ' 
-        lblFormID.AutoSize = True
-        lblFormID.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblFormID.ForeColor = Color.RoyalBlue
-        lblFormID.Location = New Point(16, 9)
-        lblFormID.Name = "lblFormID"
-        lblFormID.Size = New Size(267, 25)
-        lblFormID.TabIndex = 45
-        lblFormID.Text = "Inter County Transfer Search"
+        lblICTFormID.AutoSize = True
+        lblICTFormID.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblICTFormID.ForeColor = Color.RoyalBlue
+        lblICTFormID.Location = New Point(16, 9)
+        lblICTFormID.Name = "lblICTFormID"
+        lblICTFormID.Size = New Size(256, 25)
+        lblICTFormID.TabIndex = 45
+        lblICTFormID.Text = "Inter County Transfer Entry"
         ' 
         ' frmEntry
         ' 
@@ -327,7 +327,7 @@ Partial Class frmEntry
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
         ClientSize = New Size(738, 369)
-        Controls.Add(lblFormID)
+        Controls.Add(lblICTFormID)
         Controls.Add(btnClear)
         Controls.Add(txbReceiveCo)
         Controls.Add(Label10)
@@ -391,5 +391,5 @@ Partial Class frmEntry
     Friend WithEvents txbReceiveCo As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents btnClear As Button
-    Friend WithEvents lblFormID As Label
+    Friend WithEvents lblICTFormID As Label
 End Class

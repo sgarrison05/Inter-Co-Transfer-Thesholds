@@ -295,9 +295,9 @@ Partial Class frmICJEntry
         lblFormID.ForeColor = Color.Maroon
         lblFormID.Location = New Point(16, 9)
         lblFormID.Name = "lblFormID"
-        lblFormID.Size = New Size(359, 25)
+        lblFormID.Size = New Size(348, 25)
         lblFormID.TabIndex = 44
-        lblFormID.Text = "Interstate Compact on Juveniles Search"
+        lblFormID.Text = "Interstate Compact on Juveniles Entry"
         ' 
         ' frmICJEntry
         ' 
