@@ -243,7 +243,7 @@ Partial Class frmICJEntry
         ' 
         ' btnReturn
         ' 
-        btnReturn.BackColor = Color.Gold
+        btnReturn.BackColor = Color.Orange
         btnReturn.Location = New Point(643, 117)
         btnReturn.Name = "btnReturn"
         btnReturn.Size = New Size(75, 40)
