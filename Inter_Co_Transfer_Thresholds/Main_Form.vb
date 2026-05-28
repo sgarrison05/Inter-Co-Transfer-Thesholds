@@ -2,7 +2,7 @@
 'Purpose:       To manage progress reports and thresholds for inter-county transfers
 'Created:       October 31, 2025
 'By:            Shon Garrison
-'Last Updated:  April 2026
+'Last Updated:  May 2026
 'Version: 1.0.1.0
 
 Option Explicit On
@@ -17,6 +17,7 @@ Public Class frmMain
     Private title As String = "Inter County Transfer Thresholds"
     Public Shared ReadOnly tdirectory As String = Path.Combine("D:\Temp", "Transfers")
     Public Shared ReadOnly tfile As String = Path.Combine(tdirectory, "ICT_Thresholds.txt")
+    Public Shared ReadOnly icjfile As String = Path.Combine(tdirectory, "ICJ_Thresholds.txt")
 
     '------------------------------ Form Events --------------------------------------------------
 
