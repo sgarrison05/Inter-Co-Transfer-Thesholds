@@ -16,7 +16,7 @@ Public Class frmMain
 
     Private title As String = "Inter County Transfer Thresholds"
     Public Shared ReadOnly tdirectory As String = Path.Combine("D:\Temp", "Transfers")
-    Public Shared ReadOnly tfile As String = Path.Combine(tdirectory, "ICT_Thresholds.txt")
+    Public Shared ReadOnly ictfile As String = Path.Combine(tdirectory, "ICT_Thresholds.txt")
     Public Shared ReadOnly icjfile As String = Path.Combine(tdirectory, "ICJ_Thresholds.txt")
 
     '------------------------------ Form Events --------------------------------------------------
@@ -32,7 +32,8 @@ Public Class frmMain
 
         Dim button As DialogResult
 
-        If Not My.Computer.FileSystem.FileExists(tfile) Then
+        ' --- ICT File Check ---
+        If Not My.Computer.FileSystem.FileExists(ictfile) Then
 
             button = MessageBox.Show("Thresholds file not found." & vbCrLf &
                                      "Would you like to Create it?",
@@ -48,24 +49,44 @@ Public Class frmMain
                 Me.Close()
             End If
         Else
-            If RefreshFile() Then
-                PullData()
+            If RefreshFile(ictfile, isInterstate:=False) Then
+                PullICTData()
+            End If
+        End If
 
+        ' --- Interstate File Check ---
+        If Not My.Computer.FileSystem.FileExists(icjfile) Then
+
+            button = MessageBox.Show("Interstate Thresholds file not found." & vbCrLf &
+                                     "Would you like to create it?",
+                                     title, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                                     MessageBoxDefaultButton.Button1)
+
+            If button = DialogResult.Yes Then
+                Me.Hide()
+                Using f As New frmEntry()
+                    f.ShowDialog()
+                End Using
+            End If
+            ' If No, simply continue — Interstate section stays empty
+        Else
+            If RefreshFile(icjfile, isInterstate:=True) Then
+                PullICJData()
             End If
         End If
     End Sub
 
     '------------------------------ Private Subroutines  ---------------------------------------
 
-    Private Function RefreshFile() As Boolean
+    Private Function RefreshFile(filepath As String, isInterstate As Boolean) As Boolean
 
-        Dim tempPath As String = Path.Combine(Path.GetDirectoryName(tfile),
-                                              Path.GetFileNameWithoutExtension(tfile) & ".tmp" &
-                                              Path.GetExtension(tfile))
+        Dim tempPath As String = Path.Combine(Path.GetDirectoryName(ictfile),
+                                              Path.GetFileNameWithoutExtension(ictfile) & ".tmp" &
+                                              Path.GetExtension(ictfile))
 
         Try
 
-            Dim readtxt As String = File.ReadAllText(tfile)
+            Dim readtxt As String = File.ReadAllText(ictfile)
             Dim lines() As String = Split(readtxt, vbCrLf)
 
             ' Remove temp file if one already exists from a previous failed run
@@ -131,8 +152,8 @@ Public Class frmMain
             Next
 
             ' Replace original file with updated temp file
-            File.Delete(tfile)
-            File.Move(tempPath, tfile)
+            File.Delete(ictfile)
+            File.Move(tempPath, ictfile)
 
             Return True
 
@@ -149,9 +170,9 @@ Public Class frmMain
 
     End Function
 
-    Private Sub PullData()
+    Private Sub PullICTData()
         Try
-            Dim myText As String = My.Computer.FileSystem.ReadAllText(tfile)
+            Dim myText As String = My.Computer.FileSystem.ReadAllText(ictfile)
             Dim mySentence() As String = Split(myText, vbCrLf)
             Dim listing As Integer = 1  ' Counter for each record
             Dim recieve As Integer = 0  ' Counter for receiving County
@@ -209,6 +230,59 @@ Public Class frmMain
         End Try
     End Sub
 
+    Private Sub PullICJData()
+        Try
+
+            Dim myText As String = My.Computer.FileSystem.ReadAllText(icjfile)
+            Dim mySentence() As String = Split(myText, vbCrLf)
+            Dim listing As Integer = 1
+            Dim receive As Integer = 0
+            Dim sent As Integer = 0
+            Dim dteThreshold As Date
+            Dim dteProgRpt As Date
+            Dim display As String
+
+            For Each sentence As String In mySentence
+                If sentence.Contains("/"c) Then
+
+                    Dim words() = Split(sentence, vbTab)
+
+                    ' Interstate column indices are shifted left by one (no Type of Transfer)
+                    dteThreshold = CDate(words(5).TrimEnd)
+                    dteProgRpt = CDate(words(6).TrimEnd)
+
+                    Dim progDaysRefresh As Integer = dteProgRpt.Subtract(Date.Now).Days
+                    Dim threshDaysRefresh As Integer = dteThreshold.Subtract(Date.Now).Days
+
+                    words(7) = progDaysRefresh.ToString.PadLeft(3) & " days"
+                    words(8) = threshDaysRefresh.ToString.PadLeft(3) & " days"
+
+                    display = String.Join(" ".PadRight(5), words)
+
+                    If words(1).TrimEnd.Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
+                        receive += 1
+                    End If
+
+                    If words(2).TrimEnd.Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
+                        sent += 1
+                    End If
+
+                    lblICJListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+                    listing += 1
+
+                End If
+            Next
+
+            lblTotICJChildren.Text = (listing - 1).ToString
+            lblTotICJReceived.Text = receive.ToString
+            lblTotICJSent.Text = sent.ToString
+
+        Catch ex As Exception
+            MessageBox.Show("Error reading Interstate data: " & ex.Message, title,
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
     '------------------------------ Button Events ----------------------------------------------
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -243,7 +317,7 @@ Public Class frmMain
         lblICTListing.Text = String.Empty
 
         If RefreshFile() Then
-            PullData()
+            PullICTData()
         End If
 
     End Sub
@@ -256,12 +330,4 @@ Public Class frmMain
         End Using
     End Sub
 
-    Private Sub btnICJAdd_Click(sender As Object, e As EventArgs) Handles btnICJAdd.Click
-
-        Hide()
-        Using f As New frmICJEntry
-            f.ShowDialog()
-        End Using
-
-    End Sub
 End Class
