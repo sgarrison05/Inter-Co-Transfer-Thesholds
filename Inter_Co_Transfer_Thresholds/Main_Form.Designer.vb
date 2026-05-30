@@ -42,15 +42,12 @@ Partial Class frmMain
         btnSearch = New Button()
         btnRefresh = New Button()
         lblICJListing = New Label()
-        btnICJSearch = New Button()
         Label1 = New Label()
         Label2 = New Label()
         Label3 = New Label()
         lblTotICJSent = New Label()
         lblTotICJReceived = New Label()
         lblTotICJChildren = New Label()
-        btnICJDelete = New Button()
-        btnICJAdd = New Button()
         lblICJListingID = New Label()
         SuspendLayout()
         ' 
@@ -78,7 +75,7 @@ Partial Class frmMain
         ' btnAdd
         ' 
         btnAdd.BackColor = Color.Green
-        btnAdd.Location = New Point(826, 263)
+        btnAdd.Location = New Point(826, 498)
         btnAdd.Name = "btnAdd"
         btnAdd.Size = New Size(75, 39)
         btnAdd.TabIndex = 1
@@ -88,7 +85,7 @@ Partial Class frmMain
         ' btnDelete
         ' 
         btnDelete.BackColor = Color.Red
-        btnDelete.Location = New Point(1047, 263)
+        btnDelete.Location = New Point(1047, 498)
         btnDelete.Name = "btnDelete"
         btnDelete.Size = New Size(75, 39)
         btnDelete.TabIndex = 3
@@ -99,7 +96,7 @@ Partial Class frmMain
         ' 
         lblDateID.AutoSize = True
         lblDateID.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblDateID.Location = New Point(18, 609)
+        lblDateID.Location = New Point(18, 592)
         lblDateID.Name = "lblDateID"
         lblDateID.Size = New Size(80, 15)
         lblDateID.TabIndex = 5
@@ -169,7 +166,7 @@ Partial Class frmMain
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label8.Location = New Point(193, 609)
+        Label8.Location = New Point(193, 592)
         Label8.Name = "Label8"
         Label8.Size = New Size(119, 15)
         Label8.TabIndex = 15
@@ -179,7 +176,7 @@ Partial Class frmMain
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label9.Location = New Point(373, 609)
+        Label9.Location = New Point(373, 592)
         Label9.Name = "Label9"
         Label9.Size = New Size(126, 15)
         Label9.TabIndex = 16
@@ -190,7 +187,7 @@ Partial Class frmMain
         dtpNinety.Enabled = False
         dtpNinety.Font = New Font("Segoe UI", 11.25F)
         dtpNinety.Format = DateTimePickerFormat.Short
-        dtpNinety.Location = New Point(193, 627)
+        dtpNinety.Location = New Point(193, 610)
         dtpNinety.Name = "dtpNinety"
         dtpNinety.Size = New Size(131, 27)
         dtpNinety.TabIndex = 17
@@ -200,7 +197,7 @@ Partial Class frmMain
         dtpOneEighty.Enabled = False
         dtpOneEighty.Font = New Font("Segoe UI", 11.25F)
         dtpOneEighty.Format = DateTimePickerFormat.Short
-        dtpOneEighty.Location = New Point(373, 627)
+        dtpOneEighty.Location = New Point(373, 610)
         dtpOneEighty.Name = "dtpOneEighty"
         dtpOneEighty.Size = New Size(131, 27)
         dtpOneEighty.TabIndex = 18
@@ -210,7 +207,7 @@ Partial Class frmMain
         dtpToday.Enabled = False
         dtpToday.Font = New Font("Segoe UI", 11.25F)
         dtpToday.Format = DateTimePickerFormat.Short
-        dtpToday.Location = New Point(17, 627)
+        dtpToday.Location = New Point(17, 610)
         dtpToday.Name = "dtpToday"
         dtpToday.Size = New Size(131, 27)
         dtpToday.TabIndex = 19
@@ -218,7 +215,7 @@ Partial Class frmMain
         ' brnClose
         ' 
         brnClose.BackColor = Color.SkyBlue
-        brnClose.Location = New Point(1047, 609)
+        brnClose.Location = New Point(1047, 592)
         brnClose.Name = "brnClose"
         brnClose.Size = New Size(75, 39)
         brnClose.TabIndex = 4
@@ -228,7 +225,7 @@ Partial Class frmMain
         ' btnSearch
         ' 
         btnSearch.BackColor = Color.Gold
-        btnSearch.Location = New Point(935, 263)
+        btnSearch.Location = New Point(935, 498)
         btnSearch.Name = "btnSearch"
         btnSearch.Size = New Size(75, 39)
         btnSearch.TabIndex = 2
@@ -238,7 +235,7 @@ Partial Class frmMain
         ' btnRefresh
         ' 
         btnRefresh.BackColor = Color.DodgerBlue
-        btnRefresh.Location = New Point(935, 609)
+        btnRefresh.Location = New Point(935, 592)
         btnRefresh.Name = "btnRefresh"
         btnRefresh.Size = New Size(75, 39)
         btnRefresh.TabIndex = 0
@@ -250,26 +247,16 @@ Partial Class frmMain
         lblICJListing.BackColor = SystemColors.ActiveCaptionText
         lblICJListing.Font = New Font("Cascadia Mono", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblICJListing.ForeColor = SystemColors.Control
-        lblICJListing.Location = New Point(12, 375)
+        lblICJListing.Location = New Point(12, 358)
         lblICJListing.Name = "lblICJListing"
         lblICJListing.Size = New Size(1110, 127)
         lblICJListing.TabIndex = 20
-        ' 
-        ' btnICJSearch
-        ' 
-        btnICJSearch.BackColor = Color.Gold
-        btnICJSearch.Location = New Point(935, 515)
-        btnICJSearch.Name = "btnICJSearch"
-        btnICJSearch.Size = New Size(75, 39)
-        btnICJSearch.TabIndex = 22
-        btnICJSearch.Text = "Search"
-        btnICJSearch.UseVisualStyleBackColor = False
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label1.Location = New Point(264, 515)
+        Label1.Location = New Point(264, 498)
         Label1.Name = "Label1"
         Label1.Size = New Size(85, 15)
         Label1.TabIndex = 29
@@ -279,7 +266,7 @@ Partial Class frmMain
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label2.Location = New Point(137, 515)
+        Label2.Location = New Point(137, 498)
         Label2.Name = "Label2"
         Label2.Size = New Size(104, 15)
         Label2.TabIndex = 28
@@ -289,7 +276,7 @@ Partial Class frmMain
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label3.Location = New Point(12, 515)
+        Label3.Location = New Point(12, 498)
         Label3.Name = "Label3"
         Label3.Size = New Size(105, 15)
         Label3.TabIndex = 27
@@ -299,7 +286,7 @@ Partial Class frmMain
         ' 
         lblTotICJSent.BorderStyle = BorderStyle.FixedSingle
         lblTotICJSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotICJSent.Location = New Point(264, 534)
+        lblTotICJSent.Location = New Point(264, 517)
         lblTotICJSent.Name = "lblTotICJSent"
         lblTotICJSent.Size = New Size(102, 23)
         lblTotICJSent.TabIndex = 26
@@ -309,7 +296,7 @@ Partial Class frmMain
         ' 
         lblTotICJReceived.BorderStyle = BorderStyle.FixedSingle
         lblTotICJReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotICJReceived.Location = New Point(137, 534)
+        lblTotICJReceived.Location = New Point(137, 517)
         lblTotICJReceived.Name = "lblTotICJReceived"
         lblTotICJReceived.Size = New Size(102, 23)
         lblTotICJReceived.TabIndex = 25
@@ -319,38 +306,18 @@ Partial Class frmMain
         ' 
         lblTotICJChildren.BorderStyle = BorderStyle.FixedSingle
         lblTotICJChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotICJChildren.Location = New Point(17, 534)
+        lblTotICJChildren.Location = New Point(17, 517)
         lblTotICJChildren.Name = "lblTotICJChildren"
         lblTotICJChildren.Size = New Size(102, 23)
         lblTotICJChildren.TabIndex = 24
         lblTotICJChildren.TextAlign = ContentAlignment.MiddleCenter
-        ' 
-        ' btnICJDelete
-        ' 
-        btnICJDelete.BackColor = Color.Red
-        btnICJDelete.Location = New Point(1047, 515)
-        btnICJDelete.Name = "btnICJDelete"
-        btnICJDelete.Size = New Size(75, 39)
-        btnICJDelete.TabIndex = 23
-        btnICJDelete.Text = "Delete"
-        btnICJDelete.UseVisualStyleBackColor = False
-        ' 
-        ' btnICJAdd
-        ' 
-        btnICJAdd.BackColor = Color.Green
-        btnICJAdd.Location = New Point(826, 515)
-        btnICJAdd.Name = "btnICJAdd"
-        btnICJAdd.Size = New Size(75, 39)
-        btnICJAdd.TabIndex = 21
-        btnICJAdd.Text = "Add New"
-        btnICJAdd.UseVisualStyleBackColor = False
         ' 
         ' lblICJListingID
         ' 
         lblICJListingID.AutoSize = True
         lblICJListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblICJListingID.ForeColor = Color.Blue
-        lblICJListingID.Location = New Point(12, 343)
+        lblICJListingID.Location = New Point(12, 326)
         lblICJListingID.Name = "lblICJListingID"
         lblICJListingID.Size = New Size(503, 32)
         lblICJListingID.TabIndex = 30
@@ -362,17 +329,14 @@ Partial Class frmMain
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = brnClose
-        ClientSize = New Size(1135, 668)
+        ClientSize = New Size(1135, 649)
         Controls.Add(lblICJListingID)
-        Controls.Add(btnICJSearch)
         Controls.Add(Label1)
         Controls.Add(Label2)
         Controls.Add(Label3)
         Controls.Add(lblTotICJSent)
         Controls.Add(lblTotICJReceived)
         Controls.Add(lblTotICJChildren)
-        Controls.Add(btnICJDelete)
-        Controls.Add(btnICJAdd)
         Controls.Add(lblICJListing)
         Controls.Add(btnRefresh)
         Controls.Add(btnSearch)
@@ -421,15 +385,12 @@ Partial Class frmMain
     Friend WithEvents btnSearch As Button
     Friend WithEvents btnRefresh As Button
     Friend WithEvents lblICJListing As Label
-    Friend WithEvents btnICJSearch As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents lblTotICJSent As Label
     Friend WithEvents lblTotICJReceived As Label
     Friend WithEvents lblTotICJChildren As Label
-    Friend WithEvents btnICJDelete As Button
-    Friend WithEvents btnICJAdd As Button
     Friend WithEvents lblICJListingID As Label
 
 End Class

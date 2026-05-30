@@ -51,7 +51,7 @@ Public Class frmDelete
 
                 Loop
 
-                'Deletes original file and renames temp file to original name
+                'Deletes Falseoriginal file and renames temp file to original name
                 File.Delete(filepath)
                 File.Move(tempPath, filepath)
 
@@ -99,7 +99,7 @@ Public Class frmDelete
             MessageBoxDefaultButton.Button2)
 
         If confirm = DialogResult.Yes Then
-            DeleteRecord(frmMain.tfile, lastName)
+            DeleteRecord(frmMain.ictfile, lastName)
             CleanForm()
         End If
 

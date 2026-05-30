@@ -19,7 +19,7 @@
         display = String.Empty
 
         Try
-            Dim myText As String = My.Computer.FileSystem.ReadAllText(frmMain.tfile)
+            Dim myText As String = My.Computer.FileSystem.ReadAllText(frmMain.ictfile)
             Dim mySentence() As String = Split(myText, vbCrLf)
 
             For Each sentence As String In mySentence

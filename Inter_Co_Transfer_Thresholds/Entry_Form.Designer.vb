@@ -51,14 +51,19 @@ Partial Class frmEntry
         Label10 = New Label()
         btnClear = New Button()
         lblICTFormID = New Label()
+        gpbType = New GroupBox()
+        rdbICJ = New RadioButton()
+        rdbICT = New RadioButton()
+        lblICJFormID = New Label()
+        gpbType.SuspendLayout()
         SuspendLayout()
         ' 
         ' Label9
         ' 
         Label9.AutoSize = True
-        Label9.Location = New Point(555, 305)
+        Label9.Location = New Point(503, 305)
         Label9.Name = "Label9"
-        Label9.Size = New Size(97, 15)
+        Label9.Size = New Size(99, 15)
         Label9.TabIndex = 26
         Label9.Text = "Days Till Transfer:"
         ' 
@@ -67,7 +72,7 @@ Partial Class frmEntry
         Label8.AutoSize = True
         Label8.Location = New Point(170, 305)
         Label8.Name = "Label8"
-        Label8.Size = New Size(119, 15)
+        Label8.Size = New Size(120, 15)
         Label8.TabIndex = 25
         Label8.Text = "Days Till Prog Report:" & vbCrLf
         ' 
@@ -85,7 +90,7 @@ Partial Class frmEntry
         Label6.AutoSize = True
         Label6.Location = New Point(395, 123)
         Label6.Name = "Label6"
-        Label6.Size = New Size(34, 15)
+        Label6.Size = New Size(35, 15)
         Label6.TabIndex = 23
         Label6.Text = "Type:"
         ' 
@@ -110,9 +115,9 @@ Partial Class frmEntry
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(411, 305)
+        Label3.Location = New Point(359, 305)
         Label3.Name = "Label3"
-        Label3.Size = New Size(106, 15)
+        Label3.Size = New Size(108, 15)
         Label3.TabIndex = 20
         Label3.Text = "Transfer Threshold:"
         ' 
@@ -217,7 +222,7 @@ Partial Class frmEntry
         ' lblTransThreshold
         ' 
         lblTransThreshold.BorderStyle = BorderStyle.FixedSingle
-        lblTransThreshold.Location = New Point(414, 329)
+        lblTransThreshold.Location = New Point(362, 329)
         lblTransThreshold.Name = "lblTransThreshold"
         lblTransThreshold.Size = New Size(103, 23)
         lblTransThreshold.TabIndex = 36
@@ -227,7 +232,7 @@ Partial Class frmEntry
         ' 
         lblDaysRemainTrns.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainTrns.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainTrns.Location = New Point(558, 329)
+        lblDaysRemainTrns.Location = New Point(506, 329)
         lblDaysRemainTrns.Name = "lblDaysRemainTrns"
         lblDaysRemainTrns.Size = New Size(57, 23)
         lblDaysRemainTrns.TabIndex = 37
@@ -244,7 +249,7 @@ Partial Class frmEntry
         ' 
         ' Label15
         ' 
-        Label15.Location = New Point(621, 330)
+        Label15.Location = New Point(569, 323)
         Label15.Name = "Label15"
         Label15.Size = New Size(47, 22)
         Label15.TabIndex = 39
@@ -254,7 +259,7 @@ Partial Class frmEntry
         ' btnSave
         ' 
         btnSave.BackColor = Color.FromArgb(CByte(0), CByte(192), CByte(0))
-        btnSave.Location = New Point(643, 21)
+        btnSave.Location = New Point(685, 217)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(75, 40)
         btnSave.TabIndex = 7
@@ -264,7 +269,7 @@ Partial Class frmEntry
         ' btnReturn
         ' 
         btnReturn.BackColor = Color.Gold
-        btnReturn.Location = New Point(643, 117)
+        btnReturn.Location = New Point(685, 313)
         btnReturn.Name = "btnReturn"
         btnReturn.Size = New Size(75, 40)
         btnReturn.TabIndex = 9
@@ -301,7 +306,7 @@ Partial Class frmEntry
         ' btnClear
         ' 
         btnClear.BackColor = Color.Silver
-        btnClear.Location = New Point(643, 67)
+        btnClear.Location = New Point(685, 263)
         btnClear.Name = "btnClear"
         btnClear.Size = New Size(75, 40)
         btnClear.TabIndex = 8
@@ -318,6 +323,54 @@ Partial Class frmEntry
         lblICTFormID.Size = New Size(256, 25)
         lblICTFormID.TabIndex = 45
         lblICTFormID.Text = "Inter County Transfer Entry"
+        lblICTFormID.Visible = False
+        ' 
+        ' gpbType
+        ' 
+        gpbType.BackColor = Color.DodgerBlue
+        gpbType.Controls.Add(rdbICJ)
+        gpbType.Controls.Add(rdbICT)
+        gpbType.ForeColor = SystemColors.Window
+        gpbType.Location = New Point(613, 12)
+        gpbType.Name = "gpbType"
+        gpbType.Size = New Size(147, 114)
+        gpbType.TabIndex = 46
+        gpbType.TabStop = False
+        gpbType.Text = "Record to Enter"
+        ' 
+        ' rdbICJ
+        ' 
+        rdbICJ.AutoSize = True
+        rdbICJ.Location = New Point(6, 67)
+        rdbICJ.Name = "rdbICJ"
+        rdbICJ.Size = New Size(126, 19)
+        rdbICJ.TabIndex = 1
+        rdbICJ.TabStop = True
+        rdbICJ.Text = "Interstate Compact"
+        rdbICJ.UseVisualStyleBackColor = True
+        ' 
+        ' rdbICT
+        ' 
+        rdbICT.AutoSize = True
+        rdbICT.Location = New Point(6, 29)
+        rdbICT.Name = "rdbICT"
+        rdbICT.Size = New Size(136, 19)
+        rdbICT.TabIndex = 0
+        rdbICT.TabStop = True
+        rdbICT.Text = "Inter County Transfer"
+        rdbICT.UseVisualStyleBackColor = True
+        ' 
+        ' lblICJFormID
+        ' 
+        lblICJFormID.AutoSize = True
+        lblICJFormID.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblICJFormID.ForeColor = Color.Maroon
+        lblICJFormID.Location = New Point(16, 9)
+        lblICJFormID.Name = "lblICJFormID"
+        lblICJFormID.Size = New Size(348, 25)
+        lblICJFormID.TabIndex = 47
+        lblICJFormID.Text = "Interstate Compact on Juveniles Entry"
+        lblICJFormID.Visible = False
         ' 
         ' frmEntry
         ' 
@@ -326,7 +379,9 @@ Partial Class frmEntry
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
-        ClientSize = New Size(738, 369)
+        ClientSize = New Size(772, 369)
+        Controls.Add(lblICJFormID)
+        Controls.Add(gpbType)
         Controls.Add(lblICTFormID)
         Controls.Add(btnClear)
         Controls.Add(txbReceiveCo)
@@ -360,6 +415,8 @@ Partial Class frmEntry
         Name = "frmEntry"
         StartPosition = FormStartPosition.CenterScreen
         Text = "ICT Entry Form"
+        gpbType.ResumeLayout(False)
+        gpbType.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -392,4 +449,8 @@ Partial Class frmEntry
     Friend WithEvents Label10 As Label
     Friend WithEvents btnClear As Button
     Friend WithEvents lblICTFormID As Label
+    Friend WithEvents gpbType As GroupBox
+    Friend WithEvents rdbICT As RadioButton
+    Friend WithEvents rdbICJ As RadioButton
+    Friend WithEvents lblICJFormID As Label
 End Class

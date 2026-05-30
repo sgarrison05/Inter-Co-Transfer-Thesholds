@@ -13,6 +13,8 @@
 
         RefillCombo()
         FillData()
+        rdbICT.Checked = True
+        lblICTFormID.Visible = True
 
     End Sub
 
@@ -89,7 +91,7 @@
 
         Try
 
-            If My.Computer.FileSystem.FileExists(frmMain.tfile) Then
+            If My.Computer.FileSystem.FileExists(frmMain.ictfile) Then
 
                 WriteDataLine()
 
@@ -117,7 +119,7 @@
 
     Private Sub WriteDataLine()
 
-        My.Computer.FileSystem.WriteAllText(frmMain.tfile,
+        My.Computer.FileSystem.WriteAllText(frmMain.ictfile,
                                                childName.PadRight(20) & vbTab &
                                                receivingCounty.PadRight(17) & vbTab &
                                                sendingCounty.PadRight(17) & vbTab &
@@ -134,7 +136,7 @@
 
     Private Sub WriteHeader()
 
-        My.Computer.FileSystem.WriteAllText(frmMain.tfile,
+        My.Computer.FileSystem.WriteAllText(frmMain.ictfile,
                                                 "Child Name:".PadRight(20) & vbTab &
                                                 "Receiving County:" & vbTab &
                                                 "Sending County:".PadRight(18) & vbTab &
@@ -238,4 +240,13 @@
 
     End Sub
 
+    Private Sub rdbICT_Click(sender As Object, e As EventArgs) Handles rdbICT.Click
+        lblICTFormID.Visible = True
+        lblICJFormID.Visible = False
+    End Sub
+
+    Private Sub rdbICJ_Click(sender As Object, e As EventArgs) Handles rdbICJ.Click
+        lblICJFormID.Visible = True
+        lblICTFormID.Visible = False
+    End Sub
 End Class
