@@ -80,13 +80,13 @@ Public Class frmMain
 
     Private Function RefreshFile(filepath As String, isInterstate As Boolean) As Boolean
 
-        Dim tempPath As String = Path.Combine(Path.GetDirectoryName(ictfile),
-                                              Path.GetFileNameWithoutExtension(ictfile) & ".tmp" &
-                                              Path.GetExtension(ictfile))
+        Dim tempPath As String = Path.Combine(Path.GetDirectoryName(filepath),
+                                              Path.GetFileNameWithoutExtension(filepath) & ".tmp" &
+                                              Path.GetExtension(filepath))
 
         Try
 
-            Dim readtxt As String = File.ReadAllText(ictfile)
+            Dim readtxt As String = File.ReadAllText(filepath)
             Dim lines() As String = Split(readtxt, vbCrLf)
 
             ' Remove temp file if one already exists from a previous failed run
@@ -152,8 +152,8 @@ Public Class frmMain
             Next
 
             ' Replace original file with updated temp file
-            File.Delete(ictfile)
-            File.Move(tempPath, ictfile)
+            File.Delete(filepath)
+            File.Move(tempPath, filepath)
 
             Return True
 
@@ -315,8 +315,15 @@ Public Class frmMain
 
         ' Clear form before each pull to prevent duplication of listings.
         lblICTListing.Text = String.Empty
+        lblICJListing.Text = String.Empty
 
-        If RefreshFile() Then
+        ' Refresh and reload ICT File Data
+        If RefreshFile(ictfile, isInterstate:=False) Then
+            PullICTData()
+        End If
+
+        ' Refresh and reload ICT File Data
+        If RefreshFile(icjfile, isInterstate:=True) Then
             PullICTData()
         End If
 
