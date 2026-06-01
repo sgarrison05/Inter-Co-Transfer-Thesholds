@@ -1,8 +1,8 @@
 ﻿Public Class frmEntry
 
     Public childName As String
-    Public sendingCounty As String
-    Public receivingCounty As String
+    Public sendingText As String
+    Public receivingText As String
     Public typeOfTransfer As String
     Public officer As String
     Private dteStart As Date
@@ -15,6 +15,7 @@
         FillData()
         rdbICT.Checked = True
         lblICTFormID.Visible = True
+        lblICJFormID.Visible = False
 
     End Sub
 
@@ -33,8 +34,10 @@
         cmbType.Items.Clear()
         cmbOfficer.Items.Clear()
         frmMain.lblICTListing.Text = String.Empty
+        frmMain.lblICJListing.Text = String.Empty
         frmMain.Show()
-        frmMain.lblICTListing.Text = "Please Press Refresh to Update Data."
+        'frmMain.lblICTListing.Text = "Please Press Refresh to Update Data."
+        frmMain.btnRefresh.PerformClick()
         Me.Close()
 
     End Sub
@@ -61,46 +64,56 @@
             Return
         End If
 
+        Dim locationLabel As String = If(rdbICT.Checked, "counties", "states")
         If String.IsNullOrWhiteSpace(txbReceiveCo.Text) OrElse
-       String.IsNullOrWhiteSpace(txbSendCo.Text) Then
-            MessageBox.Show("Please enter both sending and receiving counties.",
-                        "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+           String.IsNullOrWhiteSpace(txbSendCo.Text) Then
+            MessageBox.Show("Please enter both sending and receiving " &
+                            locationLabel & ".",
+                            "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        If cmbType.SelectedIndex = 0 Then
+        'Only validate transfer type for ICT records
+        If rdbICT.Checked AndAlso cmbType.SelectedIndex = 0 Then
             MessageBox.Show("Please select a transfer type.",
-                    "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             cmbType.Focus()
             Return
         End If
 
         If cmbOfficer.SelectedIndex = 0 Then
             MessageBox.Show("Please select an officer.",
-                    "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             cmbOfficer.Focus()
             Return
         End If
 
         ' Assign field values to variables
         childName = txbChildName.Text
-        receivingCounty = txbReceiveCo.Text
-        sendingCounty = txbSendCo.Text
-        typeOfTransfer = cmbType.Text
+        receivingText = txbReceiveCo.Text
+        sendingText = txbSendCo.Text
         officer = cmbOfficer.Text
+
+        If rdbICT.Checked Then
+            typeOfTransfer = cmbType.Text
+        Else
+            typeOfTransfer = String.Empty ' No transfer type for ICJ, set to empty string
+        End If
+
+        Dim targetFile As String = If(rdbICT.Checked, frmMain.ictfile, frmMain.icjfile)
 
         Try
 
-            If My.Computer.FileSystem.FileExists(frmMain.ictfile) Then
+            If My.Computer.FileSystem.FileExists(targetFile) Then
 
-                WriteDataLine()
+                WriteDataLine(targetFile)
 
             Else
 
                 'Creates the Directory/File and writes the header and first line of data
                 My.Computer.FileSystem.CreateDirectory(frmMain.tdirectory)
-                WriteHeader()
-                WriteDataLine()
+                WriteHeader(targetFile)
+                WriteDataLine(targetFile)
 
             End If
 
@@ -117,26 +130,40 @@
 
     End Sub
 
-    Private Sub WriteDataLine()
+    Private Sub WriteDataLine(filepath As String)
 
-        My.Computer.FileSystem.WriteAllText(frmMain.ictfile,
-                                               childName.PadRight(20) & vbTab &
-                                               receivingCounty.PadRight(17) & vbTab &
-                                               sendingCounty.PadRight(17) & vbTab &
-                                               typeOfTransfer.PadRight(22) & vbTab &
-                                               officer.PadRight(10) & vbTab &
-                                               dteStart.ToString("MM/dd/yyyy") & vbTab &
-                                               dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                                               dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                                               lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
-                                               lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf,
-                                               True)
+        If rdbICT.Checked Then
+            My.Computer.FileSystem.WriteAllText(filepath,
+                childName.PadRight(20) & vbTab &
+                receivingText.PadRight(17) & vbTab &
+                sendingText.PadRight(17) & vbTab &
+                typeOfTransfer.PadRight(22) & vbTab &
+                officer.PadRight(10) & vbTab &
+                dteStart.ToString("MM/dd/yyyy") & vbTab &
+                dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
+                lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+        Else
+            ' Interstate — no typeOfTransfer column
+            My.Computer.FileSystem.WriteAllText(filepath,
+                childName.PadRight(20) & vbTab &
+                receivingText.PadRight(17) & vbTab &
+                sendingText.PadRight(17) & vbTab &
+                officer.PadRight(10) & vbTab &
+                dteStart.ToString("MM/dd/yyyy") & vbTab &
+                dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
+                lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+        End If
 
     End Sub
 
-    Private Sub WriteHeader()
+    Private Sub WriteHeader(filepath As String)
+        If rdbICT.Checked Then
 
-        My.Computer.FileSystem.WriteAllText(frmMain.ictfile,
+            My.Computer.FileSystem.WriteAllText(filepath,
                                                 "Child Name:".PadRight(20) & vbTab &
                                                 "Receiving County:" & vbTab &
                                                 "Sending County:".PadRight(18) & vbTab &
@@ -159,6 +186,31 @@
                                                 "----------" & ControlChars.NewLine,
                                                 True)
 
+        Else
+
+            My.Computer.FileSystem.WriteAllText(filepath,
+                                                "Child Name:".PadRight(20) & vbTab &
+                                                "Receiving State:" & vbTab &
+                                                "Sending State:".PadRight(18) & vbTab &
+                                                "Officer:".PadRight(2) & vbTab &
+                                                "Start Date:" & vbTab &
+                                                "Threshold:" & vbTab &
+                                                "Prog Rpt:" & vbTab &
+                                                "Prog Rpt Days:" & vbTab &
+                                                "Threshold Days:" & vbCrLf &
+                                                "-----------".PadRight(20) & vbTab &
+                                                "---------------".PadRight(18) & vbTab &
+                                                "------------".PadRight(18) & vbTab &
+                                                "----------" & vbTab &
+                                                "----------" & vbTab &
+                                                "----------" & vbTab &
+                                                "----------" & vbTab &
+                                                "----------".PadRight(14) & vbTab &
+                                                "----------" & ControlChars.NewLine,
+                                                True)
+
+        End If
+
     End Sub
 
     Private Sub ClearForm()
@@ -175,6 +227,15 @@
         dtpStart.Value = Date.Today
         dtpEnd.Value = Date.Today.AddDays(180)
         txbChildName.Focus()
+
+        ' Reset form to default to ICT
+        rdbICT.Checked = True
+        lblICTFormID.Visible = True
+        lblICJFormID.Visible = False
+        cmbTypeID.Visible = True
+        cmbType.Visible = True
+        lblReceiveID.Text = "Receiving County:"
+        lblSendID.Text = "Sending County:"
 
     End Sub
 
@@ -211,7 +272,6 @@
         cmbType.Items.Add("Interim Inter Co Trans")
         cmbType.SelectedIndex = 0
 
-
     End Sub
 
     Private Sub dtpStart_TextChanged(sender As Object, e As EventArgs) Handles dtpStart.TextChanged
@@ -240,11 +300,11 @@
 
     Private Sub txbSendCo_TextChanged(sender As Object, e As EventArgs) Handles txbSendCo.TextChanged
 
-        If rdbICT.Checked And txbSendCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
+        If rdbICT.Checked AndAlso txbSendCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
             txbSendCo.BackColor = Color.Orange
             txbSendCo.ForeColor = Color.Black
 
-        ElseIf rdbICJ.Checked And txbSendCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
+        ElseIf rdbICJ.Checked AndAlso txbSendCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
             txbSendCo.BackColor = Color.Maroon
             txbSendCo.ForeColor = Color.White
 
@@ -266,6 +326,12 @@
         lblReceiveID.Text = "Receiving County:"
         lblSendID.Text = "Sending County:"
 
+        ' Reset in case click changes type:
+        txbReceiveCo.BackColor = Color.White
+        txbReceiveCo.ForeColor = Color.Black
+        txbSendCo.BackColor = Color.White
+        txbSendCo.ForeColor = Color.Black
+
     End Sub
 
     Private Sub rdbICJ_Click(sender As Object, e As EventArgs) Handles rdbICJ.Click
@@ -276,6 +342,12 @@
 
         lblReceiveID.Text = "Receiving State:"
         lblSendID.Text = "Sending State:"
+
+        ' Reset in case click changes type:
+        txbReceiveCo.BackColor = Color.White
+        txbReceiveCo.ForeColor = Color.Black
+        txbSendCo.BackColor = Color.White
+        txbSendCo.ForeColor = Color.Black
 
     End Sub
 End Class
