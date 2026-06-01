@@ -4,7 +4,7 @@ Imports System.Text
 Public Class frmDelete
 
     Private Sub frmDelete_Load(sender As Object, e As EventArgs) Handles Me.Load
-        rdbICJ.Checked = True
+        rdbICT.Checked = True
         txbLastName.Focus()
 
     End Sub
@@ -51,9 +51,26 @@ Public Class frmDelete
 
                 Loop
 
-                'Deletes Falseoriginal file and renames temp file to original name
-                File.Delete(filepath)
-                File.Move(tempPath, filepath)
+                If entryIndex < readtxt.Length Then
+                    Dim remainingLine As String = readtxt.Substring(entryIndex)
+                    If remainingLine.Length > 0 AndAlso
+                        remainingLine.IndexOf(name, StringComparison.OrdinalIgnoreCase) < 0 Then
+                        My.Computer.FileSystem.WriteAllText(tempPath, remainingLine, True)
+                    End If
+                End If
+
+                'Deletes original file and renames temp file to original name
+                If recordFound Then
+                    File.Delete(filepath)
+                    File.Move(tempPath, filepath)
+                    MessageBox.Show("Record for " & name & " has been deleted.",
+                    "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    ' Discard the temp file — leave original untouched
+                    If File.Exists(tempPath) Then File.Delete(tempPath)
+                    MessageBox.Show("No record found for: " & name,
+                    "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
 
                 If recordFound Then
                     MessageBox.Show("Record for " & name & " has been deleted.",
@@ -64,6 +81,7 @@ Public Class frmDelete
                 End If
 
             Catch ex As Exception
+                If File.Exists(tempPath) Then File.Delete(tempPath)
                 MessageBox.Show("Error deleting record: " & ex.Message,
                                 "Delete", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -91,6 +109,17 @@ Public Class frmDelete
         If String.IsNullOrWhiteSpace(lastName) Then
             MessageBox.Show("Please enter a last name to delete.",
                     "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            txbLastName.Focus()
+            Return
+        End If
+
+        ' Determine target file based on selected radio button
+        Dim targetFile As String = If(rdbICT.Checked, frmMain.ictfile, frmMain.icjfile)
+
+        ' Check file exists before attempting to read
+        If Not My.Computer.FileSystem.FileExists(targetFile) Then
+            MessageBox.Show("No " & If(rdbICT.Checked, "ICT", "Interstate") & " records file found.",
+                            "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
@@ -100,7 +129,7 @@ Public Class frmDelete
             MessageBoxDefaultButton.Button2)
 
         If confirm = DialogResult.Yes Then
-            DeleteRecord(frmMain.ictfile, lastName)
+            DeleteRecord(targetFile, lastName)
             CleanForm()
         End If
 
