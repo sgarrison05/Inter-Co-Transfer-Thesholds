@@ -24,8 +24,8 @@ Partial Class frmEntry
     Private Sub InitializeComponent()
         Label9 = New Label()
         Label8 = New Label()
-        Label7 = New Label()
-        Label6 = New Label()
+        lblSendID = New Label()
+        cmbTypeID = New Label()
         Label5 = New Label()
         Label4 = New Label()
         Label3 = New Label()
@@ -48,7 +48,7 @@ Partial Class frmEntry
         btnReturn = New Button()
         Label16 = New Label()
         txbReceiveCo = New TextBox()
-        Label10 = New Label()
+        lblReceiveID = New Label()
         btnClear = New Button()
         lblICTFormID = New Label()
         gpbType = New GroupBox()
@@ -63,7 +63,7 @@ Partial Class frmEntry
         Label9.AutoSize = True
         Label9.Location = New Point(503, 305)
         Label9.Name = "Label9"
-        Label9.Size = New Size(99, 15)
+        Label9.Size = New Size(97, 15)
         Label9.TabIndex = 26
         Label9.Text = "Days Till Transfer:"
         ' 
@@ -72,27 +72,27 @@ Partial Class frmEntry
         Label8.AutoSize = True
         Label8.Location = New Point(170, 305)
         Label8.Name = "Label8"
-        Label8.Size = New Size(120, 15)
+        Label8.Size = New Size(119, 15)
         Label8.TabIndex = 25
         Label8.Text = "Days Till Prog Report:" & vbCrLf
         ' 
-        ' Label7
+        ' lblSendID
         ' 
-        Label7.AutoSize = True
-        Label7.Location = New Point(205, 123)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(95, 15)
-        Label7.TabIndex = 24
-        Label7.Text = "Sending County:"
+        lblSendID.AutoSize = True
+        lblSendID.Location = New Point(205, 123)
+        lblSendID.Name = "lblSendID"
+        lblSendID.Size = New Size(95, 15)
+        lblSendID.TabIndex = 24
+        lblSendID.Text = "Sending County:"
         ' 
-        ' Label6
+        ' cmbTypeID
         ' 
-        Label6.AutoSize = True
-        Label6.Location = New Point(395, 123)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(35, 15)
-        Label6.TabIndex = 23
-        Label6.Text = "Type:"
+        cmbTypeID.AutoSize = True
+        cmbTypeID.Location = New Point(395, 123)
+        cmbTypeID.Name = "cmbTypeID"
+        cmbTypeID.Size = New Size(34, 15)
+        cmbTypeID.TabIndex = 23
+        cmbTypeID.Text = "Type:"
         ' 
         ' Label5
         ' 
@@ -117,7 +117,7 @@ Partial Class frmEntry
         Label3.AutoSize = True
         Label3.Location = New Point(359, 305)
         Label3.Name = "Label3"
-        Label3.Size = New Size(108, 15)
+        Label3.Size = New Size(106, 15)
         Label3.TabIndex = 20
         Label3.Text = "Transfer Threshold:"
         ' 
@@ -294,14 +294,14 @@ Partial Class frmEntry
         txbReceiveCo.Size = New Size(178, 29)
         txbReceiveCo.TabIndex = 1
         ' 
-        ' Label10
+        ' lblReceiveID
         ' 
-        Label10.AutoSize = True
-        Label10.Location = New Point(16, 122)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(103, 15)
-        Label10.TabIndex = 43
-        Label10.Text = "Receiving County:"
+        lblReceiveID.AutoSize = True
+        lblReceiveID.Location = New Point(16, 122)
+        lblReceiveID.Name = "lblReceiveID"
+        lblReceiveID.Size = New Size(103, 15)
+        lblReceiveID.TabIndex = 43
+        lblReceiveID.Text = "Receiving County:"
         ' 
         ' btnClear
         ' 
@@ -354,7 +354,7 @@ Partial Class frmEntry
         rdbICT.AutoSize = True
         rdbICT.Location = New Point(6, 29)
         rdbICT.Name = "rdbICT"
-        rdbICT.Size = New Size(136, 19)
+        rdbICT.Size = New Size(135, 19)
         rdbICT.TabIndex = 0
         rdbICT.TabStop = True
         rdbICT.Text = "Inter County Transfer"
@@ -385,7 +385,7 @@ Partial Class frmEntry
         Controls.Add(lblICTFormID)
         Controls.Add(btnClear)
         Controls.Add(txbReceiveCo)
-        Controls.Add(Label10)
+        Controls.Add(lblReceiveID)
         Controls.Add(Label16)
         Controls.Add(btnReturn)
         Controls.Add(btnSave)
@@ -403,8 +403,8 @@ Partial Class frmEntry
         Controls.Add(txbChildName)
         Controls.Add(Label9)
         Controls.Add(Label8)
-        Controls.Add(Label7)
-        Controls.Add(Label6)
+        Controls.Add(lblSendID)
+        Controls.Add(cmbTypeID)
         Controls.Add(Label5)
         Controls.Add(Label4)
         Controls.Add(Label3)
@@ -422,8 +422,8 @@ Partial Class frmEntry
     End Sub
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblSendID As Label
+    Friend WithEvents cmbTypeID As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
@@ -446,7 +446,7 @@ Partial Class frmEntry
     Friend WithEvents btnReturn As Button
     Friend WithEvents Label16 As Label
     Friend WithEvents txbReceiveCo As TextBox
-    Friend WithEvents Label10 As Label
+    Friend WithEvents lblReceiveID As Label
     Friend WithEvents btnClear As Button
     Friend WithEvents lblICTFormID As Label
     Friend WithEvents gpbType As GroupBox

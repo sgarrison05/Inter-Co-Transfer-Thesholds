@@ -222,31 +222,60 @@
 
     Private Sub txbReceiveCo_TextChanged(sender As Object, e As EventArgs) Handles txbReceiveCo.TextChanged
 
-        If txbReceiveCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
+        If rdbICT.Checked And txbReceiveCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
             txbReceiveCo.BackColor = Color.Orange
+            txbReceiveCo.ForeColor = Color.Black
+
+        ElseIf rdbICJ.Checked And txbReceiveCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
+            txbReceiveCo.BackColor = Color.Maroon
+            txbReceiveCo.ForeColor = Color.White
+
         Else
             txbReceiveCo.BackColor = Color.White
+            txbReceiveCo.ForeColor = Color.Black
+
         End If
 
     End Sub
 
     Private Sub txbSendCo_TextChanged(sender As Object, e As EventArgs) Handles txbSendCo.TextChanged
 
-        If txbSendCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
+        If rdbICT.Checked And txbSendCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
             txbSendCo.BackColor = Color.Orange
+            txbSendCo.ForeColor = Color.Black
+
+        ElseIf rdbICJ.Checked And txbSendCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
+            txbSendCo.BackColor = Color.Maroon
+            txbSendCo.ForeColor = Color.White
+
         Else
             txbSendCo.BackColor = Color.White
+            txbSendCo.ForeColor = Color.Black
+
         End If
+
 
     End Sub
 
     Private Sub rdbICT_Click(sender As Object, e As EventArgs) Handles rdbICT.Click
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
+        cmbTypeID.Visible = True
+        cmbType.Visible = True
+
+        lblReceiveID.Text = "Receiving County:"
+        lblSendID.Text = "Sending County:"
+
     End Sub
 
     Private Sub rdbICJ_Click(sender As Object, e As EventArgs) Handles rdbICJ.Click
         lblICJFormID.Visible = True
         lblICTFormID.Visible = False
+        cmbTypeID.Visible = False
+        cmbType.Visible = False
+
+        lblReceiveID.Text = "Receiving State:"
+        lblSendID.Text = "Sending State:"
+
     End Sub
 End Class
