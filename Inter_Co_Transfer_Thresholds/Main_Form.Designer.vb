@@ -104,7 +104,6 @@ Partial Class frmMain
         ' 
         ' lblTotICTChildren
         ' 
-        lblTotICTChildren.BorderStyle = BorderStyle.FixedSingle
         lblTotICTChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICTChildren.Location = New Point(17, 282)
         lblTotICTChildren.Name = "lblTotICTChildren"
@@ -114,7 +113,6 @@ Partial Class frmMain
         ' 
         ' lblTotICTReceived
         ' 
-        lblTotICTReceived.BorderStyle = BorderStyle.FixedSingle
         lblTotICTReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICTReceived.Location = New Point(137, 282)
         lblTotICTReceived.Name = "lblTotICTReceived"
@@ -124,7 +122,6 @@ Partial Class frmMain
         ' 
         ' lblTotICTSent
         ' 
-        lblTotICTSent.BorderStyle = BorderStyle.FixedSingle
         lblTotICTSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICTSent.Location = New Point(264, 282)
         lblTotICTSent.Name = "lblTotICTSent"
@@ -254,7 +251,6 @@ Partial Class frmMain
         ' 
         ' lblTotICJSent
         ' 
-        lblTotICJSent.BorderStyle = BorderStyle.FixedSingle
         lblTotICJSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICJSent.Location = New Point(264, 517)
         lblTotICJSent.Name = "lblTotICJSent"
@@ -264,7 +260,6 @@ Partial Class frmMain
         ' 
         ' lblTotICJReceived
         ' 
-        lblTotICJReceived.BorderStyle = BorderStyle.FixedSingle
         lblTotICJReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICJReceived.Location = New Point(137, 517)
         lblTotICJReceived.Name = "lblTotICJReceived"
@@ -274,7 +269,6 @@ Partial Class frmMain
         ' 
         ' lblTotICJChildren
         ' 
-        lblTotICJChildren.BorderStyle = BorderStyle.FixedSingle
         lblTotICJChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICJChildren.Location = New Point(17, 517)
         lblTotICJChildren.Name = "lblTotICJChildren"
@@ -295,7 +289,6 @@ Partial Class frmMain
         ' 
         ' lblNinety
         ' 
-        lblNinety.BorderStyle = BorderStyle.FixedSingle
         lblNinety.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblNinety.Location = New Point(198, 608)
         lblNinety.Name = "lblNinety"
@@ -304,7 +297,6 @@ Partial Class frmMain
         ' 
         ' lblOneEighty
         ' 
-        lblOneEighty.BorderStyle = BorderStyle.FixedSingle
         lblOneEighty.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblOneEighty.Location = New Point(379, 608)
         lblOneEighty.Name = "lblOneEighty"
@@ -313,7 +305,6 @@ Partial Class frmMain
         ' 
         ' lblToday
         ' 
-        lblToday.BorderStyle = BorderStyle.FixedSingle
         lblToday.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblToday.Location = New Point(18, 609)
         lblToday.Name = "lblToday"
