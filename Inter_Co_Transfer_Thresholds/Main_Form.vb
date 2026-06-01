@@ -68,6 +68,7 @@ Public Class frmMain
                     f.ShowDialog()
                 End Using
             End If
+
             ' If No, simply continue — Interstate section stays empty
         Else
             If RefreshFile(icjfile, isInterstate:=True) Then
@@ -83,6 +84,11 @@ Public Class frmMain
         Dim tempPath As String = Path.Combine(Path.GetDirectoryName(filepath),
                                               Path.GetFileNameWithoutExtension(filepath) & ".tmp" &
                                               Path.GetExtension(filepath))
+
+        Dim idxThreshold As Integer = If(isInterstate, 5, 6)
+        Dim idxProgRpt As Integer = If(isInterstate, 6, 7)
+        Dim idxProgDays As Integer = If(isInterstate, 7, 8)
+        Dim idxThreshDays As Integer = If(isInterstate, 8, 9)
 
         Try
 
@@ -105,10 +111,10 @@ Public Class frmMain
                     Dim dteICTThresh As Date
                     Dim dteProgRptThresh As Date
 
-                    If Not Date.TryParse(words(6).TrimEnd, dteICTThresh) Then
+                    If Not Date.TryParse(words(idxThreshold).TrimEnd, dteICTThresh) Then
 
                         MessageBox.Show("Invalid ICT Threshold date found in record: " & words(0).Trim & vbCrLf &
-                                        "Value: " & words(6).TrimEnd & vbCrLf & vbCrLf &
+                                        "Value: " & words(idxThreshold).TrimEnd & vbCrLf & vbCrLf &
                                         "File refresh has been aborted. Please correct the record and try again.",
                                         title, MessageBoxButtons.OK, MessageBoxIcon.Error)
 
@@ -118,10 +124,10 @@ Public Class frmMain
 
                     End If
 
-                    If Not Date.TryParse(words(7).TrimEnd, dteProgRptThresh) Then
+                    If Not Date.TryParse(words(idxProgRpt).TrimEnd, dteProgRptThresh) Then
 
                         MessageBox.Show("Invalid Progress Report date found in record: " & words(0).Trim & vbCrLf &
-                                        "Value: " & words(7).TrimEnd & vbCrLf & vbCrLf &
+                                        "Value: " & words(idxProgRpt).TrimEnd & vbCrLf & vbCrLf &
                                         "File refresh has been aborted. Please correct the record and try again.",
                                         title, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         ' Clean up temp file if partially written
@@ -135,8 +141,8 @@ Public Class frmMain
                     Dim ictDaysRefresh As Integer = dteICTThresh.Subtract(Date.Now).Days
 
                     ' Inject refreshed values back into the word array
-                    words(8) = progRptDaysRefresh.ToString.PadLeft(3) & " days"
-                    words(9) = ictDaysRefresh.ToString.PadLeft(3) & " days"
+                    words(idxProgDays) = progRptDaysRefresh.ToString.PadLeft(3) & " days"
+                    words(idxThreshDays) = ictDaysRefresh.ToString.PadLeft(3) & " days"
 
                     ' Rebuild the updated line and write to temp file
                     Dim updatedLine As String = String.Join(vbTab, words)
@@ -148,7 +154,6 @@ Public Class frmMain
                     My.Computer.FileSystem.WriteAllText(tempPath, line & vbCrLf, True)
 
                 End If
-
             Next
 
             ' Replace original file with updated temp file
@@ -322,9 +327,9 @@ Public Class frmMain
             PullICTData()
         End If
 
-        ' Refresh and reload ICT File Data
+        ' Refresh and reload ICJ File Data
         If RefreshFile(icjfile, isInterstate:=True) Then
-            PullICTData()
+            PullICJData()
         End If
 
     End Sub
