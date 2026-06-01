@@ -27,8 +27,9 @@ Public Class frmMain
         Dim dteNinety As Date = dteToday.AddDays(90)
         Dim dteOneEighty As Date = dteToday.AddDays(180)
 
-        dtpNinety.Text = dteNinety.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)
-        dtpOneEighty.Text = dteOneEighty.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)
+        lblToday.Text = dteToday.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)
+        lblNinety.Text = dteNinety.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)
+        lblOneEighty.Text = dteOneEighty.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)
 
         Dim button As DialogResult
 

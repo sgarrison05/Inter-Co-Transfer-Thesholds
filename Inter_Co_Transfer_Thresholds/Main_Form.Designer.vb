@@ -35,9 +35,6 @@ Partial Class frmMain
         Label7 = New Label()
         Label8 = New Label()
         Label9 = New Label()
-        dtpNinety = New DateTimePicker()
-        dtpOneEighty = New DateTimePicker()
-        dtpToday = New DateTimePicker()
         brnClose = New Button()
         btnSearch = New Button()
         btnRefresh = New Button()
@@ -49,6 +46,9 @@ Partial Class frmMain
         lblTotICJReceived = New Label()
         lblTotICJChildren = New Label()
         lblICJListingID = New Label()
+        lblNinety = New Label()
+        lblOneEighty = New Label()
+        lblToday = New Label()
         SuspendLayout()
         ' 
         ' lblICTListingID
@@ -56,7 +56,7 @@ Partial Class frmMain
         lblICTListingID.AutoSize = True
         lblICTListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblICTListingID.ForeColor = Color.Blue
-        lblICTListingID.Location = New Point(12, 4)
+        lblICTListingID.Location = New Point(12, -1)
         lblICTListingID.Name = "lblICTListingID"
         lblICTListingID.Size = New Size(521, 32)
         lblICTListingID.TabIndex = 0
@@ -182,36 +182,6 @@ Partial Class frmMain
         Label9.TabIndex = 16
         Label9.Text = "180 Days from Today:"
         ' 
-        ' dtpNinety
-        ' 
-        dtpNinety.Enabled = False
-        dtpNinety.Font = New Font("Segoe UI", 11.25F)
-        dtpNinety.Format = DateTimePickerFormat.Short
-        dtpNinety.Location = New Point(193, 610)
-        dtpNinety.Name = "dtpNinety"
-        dtpNinety.Size = New Size(131, 27)
-        dtpNinety.TabIndex = 17
-        ' 
-        ' dtpOneEighty
-        ' 
-        dtpOneEighty.Enabled = False
-        dtpOneEighty.Font = New Font("Segoe UI", 11.25F)
-        dtpOneEighty.Format = DateTimePickerFormat.Short
-        dtpOneEighty.Location = New Point(373, 610)
-        dtpOneEighty.Name = "dtpOneEighty"
-        dtpOneEighty.Size = New Size(131, 27)
-        dtpOneEighty.TabIndex = 18
-        ' 
-        ' dtpToday
-        ' 
-        dtpToday.Enabled = False
-        dtpToday.Font = New Font("Segoe UI", 11.25F)
-        dtpToday.Format = DateTimePickerFormat.Short
-        dtpToday.Location = New Point(17, 610)
-        dtpToday.Name = "dtpToday"
-        dtpToday.Size = New Size(131, 27)
-        dtpToday.TabIndex = 19
-        ' 
         ' brnClose
         ' 
         brnClose.BackColor = Color.SkyBlue
@@ -317,11 +287,38 @@ Partial Class frmMain
         lblICJListingID.AutoSize = True
         lblICJListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblICJListingID.ForeColor = Color.Blue
-        lblICJListingID.Location = New Point(12, 326)
+        lblICJListingID.Location = New Point(12, 322)
         lblICJListingID.Name = "lblICJListingID"
         lblICJListingID.Size = New Size(503, 32)
         lblICJListingID.TabIndex = 30
         lblICJListingID.Text = "Listing of Inter State Compact Supervision:"
+        ' 
+        ' lblNinety
+        ' 
+        lblNinety.BorderStyle = BorderStyle.FixedSingle
+        lblNinety.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblNinety.Location = New Point(198, 608)
+        lblNinety.Name = "lblNinety"
+        lblNinety.Size = New Size(87, 23)
+        lblNinety.TabIndex = 31
+        ' 
+        ' lblOneEighty
+        ' 
+        lblOneEighty.BorderStyle = BorderStyle.FixedSingle
+        lblOneEighty.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblOneEighty.Location = New Point(379, 608)
+        lblOneEighty.Name = "lblOneEighty"
+        lblOneEighty.Size = New Size(87, 23)
+        lblOneEighty.TabIndex = 32
+        ' 
+        ' lblToday
+        ' 
+        lblToday.BorderStyle = BorderStyle.FixedSingle
+        lblToday.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblToday.Location = New Point(18, 609)
+        lblToday.Name = "lblToday"
+        lblToday.Size = New Size(87, 23)
+        lblToday.TabIndex = 33
         ' 
         ' frmMain
         ' 
@@ -330,6 +327,9 @@ Partial Class frmMain
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = brnClose
         ClientSize = New Size(1135, 649)
+        Controls.Add(lblToday)
+        Controls.Add(lblOneEighty)
+        Controls.Add(lblNinety)
         Controls.Add(lblICJListingID)
         Controls.Add(Label1)
         Controls.Add(Label2)
@@ -340,9 +340,6 @@ Partial Class frmMain
         Controls.Add(lblICJListing)
         Controls.Add(btnRefresh)
         Controls.Add(btnSearch)
-        Controls.Add(dtpToday)
-        Controls.Add(dtpOneEighty)
-        Controls.Add(dtpNinety)
         Controls.Add(Label9)
         Controls.Add(Label8)
         Controls.Add(Label7)
@@ -378,9 +375,6 @@ Partial Class frmMain
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents dtpNinety As DateTimePicker
-    Friend WithEvents dtpOneEighty As DateTimePicker
-    Friend WithEvents dtpToday As DateTimePicker
     Friend WithEvents brnClose As Button
     Friend WithEvents btnSearch As Button
     Friend WithEvents btnRefresh As Button
@@ -392,5 +386,8 @@ Partial Class frmMain
     Friend WithEvents lblTotICJReceived As Label
     Friend WithEvents lblTotICJChildren As Label
     Friend WithEvents lblICJListingID As Label
+    Friend WithEvents lblNinety As Label
+    Friend WithEvents lblOneEighty As Label
+    Friend WithEvents lblToday As Label
 
 End Class
