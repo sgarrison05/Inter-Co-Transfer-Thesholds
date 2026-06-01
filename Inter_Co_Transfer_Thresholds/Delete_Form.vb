@@ -4,7 +4,7 @@ Imports System.Text
 Public Class frmDelete
 
     Private Sub frmDelete_Load(sender As Object, e As EventArgs) Handles Me.Load
-
+        rdbICJ.Checked = True
         txbLastName.Focus()
 
     End Sub
@@ -79,6 +79,7 @@ Public Class frmDelete
     Public Sub CleanForm()
 
         txbLastName.Clear()
+        rdbICT.Checked = True
         txbLastName.Focus()
 
     End Sub
@@ -108,15 +109,16 @@ Public Class frmDelete
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
 
         CleanForm()
-        txbLastName.Focus()
 
     End Sub
 
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
 
         CleanForm()
+        frmMain.lblICTListing.Text = String.Empty
+        frmMain.lblICJListing.Text = String.Empty
         frmMain.Show()
-        frmMain.lblICTListing.Text = "Please Press Refresh to Update Data."
+        frmMain.btnRefresh.PerformClick()
         Me.Close()
 
     End Sub

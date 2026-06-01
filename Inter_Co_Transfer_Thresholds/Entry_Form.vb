@@ -36,7 +36,6 @@
         frmMain.lblICTListing.Text = String.Empty
         frmMain.lblICJListing.Text = String.Empty
         frmMain.Show()
-        'frmMain.lblICTListing.Text = "Please Press Refresh to Update Data."
         frmMain.btnRefresh.PerformClick()
         Me.Close()
 
