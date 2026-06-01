@@ -226,7 +226,6 @@
         cmbType.SelectedIndex = 0
         dtpStart.Value = Date.Today
         dtpEnd.Value = Date.Today.AddDays(180)
-        txbChildName.Focus()
 
         ' Reset form to default to ICT
         rdbICT.Checked = True
@@ -236,6 +235,14 @@
         cmbType.Visible = True
         lblReceiveID.Text = "Receiving County:"
         lblSendID.Text = "Sending County:"
+
+        ' Reset text box colors
+        txbReceiveCo.BackColor = Color.White
+        txbReceiveCo.ForeColor = Color.Black
+        txbSendCo.BackColor = Color.White
+        txbSendCo.ForeColor = Color.Black
+
+        txbChildName.Focus()
 
     End Sub
 
@@ -318,11 +325,11 @@
     End Sub
 
     Private Sub rdbICT_Click(sender As Object, e As EventArgs) Handles rdbICT.Click
+
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
         cmbTypeID.Visible = True
         cmbType.Visible = True
-
         lblReceiveID.Text = "Receiving County:"
         lblSendID.Text = "Sending County:"
 
@@ -335,11 +342,11 @@
     End Sub
 
     Private Sub rdbICJ_Click(sender As Object, e As EventArgs) Handles rdbICJ.Click
+
         lblICJFormID.Visible = True
         lblICTFormID.Visible = False
         cmbTypeID.Visible = False
         cmbType.Visible = False
-
         lblReceiveID.Text = "Receiving State:"
         lblSendID.Text = "Sending State:"
 
