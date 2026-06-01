@@ -54,7 +54,7 @@
             Dim recordType As String = If(rdbICT.Checked, "[ICT] ", "[Interstate] ")
 
             If String.IsNullOrEmpty(display) Then
-                display = "Name not found."
+                lblDisplay.Text = "Name not found."
             Else
                 lblDisplay.Text = recordType & display
             End If
