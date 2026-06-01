@@ -4,6 +4,7 @@ Imports System.Text
 Public Class frmDelete
 
     Private Sub frmDelete_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         rdbICT.Checked = True
         txbLastName.Focus()
 
@@ -39,9 +40,7 @@ Public Class frmDelete
                     If entry.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0 Then
 
                         recordFound = True
-
                     Else
-
                         'if not found writes line to temp file and moves on
                         My.Computer.FileSystem.WriteAllText(tempPath, entry, True)
                     End If
@@ -56,6 +55,10 @@ Public Class frmDelete
                     If remainingLine.Length > 0 AndAlso
                         remainingLine.IndexOf(name, StringComparison.OrdinalIgnoreCase) < 0 Then
                         My.Computer.FileSystem.WriteAllText(tempPath, remainingLine, True)
+
+                    ElseIf remainingLine.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0 Then
+
+                        recordFound = True
                     End If
                 End If
 
@@ -70,14 +73,6 @@ Public Class frmDelete
                     If File.Exists(tempPath) Then File.Delete(tempPath)
                     MessageBox.Show("No record found for: " & name,
                     "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
-
-                If recordFound Then
-                    MessageBox.Show("Record for " & name & " has been deleted.",
-                                    "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MessageBox.Show("No record found for: " & name,
-                                    "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
 
             Catch ex As Exception
