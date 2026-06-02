@@ -202,8 +202,7 @@ Partial Class frmEntry
         ' 
         ' lblProgRptDate
         ' 
-        lblProgRptDate.BorderStyle = BorderStyle.FixedSingle
-        lblProgRptDate.Location = New Point(18, 329)
+        lblProgRptDate.Location = New Point(18, 330)
         lblProgRptDate.Name = "lblProgRptDate"
         lblProgRptDate.Size = New Size(103, 23)
         lblProgRptDate.TabIndex = 34
@@ -211,9 +210,8 @@ Partial Class frmEntry
         ' 
         ' lblDaysRemainProg
         ' 
-        lblDaysRemainProg.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainProg.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainProg.Location = New Point(173, 329)
+        lblDaysRemainProg.Location = New Point(174, 330)
         lblDaysRemainProg.Name = "lblDaysRemainProg"
         lblDaysRemainProg.Size = New Size(57, 23)
         lblDaysRemainProg.TabIndex = 35
@@ -221,8 +219,7 @@ Partial Class frmEntry
         ' 
         ' lblTransThreshold
         ' 
-        lblTransThreshold.BorderStyle = BorderStyle.FixedSingle
-        lblTransThreshold.Location = New Point(362, 329)
+        lblTransThreshold.Location = New Point(362, 330)
         lblTransThreshold.Name = "lblTransThreshold"
         lblTransThreshold.Size = New Size(103, 23)
         lblTransThreshold.TabIndex = 36
@@ -230,9 +227,8 @@ Partial Class frmEntry
         ' 
         ' lblDaysRemainTrns
         ' 
-        lblDaysRemainTrns.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainTrns.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainTrns.Location = New Point(506, 329)
+        lblDaysRemainTrns.Location = New Point(509, 330)
         lblDaysRemainTrns.Name = "lblDaysRemainTrns"
         lblDaysRemainTrns.Size = New Size(57, 23)
         lblDaysRemainTrns.TabIndex = 37
@@ -240,7 +236,7 @@ Partial Class frmEntry
         ' 
         ' Label14
         ' 
-        Label14.Location = New Point(231, 330)
+        Label14.Location = New Point(231, 327)
         Label14.Name = "Label14"
         Label14.Size = New Size(47, 22)
         Label14.TabIndex = 38
@@ -249,7 +245,7 @@ Partial Class frmEntry
         ' 
         ' Label15
         ' 
-        Label15.Location = New Point(569, 323)
+        Label15.Location = New Point(566, 327)
         Label15.Name = "Label15"
         Label15.Size = New Size(47, 22)
         Label15.TabIndex = 39
