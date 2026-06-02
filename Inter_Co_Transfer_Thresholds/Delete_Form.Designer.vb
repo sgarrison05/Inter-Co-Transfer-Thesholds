@@ -96,7 +96,7 @@ Partial Class frmDelete
         rdbICT.AutoSize = True
         rdbICT.Location = New Point(6, 29)
         rdbICT.Name = "rdbICT"
-        rdbICT.Size = New Size(136, 19)
+        rdbICT.Size = New Size(135, 19)
         rdbICT.TabIndex = 0
         rdbICT.TabStop = True
         rdbICT.Text = "Inter County Transfer"

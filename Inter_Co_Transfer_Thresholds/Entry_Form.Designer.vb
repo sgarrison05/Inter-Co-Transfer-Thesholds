@@ -162,7 +162,7 @@ Partial Class frmEntry
         txbSendCo.Location = New Point(205, 150)
         txbSendCo.Name = "txbSendCo"
         txbSendCo.Size = New Size(178, 29)
-        txbSendCo.TabIndex = 2
+        txbSendCo.TabIndex = 3
         ' 
         ' dtpStart
         ' 
@@ -189,7 +189,7 @@ Partial Class frmEntry
         cmbType.Location = New Point(395, 150)
         cmbType.Name = "cmbType"
         cmbType.Size = New Size(187, 29)
-        cmbType.TabIndex = 3
+        cmbType.TabIndex = 4
         ' 
         ' cmbOfficer
         ' 
@@ -198,7 +198,7 @@ Partial Class frmEntry
         cmbOfficer.Location = New Point(395, 72)
         cmbOfficer.Name = "cmbOfficer"
         cmbOfficer.Size = New Size(126, 29)
-        cmbOfficer.TabIndex = 4
+        cmbOfficer.TabIndex = 1
         ' 
         ' lblProgRptDate
         ' 
@@ -292,7 +292,7 @@ Partial Class frmEntry
         txbReceiveCo.Location = New Point(16, 149)
         txbReceiveCo.Name = "txbReceiveCo"
         txbReceiveCo.Size = New Size(178, 29)
-        txbReceiveCo.TabIndex = 1
+        txbReceiveCo.TabIndex = 2
         ' 
         ' lblReceiveID
         ' 
