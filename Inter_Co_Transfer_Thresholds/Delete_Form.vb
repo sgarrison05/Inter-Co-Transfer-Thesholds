@@ -5,6 +5,7 @@ Public Class frmDelete
 
     Private Sub frmDelete_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        rdbICT.Checked = True
         txbLastName.Focus()
 
     End Sub
@@ -39,9 +40,7 @@ Public Class frmDelete
                     If entry.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0 Then
 
                         recordFound = True
-
                     Else
-
                         'if not found writes line to temp file and moves on
                         My.Computer.FileSystem.WriteAllText(tempPath, entry, True)
                     End If
@@ -51,19 +50,33 @@ Public Class frmDelete
 
                 Loop
 
-                'Deletes original file and renames temp file to original name
-                File.Delete(filepath)
-                File.Move(tempPath, filepath)
+                If entryIndex < readtxt.Length Then
+                    Dim remainingLine As String = readtxt.Substring(entryIndex)
+                    If remainingLine.Length > 0 AndAlso
+                        remainingLine.IndexOf(name, StringComparison.OrdinalIgnoreCase) < 0 Then
+                        My.Computer.FileSystem.WriteAllText(tempPath, remainingLine, True)
 
+                    ElseIf remainingLine.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0 Then
+
+                        recordFound = True
+                    End If
+                End If
+
+                'Deletes original file and renames temp file to original name
                 If recordFound Then
+                    File.Delete(filepath)
+                    File.Move(tempPath, filepath)
                     MessageBox.Show("Record for " & name & " has been deleted.",
-                                    "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
+                    ' Discard the temp file — leave original untouched
+                    If File.Exists(tempPath) Then File.Delete(tempPath)
                     MessageBox.Show("No record found for: " & name,
-                                    "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
 
             Catch ex As Exception
+                If File.Exists(tempPath) Then File.Delete(tempPath)
                 MessageBox.Show("Error deleting record: " & ex.Message,
                                 "Delete", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -79,6 +92,7 @@ Public Class frmDelete
     Public Sub CleanForm()
 
         txbLastName.Clear()
+        rdbICT.Checked = True
         txbLastName.Focus()
 
     End Sub
@@ -90,6 +104,17 @@ Public Class frmDelete
         If String.IsNullOrWhiteSpace(lastName) Then
             MessageBox.Show("Please enter a last name to delete.",
                     "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            txbLastName.Focus()
+            Return
+        End If
+
+        ' Determine target file based on selected radio button
+        Dim targetFile As String = If(rdbICT.Checked, frmMain.ictfile, frmMain.icjfile)
+
+        ' Check file exists before attempting to read
+        If Not My.Computer.FileSystem.FileExists(targetFile) Then
+            MessageBox.Show("No " & If(rdbICT.Checked, "ICT", "Interstate") & " records file found.",
+                            "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
@@ -99,7 +124,7 @@ Public Class frmDelete
             MessageBoxDefaultButton.Button2)
 
         If confirm = DialogResult.Yes Then
-            DeleteRecord(frmMain.tfile, lastName)
+            DeleteRecord(targetFile, lastName)
             CleanForm()
         End If
 
@@ -108,15 +133,16 @@ Public Class frmDelete
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
 
         CleanForm()
-        txbLastName.Focus()
 
     End Sub
 
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
 
         CleanForm()
+        frmMain.lblICTListing.Text = String.Empty
+        frmMain.lblICJListing.Text = String.Empty
         frmMain.Show()
-        frmMain.lblListing.Text = "Please Press Refresh to Update Data."
+        frmMain.btnRefresh.PerformClick()
         Me.Close()
 
     End Sub

@@ -22,143 +22,148 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        lblListingID = New Label()
-        lblListing = New Label()
+        lblICTListingID = New Label()
+        lblICTListing = New Label()
         btnAdd = New Button()
         btnDelete = New Button()
         lblDateID = New Label()
-        lblTotalChildren = New Label()
-        lblTotReceived = New Label()
-        lblTotSent = New Label()
+        lblTotICTChildren = New Label()
+        lblTotICTReceived = New Label()
+        lblTotICTSent = New Label()
         Label5 = New Label()
         Label6 = New Label()
         Label7 = New Label()
         Label8 = New Label()
         Label9 = New Label()
-        dtpNinety = New DateTimePicker()
-        dtpOneEighty = New DateTimePicker()
-        dtpToday = New DateTimePicker()
         brnClose = New Button()
         btnSearch = New Button()
         btnRefresh = New Button()
+        lblICJListing = New Label()
+        Label1 = New Label()
+        Label2 = New Label()
+        Label3 = New Label()
+        lblTotICJSent = New Label()
+        lblTotICJReceived = New Label()
+        lblTotICJChildren = New Label()
+        lblICJListingID = New Label()
+        lblNinety = New Label()
+        lblOneEighty = New Label()
+        lblToday = New Label()
         SuspendLayout()
         ' 
-        ' lblListingID
+        ' lblICTListingID
         ' 
-        lblListingID.AutoSize = True
-        lblListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblListingID.ForeColor = Color.Blue
-        lblListingID.Location = New Point(12, 15)
-        lblListingID.Name = "lblListingID"
-        lblListingID.Size = New Size(333, 32)
-        lblListingID.TabIndex = 0
-        lblListingID.Text = "Listing of Current Transfers:" & vbCrLf
+        lblICTListingID.AutoSize = True
+        lblICTListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblICTListingID.ForeColor = Color.Blue
+        lblICTListingID.Location = New Point(12, -1)
+        lblICTListingID.Name = "lblICTListingID"
+        lblICTListingID.Size = New Size(521, 32)
+        lblICTListingID.TabIndex = 0
+        lblICTListingID.Text = "Listing of Inter County Transfer Supervision:" & vbCrLf
         ' 
-        ' lblListing
+        ' lblICTListing
         ' 
-        lblListing.BackColor = SystemColors.ActiveCaptionText
-        lblListing.Font = New Font("Cascadia Mono", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblListing.ForeColor = SystemColors.Control
-        lblListing.Location = New Point(12, 94)
-        lblListing.Name = "lblListing"
-        lblListing.Size = New Size(1178, 290)
-        lblListing.TabIndex = 1
+        lblICTListing.BackColor = SystemColors.ActiveCaptionText
+        lblICTListing.Font = New Font("Cascadia Mono", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblICTListing.ForeColor = SystemColors.Control
+        lblICTListing.Location = New Point(12, 36)
+        lblICTListing.Name = "lblICTListing"
+        lblICTListing.Size = New Size(1110, 213)
+        lblICTListing.TabIndex = 1
         ' 
         ' btnAdd
         ' 
         btnAdd.BackColor = Color.Green
-        btnAdd.Location = New Point(766, 558)
+        btnAdd.Location = New Point(826, 498)
         btnAdd.Name = "btnAdd"
         btnAdd.Size = New Size(75, 39)
-        btnAdd.TabIndex = 1
+        btnAdd.TabIndex = 0
         btnAdd.Text = "Add New"
         btnAdd.UseVisualStyleBackColor = False
         ' 
         ' btnDelete
         ' 
         btnDelete.BackColor = Color.Red
-        btnDelete.Location = New Point(987, 558)
+        btnDelete.Location = New Point(1047, 498)
         btnDelete.Name = "btnDelete"
         btnDelete.Size = New Size(75, 39)
-        btnDelete.TabIndex = 3
+        btnDelete.TabIndex = 2
         btnDelete.Text = "Delete"
         btnDelete.UseVisualStyleBackColor = False
         ' 
         ' lblDateID
         ' 
         lblDateID.AutoSize = True
-        lblDateID.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblDateID.Location = New Point(965, 15)
+        lblDateID.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDateID.Location = New Point(18, 592)
         lblDateID.Name = "lblDateID"
-        lblDateID.Size = New Size(100, 21)
+        lblDateID.Size = New Size(80, 15)
         lblDateID.TabIndex = 5
         lblDateID.Text = "Today's Date:"
         ' 
-        ' lblTotalChildren
+        ' lblTotICTChildren
         ' 
-        lblTotalChildren.BorderStyle = BorderStyle.FixedSingle
-        lblTotalChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalChildren.Location = New Point(17, 444)
-        lblTotalChildren.Name = "lblTotalChildren"
-        lblTotalChildren.Size = New Size(75, 23)
-        lblTotalChildren.TabIndex = 7
-        lblTotalChildren.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICTChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTChildren.Location = New Point(17, 282)
+        lblTotICTChildren.Name = "lblTotICTChildren"
+        lblTotICTChildren.Size = New Size(102, 23)
+        lblTotICTChildren.TabIndex = 7
+        lblTotICTChildren.TextAlign = ContentAlignment.MiddleCenter
         ' 
-        ' lblTotReceived
+        ' lblTotICTReceived
         ' 
-        lblTotReceived.BorderStyle = BorderStyle.FixedSingle
-        lblTotReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotReceived.Location = New Point(154, 444)
-        lblTotReceived.Name = "lblTotReceived"
-        lblTotReceived.Size = New Size(75, 23)
-        lblTotReceived.TabIndex = 8
-        lblTotReceived.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICTReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTReceived.Location = New Point(137, 282)
+        lblTotICTReceived.Name = "lblTotICTReceived"
+        lblTotICTReceived.Size = New Size(102, 23)
+        lblTotICTReceived.TabIndex = 8
+        lblTotICTReceived.TextAlign = ContentAlignment.MiddleCenter
         ' 
-        ' lblTotSent
+        ' lblTotICTSent
         ' 
-        lblTotSent.BorderStyle = BorderStyle.FixedSingle
-        lblTotSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotSent.Location = New Point(294, 444)
-        lblTotSent.Name = "lblTotSent"
-        lblTotSent.Size = New Size(75, 23)
-        lblTotSent.TabIndex = 9
-        lblTotSent.TextAlign = ContentAlignment.MiddleCenter
+        lblTotICTSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTSent.Location = New Point(264, 282)
+        lblTotICTSent.Name = "lblTotICTSent"
+        lblTotICTSent.Size = New Size(102, 23)
+        lblTotICTSent.TabIndex = 9
+        lblTotICTSent.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' Label5
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label5.Location = New Point(12, 425)
+        Label5.Location = New Point(12, 263)
         Label5.Name = "Label5"
-        Label5.Size = New Size(86, 15)
+        Label5.Size = New Size(107, 15)
         Label5.TabIndex = 12
-        Label5.Text = "Total Children:"
+        Label5.Text = "Total ICT Children:"
         ' 
         ' Label6
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label6.Location = New Point(154, 425)
+        Label6.Location = New Point(137, 263)
         Label6.Name = "Label6"
-        Label6.Size = New Size(85, 15)
+        Label6.Size = New Size(106, 15)
         Label6.TabIndex = 13
-        Label6.Text = "Total Recived:"
+        Label6.Text = "Total ICT Recived:"
         ' 
         ' Label7
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label7.Location = New Point(294, 425)
+        Label7.Location = New Point(264, 263)
         Label7.Name = "Label7"
-        Label7.Size = New Size(66, 15)
+        Label7.Size = New Size(87, 15)
         Label7.TabIndex = 14
-        Label7.Text = "Total Sent:"
+        Label7.Text = "Total ICT Sent:"
         ' 
         ' Label8
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label8.Location = New Point(17, 496)
+        Label8.Location = New Point(193, 592)
         Label8.Name = "Label8"
         Label8.Size = New Size(119, 15)
         Label8.TabIndex = 15
@@ -168,46 +173,16 @@ Partial Class frmMain
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        Label9.Location = New Point(17, 558)
+        Label9.Location = New Point(373, 592)
         Label9.Name = "Label9"
         Label9.Size = New Size(126, 15)
         Label9.TabIndex = 16
         Label9.Text = "180 Days from Today:"
         ' 
-        ' dtpNinety
-        ' 
-        dtpNinety.Enabled = False
-        dtpNinety.Font = New Font("Segoe UI", 11.25F)
-        dtpNinety.Format = DateTimePickerFormat.Short
-        dtpNinety.Location = New Point(17, 514)
-        dtpNinety.Name = "dtpNinety"
-        dtpNinety.Size = New Size(131, 27)
-        dtpNinety.TabIndex = 17
-        ' 
-        ' dtpOneEighty
-        ' 
-        dtpOneEighty.Enabled = False
-        dtpOneEighty.Font = New Font("Segoe UI", 11.25F)
-        dtpOneEighty.Format = DateTimePickerFormat.Short
-        dtpOneEighty.Location = New Point(17, 576)
-        dtpOneEighty.Name = "dtpOneEighty"
-        dtpOneEighty.Size = New Size(131, 27)
-        dtpOneEighty.TabIndex = 18
-        ' 
-        ' dtpToday
-        ' 
-        dtpToday.Enabled = False
-        dtpToday.Font = New Font("Segoe UI", 11.25F)
-        dtpToday.Format = DateTimePickerFormat.Short
-        dtpToday.Location = New Point(965, 39)
-        dtpToday.Name = "dtpToday"
-        dtpToday.Size = New Size(131, 27)
-        dtpToday.TabIndex = 19
-        ' 
         ' brnClose
         ' 
         brnClose.BackColor = Color.SkyBlue
-        brnClose.Location = New Point(1099, 558)
+        brnClose.Location = New Point(1047, 592)
         brnClose.Name = "brnClose"
         brnClose.Size = New Size(75, 39)
         brnClose.TabIndex = 4
@@ -217,22 +192,124 @@ Partial Class frmMain
         ' btnSearch
         ' 
         btnSearch.BackColor = Color.Gold
-        btnSearch.Location = New Point(875, 558)
+        btnSearch.Location = New Point(935, 498)
         btnSearch.Name = "btnSearch"
         btnSearch.Size = New Size(75, 39)
-        btnSearch.TabIndex = 2
+        btnSearch.TabIndex = 1
         btnSearch.Text = "Search"
         btnSearch.UseVisualStyleBackColor = False
         ' 
         ' btnRefresh
         ' 
         btnRefresh.BackColor = Color.DodgerBlue
-        btnRefresh.Location = New Point(650, 558)
+        btnRefresh.Location = New Point(935, 592)
         btnRefresh.Name = "btnRefresh"
         btnRefresh.Size = New Size(75, 39)
-        btnRefresh.TabIndex = 0
+        btnRefresh.TabIndex = 3
         btnRefresh.Text = "Refresh"
         btnRefresh.UseVisualStyleBackColor = False
+        ' 
+        ' lblICJListing
+        ' 
+        lblICJListing.BackColor = SystemColors.ActiveCaptionText
+        lblICJListing.Font = New Font("Cascadia Mono", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblICJListing.ForeColor = SystemColors.Control
+        lblICJListing.Location = New Point(12, 358)
+        lblICJListing.Name = "lblICJListing"
+        lblICJListing.Size = New Size(1110, 127)
+        lblICJListing.TabIndex = 20
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label1.Location = New Point(264, 498)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(85, 15)
+        Label1.TabIndex = 29
+        Label1.Text = "Total ICJ Sent:"
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label2.Location = New Point(137, 498)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(104, 15)
+        Label2.TabIndex = 28
+        Label2.Text = "Total ICJ Recived:"
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label3.Location = New Point(12, 498)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(105, 15)
+        Label3.TabIndex = 27
+        Label3.Text = "Total ICJ Children:"
+        ' 
+        ' lblTotICJSent
+        ' 
+        lblTotICJSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICJSent.Location = New Point(264, 517)
+        lblTotICJSent.Name = "lblTotICJSent"
+        lblTotICJSent.Size = New Size(102, 23)
+        lblTotICJSent.TabIndex = 26
+        lblTotICJSent.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' lblTotICJReceived
+        ' 
+        lblTotICJReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICJReceived.Location = New Point(137, 517)
+        lblTotICJReceived.Name = "lblTotICJReceived"
+        lblTotICJReceived.Size = New Size(102, 23)
+        lblTotICJReceived.TabIndex = 25
+        lblTotICJReceived.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' lblTotICJChildren
+        ' 
+        lblTotICJChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICJChildren.Location = New Point(17, 517)
+        lblTotICJChildren.Name = "lblTotICJChildren"
+        lblTotICJChildren.Size = New Size(102, 23)
+        lblTotICJChildren.TabIndex = 24
+        lblTotICJChildren.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' lblICJListingID
+        ' 
+        lblICJListingID.AutoSize = True
+        lblICJListingID.Font = New Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblICJListingID.ForeColor = Color.Blue
+        lblICJListingID.Location = New Point(12, 322)
+        lblICJListingID.Name = "lblICJListingID"
+        lblICJListingID.Size = New Size(503, 32)
+        lblICJListingID.TabIndex = 30
+        lblICJListingID.Text = "Listing of Inter State Compact Supervision:"
+        ' 
+        ' lblNinety
+        ' 
+        lblNinety.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblNinety.Location = New Point(198, 608)
+        lblNinety.Name = "lblNinety"
+        lblNinety.Size = New Size(87, 23)
+        lblNinety.TabIndex = 31
+        ' 
+        ' lblOneEighty
+        ' 
+        lblOneEighty.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblOneEighty.Location = New Point(379, 608)
+        lblOneEighty.Name = "lblOneEighty"
+        lblOneEighty.Size = New Size(87, 23)
+        lblOneEighty.TabIndex = 32
+        ' 
+        ' lblToday
+        ' 
+        lblToday.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblToday.Location = New Point(18, 609)
+        lblToday.Name = "lblToday"
+        lblToday.Size = New Size(87, 23)
+        lblToday.TabIndex = 33
         ' 
         ' frmMain
         ' 
@@ -240,26 +317,34 @@ Partial Class frmMain
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = brnClose
-        ClientSize = New Size(1204, 625)
+        ClientSize = New Size(1135, 649)
+        Controls.Add(lblToday)
+        Controls.Add(lblOneEighty)
+        Controls.Add(lblNinety)
+        Controls.Add(lblICJListingID)
+        Controls.Add(Label1)
+        Controls.Add(Label2)
+        Controls.Add(Label3)
+        Controls.Add(lblTotICJSent)
+        Controls.Add(lblTotICJReceived)
+        Controls.Add(lblTotICJChildren)
+        Controls.Add(lblICJListing)
         Controls.Add(btnRefresh)
         Controls.Add(btnSearch)
-        Controls.Add(dtpToday)
-        Controls.Add(dtpOneEighty)
-        Controls.Add(dtpNinety)
         Controls.Add(Label9)
         Controls.Add(Label8)
         Controls.Add(Label7)
         Controls.Add(Label6)
         Controls.Add(Label5)
-        Controls.Add(lblTotSent)
-        Controls.Add(lblTotReceived)
-        Controls.Add(lblTotalChildren)
+        Controls.Add(lblTotICTSent)
+        Controls.Add(lblTotICTReceived)
+        Controls.Add(lblTotICTChildren)
         Controls.Add(lblDateID)
         Controls.Add(brnClose)
         Controls.Add(btnDelete)
         Controls.Add(btnAdd)
-        Controls.Add(lblListing)
-        Controls.Add(lblListingID)
+        Controls.Add(lblICTListing)
+        Controls.Add(lblICTListingID)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Name = "frmMain"
         StartPosition = FormStartPosition.CenterScreen
@@ -268,24 +353,32 @@ Partial Class frmMain
         PerformLayout()
     End Sub
 
-    Friend WithEvents lblListingID As Label
-    Friend WithEvents lblListing As Label
+    Friend WithEvents lblICTListingID As Label
+    Friend WithEvents lblICTListing As Label
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents lblDateID As Label
-    Friend WithEvents lblTotalChildren As Label
-    Friend WithEvents lblTotReceived As Label
-    Friend WithEvents lblTotSent As Label
+    Friend WithEvents lblTotICTChildren As Label
+    Friend WithEvents lblTotICTReceived As Label
+    Friend WithEvents lblTotICTSent As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents dtpNinety As DateTimePicker
-    Friend WithEvents dtpOneEighty As DateTimePicker
-    Friend WithEvents dtpToday As DateTimePicker
     Friend WithEvents brnClose As Button
     Friend WithEvents btnSearch As Button
     Friend WithEvents btnRefresh As Button
+    Friend WithEvents lblICJListing As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents lblTotICJSent As Label
+    Friend WithEvents lblTotICJReceived As Label
+    Friend WithEvents lblTotICJChildren As Label
+    Friend WithEvents lblICJListingID As Label
+    Friend WithEvents lblNinety As Label
+    Friend WithEvents lblOneEighty As Label
+    Friend WithEvents lblToday As Label
 
 End Class

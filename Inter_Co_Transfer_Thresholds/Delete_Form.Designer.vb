@@ -27,6 +27,10 @@ Partial Class frmDelete
         btnReturn = New Button()
         btnClear = New Button()
         btnDelete = New Button()
+        rdbICJ = New RadioButton()
+        rdbICT = New RadioButton()
+        gpbType = New GroupBox()
+        gpbType.SuspendLayout()
         SuspendLayout()
         ' 
         ' txbLastName
@@ -34,7 +38,7 @@ Partial Class frmDelete
         txbLastName.Font = New Font("Segoe UI", 12F)
         txbLastName.Location = New Point(12, 38)
         txbLastName.Name = "txbLastName"
-        txbLastName.Size = New Size(335, 29)
+        txbLastName.Size = New Size(316, 29)
         txbLastName.TabIndex = 0
         ' 
         ' lblChildNameID
@@ -49,7 +53,7 @@ Partial Class frmDelete
         ' btnReturn
         ' 
         btnReturn.BackColor = Color.Gold
-        btnReturn.Location = New Point(432, 128)
+        btnReturn.Location = New Point(214, 128)
         btnReturn.Name = "btnReturn"
         btnReturn.Size = New Size(75, 40)
         btnReturn.TabIndex = 3
@@ -59,7 +63,7 @@ Partial Class frmDelete
         ' btnClear
         ' 
         btnClear.BackColor = SystemColors.ControlDark
-        btnClear.Location = New Point(432, 73)
+        btnClear.Location = New Point(113, 128)
         btnClear.Name = "btnClear"
         btnClear.Size = New Size(75, 40)
         btnClear.TabIndex = 2
@@ -69,12 +73,47 @@ Partial Class frmDelete
         ' btnDelete
         ' 
         btnDelete.BackColor = Color.IndianRed
-        btnDelete.Location = New Point(432, 20)
+        btnDelete.Location = New Point(12, 128)
         btnDelete.Name = "btnDelete"
         btnDelete.Size = New Size(75, 40)
         btnDelete.TabIndex = 1
         btnDelete.Text = "Delete"
         btnDelete.UseVisualStyleBackColor = False
+        ' 
+        ' rdbICJ
+        ' 
+        rdbICJ.AutoSize = True
+        rdbICJ.Location = New Point(6, 67)
+        rdbICJ.Name = "rdbICJ"
+        rdbICJ.Size = New Size(126, 19)
+        rdbICJ.TabIndex = 1
+        rdbICJ.TabStop = True
+        rdbICJ.Text = "Interstate Compact"
+        rdbICJ.UseVisualStyleBackColor = True
+        ' 
+        ' rdbICT
+        ' 
+        rdbICT.AutoSize = True
+        rdbICT.Location = New Point(6, 29)
+        rdbICT.Name = "rdbICT"
+        rdbICT.Size = New Size(135, 19)
+        rdbICT.TabIndex = 0
+        rdbICT.TabStop = True
+        rdbICT.Text = "Inter County Transfer"
+        rdbICT.UseVisualStyleBackColor = True
+        ' 
+        ' gpbType
+        ' 
+        gpbType.BackColor = Color.DodgerBlue
+        gpbType.Controls.Add(rdbICJ)
+        gpbType.Controls.Add(rdbICT)
+        gpbType.ForeColor = SystemColors.Window
+        gpbType.Location = New Point(360, 12)
+        gpbType.Name = "gpbType"
+        gpbType.Size = New Size(147, 114)
+        gpbType.TabIndex = 47
+        gpbType.TabStop = False
+        gpbType.Text = "Record to Enter"
         ' 
         ' frmDelete
         ' 
@@ -83,6 +122,7 @@ Partial Class frmDelete
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
         ClientSize = New Size(519, 180)
+        Controls.Add(gpbType)
         Controls.Add(btnDelete)
         Controls.Add(btnClear)
         Controls.Add(btnReturn)
@@ -91,6 +131,8 @@ Partial Class frmDelete
         Name = "frmDelete"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Delete Child"
+        gpbType.ResumeLayout(False)
+        gpbType.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -100,4 +142,7 @@ Partial Class frmDelete
     Friend WithEvents btnReturn As Button
     Friend WithEvents btnClear As Button
     Friend WithEvents btnDelete As Button
+    Friend WithEvents rdbICJ As RadioButton
+    Friend WithEvents rdbICT As RadioButton
+    Friend WithEvents gpbType As GroupBox
 End Class

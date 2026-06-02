@@ -28,6 +28,10 @@ Partial Class frmSearch
         btnEnter = New Button()
         lblDisplay = New Label()
         btnClear = New Button()
+        rdbICJ = New RadioButton()
+        rdbICT = New RadioButton()
+        gpbType = New GroupBox()
+        gpbType.SuspendLayout()
         SuspendLayout()
         ' 
         ' txbLastName
@@ -50,7 +54,7 @@ Partial Class frmSearch
         ' btnReturn
         ' 
         btnReturn.BackColor = Color.Gold
-        btnReturn.Location = New Point(432, 195)
+        btnReturn.Location = New Point(196, 232)
         btnReturn.Name = "btnReturn"
         btnReturn.Size = New Size(75, 40)
         btnReturn.TabIndex = 3
@@ -60,7 +64,7 @@ Partial Class frmSearch
         ' btnEnter
         ' 
         btnEnter.BackColor = Color.GreenYellow
-        btnEnter.Location = New Point(248, 195)
+        btnEnter.Location = New Point(12, 232)
         btnEnter.Name = "btnEnter"
         btnEnter.Size = New Size(75, 40)
         btnEnter.TabIndex = 1
@@ -72,20 +76,55 @@ Partial Class frmSearch
         lblDisplay.BackColor = Color.Black
         lblDisplay.Font = New Font("Cascadia Mono", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblDisplay.ForeColor = Color.White
-        lblDisplay.Location = New Point(12, 77)
+        lblDisplay.Location = New Point(12, 140)
         lblDisplay.Name = "lblDisplay"
-        lblDisplay.Size = New Size(494, 93)
+        lblDisplay.Size = New Size(555, 75)
         lblDisplay.TabIndex = 47
         ' 
         ' btnClear
         ' 
         btnClear.BackColor = SystemColors.ControlDark
-        btnClear.Location = New Point(342, 195)
+        btnClear.Location = New Point(106, 232)
         btnClear.Name = "btnClear"
         btnClear.Size = New Size(75, 40)
         btnClear.TabIndex = 2
         btnClear.Text = "Clear"
         btnClear.UseVisualStyleBackColor = False
+        ' 
+        ' rdbICJ
+        ' 
+        rdbICJ.AutoSize = True
+        rdbICJ.Location = New Point(6, 67)
+        rdbICJ.Name = "rdbICJ"
+        rdbICJ.Size = New Size(126, 19)
+        rdbICJ.TabIndex = 1
+        rdbICJ.TabStop = True
+        rdbICJ.Text = "Interstate Compact"
+        rdbICJ.UseVisualStyleBackColor = True
+        ' 
+        ' rdbICT
+        ' 
+        rdbICT.AutoSize = True
+        rdbICT.Location = New Point(6, 29)
+        rdbICT.Name = "rdbICT"
+        rdbICT.Size = New Size(135, 19)
+        rdbICT.TabIndex = 0
+        rdbICT.TabStop = True
+        rdbICT.Text = "Inter County Transfer"
+        rdbICT.UseVisualStyleBackColor = True
+        ' 
+        ' gpbType
+        ' 
+        gpbType.BackColor = Color.DodgerBlue
+        gpbType.Controls.Add(rdbICJ)
+        gpbType.Controls.Add(rdbICT)
+        gpbType.ForeColor = SystemColors.Window
+        gpbType.Location = New Point(420, 9)
+        gpbType.Name = "gpbType"
+        gpbType.Size = New Size(147, 114)
+        gpbType.TabIndex = 48
+        gpbType.TabStop = False
+        gpbType.Text = "Record to Enter"
         ' 
         ' frmSearch
         ' 
@@ -93,7 +132,8 @@ Partial Class frmSearch
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
-        ClientSize = New Size(532, 247)
+        ClientSize = New Size(584, 287)
+        Controls.Add(gpbType)
         Controls.Add(btnClear)
         Controls.Add(lblDisplay)
         Controls.Add(btnEnter)
@@ -103,6 +143,8 @@ Partial Class frmSearch
         Name = "frmSearch"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Search for Child"
+        gpbType.ResumeLayout(False)
+        gpbType.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -113,4 +155,7 @@ Partial Class frmSearch
     Friend WithEvents btnEnter As Button
     Friend WithEvents lblDisplay As Label
     Friend WithEvents btnClear As Button
+    Friend WithEvents rdbICJ As RadioButton
+    Friend WithEvents rdbICT As RadioButton
+    Friend WithEvents gpbType As GroupBox
 End Class
