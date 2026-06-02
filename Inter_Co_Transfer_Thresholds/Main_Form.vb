@@ -15,7 +15,7 @@ Imports System.Windows
 Public Class frmMain
 
     Private title As String = "Inter County Transfer Thresholds"
-    Public Shared ReadOnly tdirectory As String = Path.Combine("D:\Temp", "Transfers")
+    Public Shared ReadOnly tdirectory As String = Path.Combine("C:\", "Transfers")
     Public Shared ReadOnly ictfile As String = Path.Combine(tdirectory, "ICT_Thresholds.txt")
     Public Shared ReadOnly icjfile As String = Path.Combine(tdirectory, "ICJ_Thresholds.txt")
 
