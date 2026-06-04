@@ -189,10 +189,23 @@ Public Class frmMain
 
             For Each sentence As String In mySentence
 
-                'TODO Add if/then for Pending cases and look for "Pending" in Start Date (Column 5).
+                If sentence.Contains("Pending") Then
+                    Dim words() = Split(sentence, vbTab)
 
+                    display = String.Join(" ".PadRight(5), words)
 
-                If sentence.Contains("/"c) Then
+                    'Compute numbers of sending/receiving counties for summary at bottom of form
+                    If words(1).TrimEnd = "Orange" Then
+                        recieve += 1
+                    End If
+
+                    If words(2).TrimEnd = "Orange" Then
+                        sent += 1
+                    End If
+
+                    lblICTListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+
+                ElseIf sentence.Contains("/"c) Then
 
                     Dim words() = Split(sentence, vbTab)
 
@@ -209,7 +222,6 @@ Public Class frmMain
                     words(9) = ictDaysRefresh.ToString.PadLeft(3) & " days"
 
                     'Put the words back together with padding for display on form
-
                     display = String.Join(" ".PadRight(5), words)
 
                     'Compute numbers of sending/receiving counties for summary at bottom of form
@@ -225,9 +237,6 @@ Public Class frmMain
                     listing += 1
 
                 End If
-
-
-
             Next
 
             lblTotICTChildren.Text = (listing - 1).ToString
@@ -256,7 +265,24 @@ Public Class frmMain
             Dim display As String
 
             For Each sentence As String In mySentence
-                If sentence.Contains("/"c) Then
+
+                If sentence.Contains("Pending") Then
+                    Dim words() = Split(sentence, vbTab)
+
+                    display = String.Join(" ".PadRight(5), words)
+
+                    'Compute numbers of sending/receiving states for summary at bottom of form
+                    If words(1).TrimEnd = "Texas" Then
+                        receive += 1
+                    End If
+
+                    If words(2).TrimEnd = "Texas" Then
+                        sent += 1
+                    End If
+
+                    lblICJListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+
+                ElseIf sentence.Contains("/"c) Then
 
                     Dim words() = Split(sentence, vbTab)
 

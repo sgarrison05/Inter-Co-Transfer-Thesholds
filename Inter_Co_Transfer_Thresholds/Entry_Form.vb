@@ -285,16 +285,9 @@
 
     Private Sub FillData()
 
-        If rdbPending.Checked Then
-            dtpStart.Enabled = False
-            dtpEnd.Enabled = False
-            lblProgRptDate.Text = "Pending"
-            lblTransThreshold.Text = "Pending"
-            lblDaysRemainProg.Text = "N/A"
-            lblDaysRemainTrns.Text = "N/A"
-            Return
+        'TODO: This section not loading properly on form load call. Breakpoints are not working at this time. 
 
-        Else
+        If Not rdbPending.Checked Then
             dteStart = CDate(dtpStart.Value)
             dteProgress = CDate(dteStart.AddDays(90))
             dteEnd = CDate(dteStart.AddDays(180))
@@ -305,6 +298,15 @@
             lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
             lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
             lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
+
+        Else
+            dtpStart.Enabled = False
+            dtpEnd.Enabled = False
+            lblProgRptDate.Text = "Pending"
+            lblTransThreshold.Text = "Pending"
+            lblDaysRemainProg.Text = "N/A"
+            lblDaysRemainTrns.Text = "N/A"
+            Return
 
         End If
 
@@ -409,10 +411,30 @@
 
     Private Sub rdbPending_Click(sender As Object, e As EventArgs) Handles rdbPending.Click
 
+        dtpStart.Enabled = False
+        dtpEnd.Enabled = False
+        lblProgRptDate.Text = "Pending"
+        lblTransThreshold.Text = "Pending"
+        lblDaysRemainProg.Text = "N/A"
+        lblDaysRemainTrns.Text = "N/A"
+
+
     End Sub
 
     Private Sub rdbSupervision_Click(sender As Object, e As EventArgs) Handles rdbSupervision.Click
 
+        dtpStart.Enabled = True
+        dtpEnd.Enabled = True
+        dteStart = CDate(dtpStart.Value)
+        dteProgress = CDate(dteStart.AddDays(90))
+        dteEnd = CDate(dteStart.AddDays(180))
+
+        dtpEnd.Value = dteEnd
+
+        lblProgRptDate.Text = dteProgress.ToString("MM/dd/yyyy")
+        lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
+        lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
+        lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
     End Sub
 
 End Class
