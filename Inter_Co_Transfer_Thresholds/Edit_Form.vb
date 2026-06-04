@@ -14,8 +14,14 @@
         RefillCombo()
         FillData()
         rdbICT.Checked = True
+        rdbPending.Checked = True
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
+
+        If rdbPending.Checked Then
+            dtpStart.Enabled = False
+            dtpEnd.Enabled = False
+        End If
 
     End Sub
 
@@ -131,30 +137,61 @@
 
     Private Sub WriteDataLine(filepath As String)
 
-        If rdbICT.Checked Then
-            My.Computer.FileSystem.WriteAllText(filepath,
-                childName.PadRight(20) & vbTab &
-                receivingText.PadRight(17) & vbTab &
-                sendingText.PadRight(17) & vbTab &
-                typeOfTransfer.PadRight(22) & vbTab &
-                officer.PadRight(10) & vbTab &
-                dteStart.ToString("MM/dd/yyyy") & vbTab &
-                dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
-                lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+        If rdbPending.Checked Then
+
+            If rdbICT.Checked Then
+                My.Computer.FileSystem.WriteAllText(filepath,
+                    childName.PadRight(20) & vbTab &
+                    receivingText.PadRight(17) & vbTab &
+                    sendingText.PadRight(17) & vbTab &
+                    typeOfTransfer.PadRight(22) & vbTab &
+                    officer.PadRight(10) & vbTab &
+                    dteStart = "Pending".PadRight(3) & vbTab &
+                    dteEnd = "N/A".PadRight(7) & vbTab &
+                    dteProgress = "N/A".PadRight(7) & vbTab &
+                    lblDaysRemainProg.Text.PadLeft(7) & " days" & Space(4) & vbTab &
+                    lblDaysRemainTrns.Text.PadLeft(7) & " days" & vbCrLf, True)
+            Else
+                ' Interstate — no typeOfTransfer column
+                My.Computer.FileSystem.WriteAllText(filepath,
+                    childName.PadRight(20) & vbTab &
+                    receivingText.PadRight(17) & vbTab &
+                    sendingText.PadRight(17) & vbTab &
+                    officer.PadRight(10) & vbTab &
+                    dteStart = "Pending".PadRight(3) & vbTab &
+                    dteEnd = "N/A".PadRight(7) & vbTab &
+                    dteProgress = "N/A".PadRight(7) & vbTab &
+                    lblDaysRemainProg.Text.PadLeft(7) & " days" & Space(4) & vbTab &
+                    lblDaysRemainTrns.Text.PadLeft(7) & " days" & vbCrLf, True)
+            End If
+
         Else
-            ' Interstate — no typeOfTransfer column
-            My.Computer.FileSystem.WriteAllText(filepath,
-                childName.PadRight(20) & vbTab &
-                receivingText.PadRight(17) & vbTab &
-                sendingText.PadRight(17) & vbTab &
-                officer.PadRight(10) & vbTab &
-                dteStart.ToString("MM/dd/yyyy") & vbTab &
-                dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
-                lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+
+            If rdbICT.Checked Then
+                My.Computer.FileSystem.WriteAllText(filepath,
+                    childName.PadRight(20) & vbTab &
+                    receivingText.PadRight(17) & vbTab &
+                    sendingText.PadRight(17) & vbTab &
+                    typeOfTransfer.PadRight(22) & vbTab &
+                    officer.PadRight(10) & vbTab &
+                    dteStart.ToString("MM/dd/yyyy") & vbTab &
+                    dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                    dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                    lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
+                    lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+            Else
+                ' Interstate — no typeOfTransfer column
+                My.Computer.FileSystem.WriteAllText(filepath,
+                    childName.PadRight(20) & vbTab &
+                    receivingText.PadRight(17) & vbTab &
+                    sendingText.PadRight(17) & vbTab &
+                    officer.PadRight(10) & vbTab &
+                    dteStart.ToString("MM/dd/yyyy") & vbTab &
+                    dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                    dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                    lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
+                    lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+            End If
         End If
 
     End Sub
@@ -228,6 +265,7 @@
 
         ' Reset form to default to ICT
         rdbICT.Checked = True
+        rdbPending.Checked = True
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
         cmbTypeID.Visible = True
@@ -247,16 +285,28 @@
 
     Private Sub FillData()
 
-        dteStart = CDate(dtpStart.Value)
-        dteProgress = CDate(dteStart.AddDays(90))
-        dteEnd = CDate(dteStart.AddDays(180))
+        If rdbPending.Checked Then
+            dtpStart.Enabled = False
+            dtpEnd.Enabled = False
+            lblProgRptDate.Text = "Pending"
+            lblTransThreshold.Text = "Pending"
+            lblDaysRemainProg.Text = "N/A"
+            lblDaysRemainTrns.Text = "N/A"
+            Return
 
-        dtpEnd.Value = dteEnd
+        Else
+            dteStart = CDate(dtpStart.Value)
+            dteProgress = CDate(dteStart.AddDays(90))
+            dteEnd = CDate(dteStart.AddDays(180))
 
-        lblProgRptDate.Text = dteProgress.ToString("MM/dd/yyyy")
-        lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
-        lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
-        lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
+            dtpEnd.Value = dteEnd
+
+            lblProgRptDate.Text = dteProgress.ToString("MM/dd/yyyy")
+            lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
+            lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
+            lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
+
+        End If
 
     End Sub
 
@@ -356,4 +406,13 @@
         txbSendCo.ForeColor = Color.Black
 
     End Sub
+
+    Private Sub rdbPending_Click(sender As Object, e As EventArgs) Handles rdbPending.Click
+
+    End Sub
+
+    Private Sub rdbSupervision_Click(sender As Object, e As EventArgs) Handles rdbSupervision.Click
+
+    End Sub
+
 End Class

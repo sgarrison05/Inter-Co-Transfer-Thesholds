@@ -188,6 +188,10 @@ Public Class frmMain
             Dim display As String
 
             For Each sentence As String In mySentence
+
+                'TODO Add if/then for Pending cases and look for "Pending" in Start Date (Column 5).
+
+
                 If sentence.Contains("/"c) Then
 
                     Dim words() = Split(sentence, vbTab)
@@ -221,6 +225,9 @@ Public Class frmMain
                     listing += 1
 
                 End If
+
+
+
             Next
 
             lblTotICTChildren.Text = (listing - 1).ToString
@@ -343,4 +350,10 @@ Public Class frmMain
         End Using
     End Sub
 
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+
+        Using f As New frmEdit
+            f.ShowDialog()
+        End Using
+    End Sub
 End Class
