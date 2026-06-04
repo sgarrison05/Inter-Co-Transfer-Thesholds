@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEntry
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmEdit
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmEntry
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Label9 = New Label()
         Label8 = New Label()
@@ -263,7 +263,7 @@ Partial Class frmEntry
         ' btnSave
         ' 
         btnSave.BackColor = Color.FromArgb(CByte(0), CByte(192), CByte(0))
-        btnSave.Location = New Point(685, 217)
+        btnSave.Location = New Point(685, 216)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(75, 40)
         btnSave.TabIndex = 7
@@ -273,7 +273,7 @@ Partial Class frmEntry
         ' btnReturn
         ' 
         btnReturn.BackColor = Color.Gold
-        btnReturn.Location = New Point(685, 313)
+        btnReturn.Location = New Point(685, 312)
         btnReturn.Name = "btnReturn"
         btnReturn.Size = New Size(75, 40)
         btnReturn.TabIndex = 9
@@ -310,7 +310,7 @@ Partial Class frmEntry
         ' btnClear
         ' 
         btnClear.BackColor = Color.Silver
-        btnClear.Location = New Point(685, 263)
+        btnClear.Location = New Point(685, 262)
         btnClear.Name = "btnClear"
         btnClear.Size = New Size(75, 40)
         btnClear.TabIndex = 8
@@ -324,9 +324,9 @@ Partial Class frmEntry
         lblICTFormID.ForeColor = Color.RoyalBlue
         lblICTFormID.Location = New Point(16, 9)
         lblICTFormID.Name = "lblICTFormID"
-        lblICTFormID.Size = New Size(256, 25)
+        lblICTFormID.Size = New Size(242, 25)
         lblICTFormID.TabIndex = 45
-        lblICTFormID.Text = "Inter County Transfer Entry"
+        lblICTFormID.Text = "Inter County Transfer Edit" & vbCrLf
         lblICTFormID.Visible = False
         ' 
         ' gpbType
@@ -340,12 +340,12 @@ Partial Class frmEntry
         gpbType.Size = New Size(147, 89)
         gpbType.TabIndex = 46
         gpbType.TabStop = False
-        gpbType.Text = "Type of Record to Enter"
+        gpbType.Text = " Type of Record to Enter"
         ' 
         ' rdbICJ
         ' 
         rdbICJ.AutoSize = True
-        rdbICJ.Location = New Point(6, 58)
+        rdbICJ.Location = New Point(6, 61)
         rdbICJ.Name = "rdbICJ"
         rdbICJ.Size = New Size(126, 19)
         rdbICJ.TabIndex = 1
@@ -356,7 +356,7 @@ Partial Class frmEntry
         ' rdbICT
         ' 
         rdbICT.AutoSize = True
-        rdbICT.Location = New Point(6, 25)
+        rdbICT.Location = New Point(6, 29)
         rdbICT.Name = "rdbICT"
         rdbICT.Size = New Size(135, 19)
         rdbICT.TabIndex = 0
@@ -371,9 +371,9 @@ Partial Class frmEntry
         lblICJFormID.ForeColor = Color.Maroon
         lblICJFormID.Location = New Point(16, 9)
         lblICJFormID.Name = "lblICJFormID"
-        lblICJFormID.Size = New Size(348, 25)
+        lblICJFormID.Size = New Size(334, 25)
         lblICJFormID.TabIndex = 47
-        lblICJFormID.Text = "Interstate Compact on Juveniles Entry"
+        lblICJFormID.Text = "Interstate Compact on Juveniles Edit" & vbCrLf
         lblICJFormID.Visible = False
         ' 
         ' gpbStatus
@@ -382,10 +382,10 @@ Partial Class frmEntry
         gpbStatus.Controls.Add(rdbSupervision)
         gpbStatus.Controls.Add(rdbPending)
         gpbStatus.ForeColor = SystemColors.Window
-        gpbStatus.Location = New Point(613, 110)
+        gpbStatus.Location = New Point(613, 111)
         gpbStatus.Name = "gpbStatus"
         gpbStatus.Size = New Size(147, 92)
-        gpbStatus.TabIndex = 49
+        gpbStatus.TabIndex = 48
         gpbStatus.TabStop = False
         gpbStatus.Text = "Status"
         ' 
@@ -411,7 +411,7 @@ Partial Class frmEntry
         rdbPending.Text = "Pending"
         rdbPending.UseVisualStyleBackColor = True
         ' 
-        ' frmEntry
+        ' frmEdit
         ' 
         AcceptButton = btnSave
         AccessibleRole = AccessibleRole.Caret
@@ -452,9 +452,9 @@ Partial Class frmEntry
         Controls.Add(Label1)
         Controls.Add(lblChildNameID)
         FormBorderStyle = FormBorderStyle.FixedSingle
-        Name = "frmEntry"
+        Name = "frmEdit"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Entry Form"
+        Text = "Edit Form"
         gpbType.ResumeLayout(False)
         gpbType.PerformLayout()
         gpbStatus.ResumeLayout(False)
