@@ -11,17 +11,14 @@
 
     Private Sub frmEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        RefillCombo()
-        FillData()
+
         rdbICT.Checked = True
         rdbPending.Checked = True
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
 
-        If rdbPending.Checked Then
-            dtpStart.Enabled = False
-            dtpEnd.Enabled = False
-        End If
+        RefillCombo()
+        FillData()
 
     End Sub
 
@@ -285,16 +282,7 @@
 
     Private Sub FillData()
 
-        If rdbPending.Checked Then
-            dtpStart.Enabled = False
-            dtpEnd.Enabled = False
-            lblProgRptDate.Text = "Pending"
-            lblTransThreshold.Text = "Pending"
-            lblDaysRemainProg.Text = "N/A"
-            lblDaysRemainTrns.Text = "N/A"
-            Return
-
-        Else
+        If Not rdbPending.Checked Then
             dteStart = CDate(dtpStart.Value)
             dteProgress = CDate(dteStart.AddDays(90))
             dteEnd = CDate(dteStart.AddDays(180))
@@ -305,6 +293,14 @@
             lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
             lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
             lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
+        Else
+            dtpStart.Enabled = False
+            dtpEnd.Enabled = False
+            lblProgRptDate.Text = "Pending"
+            lblTransThreshold.Text = "Pending"
+            lblDaysRemainProg.Text = "N/A"
+            lblDaysRemainTrns.Text = "N/A"
+            Return
 
         End If
 
@@ -409,10 +405,33 @@
 
     Private Sub rdbPending_Click(sender As Object, e As EventArgs) Handles rdbPending.Click
 
+        dtpStart.Enabled = False
+        dtpEnd.Enabled = False
+        lblProgRptDate.Text = "Pending"
+        lblTransThreshold.Text = "Pending"
+        lblDaysRemainProg.Text = "N/A"
+        lblDaysRemainTrns.Text = "N/A"
+
     End Sub
 
     Private Sub rdbSupervision_Click(sender As Object, e As EventArgs) Handles rdbSupervision.Click
 
+        dtpStart.Enabled = True
+        dtpEnd.Enabled = True
+        dteStart = CDate(dtpStart.Value)
+        dteProgress = CDate(dteStart.AddDays(90))
+        dteEnd = CDate(dteStart.AddDays(180))
+
+        dtpEnd.Value = dteEnd
+
+        lblProgRptDate.Text = dteProgress.ToString("MM/dd/yyyy")
+        lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
+        lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
+        lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
+
     End Sub
 
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+    End Sub
 End Class
