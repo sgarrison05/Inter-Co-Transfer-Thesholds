@@ -11,12 +11,13 @@
 
     Private Sub frmEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        RefillCombo()
-        FillData()
         rdbICT.Checked = True
         rdbPending.Checked = True
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
+
+        RefillCombo()
+        FillData()
 
     End Sub
 
@@ -273,8 +274,6 @@
     End Sub
 
     Private Sub FillData()
-
-        'TODO: This section not loading properly on form load call. Breakpoints are not working at this time. 
 
         If Not rdbPending.Checked Then
             dteStart = CDate(dtpStart.Value)
