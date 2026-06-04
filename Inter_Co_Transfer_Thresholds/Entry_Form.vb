@@ -18,11 +18,6 @@
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
 
-        If rdbPending.Checked Then
-            dtpStart.Enabled = False
-            dtpEnd.Enabled = False
-        End If
-
     End Sub
 
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
@@ -254,16 +249,18 @@
         txbChildName.Clear()
         txbReceiveCo.Clear()
         txbSendCo.Clear()
-        lblProgRptDate.Text = ""
-        lblTransThreshold.Text = ""
-        lblDaysRemainProg.Text = ""
-        lblDaysRemainTrns.Text = ""
+        dtpStart.Enabled = False
+        dtpEnd.Enabled = False
+        lblProgRptDate.Text = "Pending"
+        lblTransThreshold.Text = "Pending"
+        lblDaysRemainProg.Text = "N/A"
+        lblDaysRemainTrns.Text = "N/A"
         cmbOfficer.SelectedIndex = 0
         cmbType.SelectedIndex = 0
         dtpStart.Value = Date.Today
         dtpEnd.Value = Date.Today.AddDays(180)
 
-        ' Reset form to default to ICT
+        ' Reset form to default to ICT and Pending
         rdbICT.Checked = True
         rdbPending.Checked = True
         lblICTFormID.Visible = True
@@ -306,7 +303,6 @@
             lblTransThreshold.Text = "Pending"
             lblDaysRemainProg.Text = "N/A"
             lblDaysRemainTrns.Text = "N/A"
-            Return
 
         End If
 
