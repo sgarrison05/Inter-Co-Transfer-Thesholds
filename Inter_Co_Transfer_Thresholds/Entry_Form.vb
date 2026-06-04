@@ -141,11 +141,7 @@
                     sendingText.PadRight(17) & vbTab &
                     typeOfTransfer.PadRight(22) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    "Pending".PadRight(3) & vbTab &
-                    "N/A".PadRight(7) & vbTab &
-                    "N/A".PadRight(7) & vbTab &
-                    lblDaysRemainProg.Text.PadLeft(8) & Space(4) & vbTab &
-                    lblDaysRemainTrns.Text.PadLeft(8) & vbCrLf, True)
+                    "Pending".PadRight(3) & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
@@ -153,11 +149,7 @@
                     receivingText.PadRight(17) & vbTab &
                     sendingText.PadRight(17) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    "Pending".PadRight(3) & vbTab &
-                    "N/A".PadRight(7) & vbTab &
-                    "N/A".PadRight(7) & vbTab &
-                    lblDaysRemainProg.Text.PadLeft(8) & Space(4) & vbTab &
-                    lblDaysRemainTrns.Text.PadLeft(8) & vbCrLf, True)
+                    "Pending".PadRight(3) & vbCrLf, True)
             End If
 
         Else
