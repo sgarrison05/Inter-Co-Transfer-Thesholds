@@ -111,13 +111,12 @@
             ' Interstate Pending: at least 4 (Name, RecvState, SendState, Officer)
             ' Interstate Full:    at least 6 (above + StartDate, Threshold)
             ' Header/separator lines will have far fewer tabs and are safely skipped
-            Dim minColumns As Integer = If(rdbICT.Checked, 5, 4)
+            Dim minColumns As Integer = If(rdbICT.Checked, 6, 5)
 
             For Each sentence As String In mySentence
 
-
                 'skip blank lines
-                If String.IsNullOrWhiteSpace(sentence) Then Continue For ' Skip empty lines
+                If String.IsNullOrWhiteSpace(sentence) Then Continue For
 
                 Dim words() As String = Split(sentence, vbTab)
 
@@ -126,7 +125,7 @@
 
                 ' Skip lines that don't start with a plausible name (header lines start with "Child Name:" etc.)
                 ' A data line's first word should not contain a colon
-                If words(0).Contains(":"c) OrElse words(0).Trim().StartsWith("-") Then Continue For
+                If words(0).Contains(":"c) OrElse words(0).Trim().StartsWith("-"c) Then Continue For
 
                 If sentence.IndexOf(txbLastName.Text, StringComparison.OrdinalIgnoreCase) >= 0 Then
 
@@ -219,7 +218,6 @@
                 frmMain.Show()
             End If
         End Using
-
-
     End Sub
+
 End Class
