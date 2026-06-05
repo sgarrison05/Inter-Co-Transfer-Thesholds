@@ -49,7 +49,6 @@ Partial Class frmMain
         lblNinety = New Label()
         lblOneEighty = New Label()
         lblToday = New Label()
-        btnEdit = New Button()
         SuspendLayout()
         ' 
         ' lblICTListingID
@@ -76,7 +75,7 @@ Partial Class frmMain
         ' btnAdd
         ' 
         btnAdd.BackColor = Color.Green
-        btnAdd.Location = New Point(713, 498)
+        btnAdd.Location = New Point(826, 498)
         btnAdd.Name = "btnAdd"
         btnAdd.Size = New Size(75, 39)
         btnAdd.TabIndex = 0
@@ -312,16 +311,6 @@ Partial Class frmMain
         lblToday.Size = New Size(87, 23)
         lblToday.TabIndex = 33
         ' 
-        ' btnEdit
-        ' 
-        btnEdit.BackColor = Color.Thistle
-        btnEdit.Location = New Point(826, 498)
-        btnEdit.Name = "btnEdit"
-        btnEdit.Size = New Size(75, 39)
-        btnEdit.TabIndex = 34
-        btnEdit.Text = "Edit"
-        btnEdit.UseVisualStyleBackColor = False
-        ' 
         ' frmMain
         ' 
         AcceptButton = btnAdd
@@ -329,7 +318,6 @@ Partial Class frmMain
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = brnClose
         ClientSize = New Size(1135, 649)
-        Controls.Add(btnEdit)
         Controls.Add(lblToday)
         Controls.Add(lblOneEighty)
         Controls.Add(lblNinety)
@@ -392,6 +380,5 @@ Partial Class frmMain
     Friend WithEvents lblNinety As Label
     Friend WithEvents lblOneEighty As Label
     Friend WithEvents lblToday As Label
-    Friend WithEvents btnEdit As Button
 
 End Class

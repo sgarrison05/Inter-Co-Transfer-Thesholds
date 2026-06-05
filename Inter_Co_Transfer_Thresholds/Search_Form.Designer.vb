@@ -31,6 +31,7 @@ Partial Class frmSearch
         rdbICJ = New RadioButton()
         rdbICT = New RadioButton()
         gpbType = New GroupBox()
+        btnUpdate = New Button()
         gpbType.SuspendLayout()
         SuspendLayout()
         ' 
@@ -54,7 +55,7 @@ Partial Class frmSearch
         ' btnReturn
         ' 
         btnReturn.BackColor = Color.Gold
-        btnReturn.Location = New Point(196, 232)
+        btnReturn.Location = New Point(292, 232)
         btnReturn.Name = "btnReturn"
         btnReturn.Size = New Size(75, 40)
         btnReturn.TabIndex = 3
@@ -84,7 +85,7 @@ Partial Class frmSearch
         ' btnClear
         ' 
         btnClear.BackColor = SystemColors.ControlDark
-        btnClear.Location = New Point(106, 232)
+        btnClear.Location = New Point(200, 232)
         btnClear.Name = "btnClear"
         btnClear.Size = New Size(75, 40)
         btnClear.TabIndex = 2
@@ -126,6 +127,16 @@ Partial Class frmSearch
         gpbType.TabStop = False
         gpbType.Text = "Record to Enter"
         ' 
+        ' btnUpdate
+        ' 
+        btnUpdate.BackColor = Color.Orange
+        btnUpdate.Location = New Point(107, 232)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(75, 40)
+        btnUpdate.TabIndex = 49
+        btnUpdate.Text = "Update"
+        btnUpdate.UseVisualStyleBackColor = False
+        ' 
         ' frmSearch
         ' 
         AcceptButton = btnEnter
@@ -133,6 +144,7 @@ Partial Class frmSearch
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
         ClientSize = New Size(584, 287)
+        Controls.Add(btnUpdate)
         Controls.Add(gpbType)
         Controls.Add(btnClear)
         Controls.Add(lblDisplay)
@@ -158,4 +170,5 @@ Partial Class frmSearch
     Friend WithEvents rdbICJ As RadioButton
     Friend WithEvents rdbICT As RadioButton
     Friend WithEvents gpbType As GroupBox
+    Friend WithEvents btnUpdate As Button
 End Class

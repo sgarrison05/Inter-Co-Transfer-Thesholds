@@ -380,10 +380,4 @@ Public Class frmMain
         End Using
     End Sub
 
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-
-        Using f As New frmEdit
-            f.ShowDialog()
-        End Using
-    End Sub
 End Class

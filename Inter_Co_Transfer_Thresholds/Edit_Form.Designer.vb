@@ -58,7 +58,6 @@ Partial Class frmEdit
         gpbStatus = New GroupBox()
         rdbSupervision = New RadioButton()
         rdbPending = New RadioButton()
-        btnUpdate = New Button()
         gpbType.SuspendLayout()
         gpbStatus.SuspendLayout()
         SuspendLayout()
@@ -66,7 +65,7 @@ Partial Class frmEdit
         ' Label9
         ' 
         Label9.AutoSize = True
-        Label9.Location = New Point(503, 354)
+        Label9.Location = New Point(501, 299)
         Label9.Name = "Label9"
         Label9.Size = New Size(97, 15)
         Label9.TabIndex = 26
@@ -75,7 +74,7 @@ Partial Class frmEdit
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(170, 354)
+        Label8.Location = New Point(168, 299)
         Label8.Name = "Label8"
         Label8.Size = New Size(119, 15)
         Label8.TabIndex = 25
@@ -120,7 +119,7 @@ Partial Class frmEdit
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(359, 354)
+        Label3.Location = New Point(357, 299)
         Label3.Name = "Label3"
         Label3.Size = New Size(106, 15)
         Label3.TabIndex = 20
@@ -129,7 +128,7 @@ Partial Class frmEdit
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(15, 354)
+        Label2.Location = New Point(13, 299)
         Label2.Name = "Label2"
         Label2.Size = New Size(120, 15)
         Label2.TabIndex = 19
@@ -208,7 +207,7 @@ Partial Class frmEdit
         ' lblProgRptDate
         ' 
         lblProgRptDate.BorderStyle = BorderStyle.FixedSingle
-        lblProgRptDate.Location = New Point(18, 378)
+        lblProgRptDate.Location = New Point(16, 323)
         lblProgRptDate.Name = "lblProgRptDate"
         lblProgRptDate.Size = New Size(103, 23)
         lblProgRptDate.TabIndex = 34
@@ -218,7 +217,7 @@ Partial Class frmEdit
         ' 
         lblDaysRemainProg.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainProg.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainProg.Location = New Point(173, 378)
+        lblDaysRemainProg.Location = New Point(171, 323)
         lblDaysRemainProg.Name = "lblDaysRemainProg"
         lblDaysRemainProg.Size = New Size(57, 23)
         lblDaysRemainProg.TabIndex = 35
@@ -227,7 +226,7 @@ Partial Class frmEdit
         ' lblTransThreshold
         ' 
         lblTransThreshold.BorderStyle = BorderStyle.FixedSingle
-        lblTransThreshold.Location = New Point(362, 378)
+        lblTransThreshold.Location = New Point(360, 323)
         lblTransThreshold.Name = "lblTransThreshold"
         lblTransThreshold.Size = New Size(103, 23)
         lblTransThreshold.TabIndex = 36
@@ -237,7 +236,7 @@ Partial Class frmEdit
         ' 
         lblDaysRemainTrns.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainTrns.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainTrns.Location = New Point(506, 378)
+        lblDaysRemainTrns.Location = New Point(504, 323)
         lblDaysRemainTrns.Name = "lblDaysRemainTrns"
         lblDaysRemainTrns.Size = New Size(57, 23)
         lblDaysRemainTrns.TabIndex = 37
@@ -245,7 +244,7 @@ Partial Class frmEdit
         ' 
         ' Label14
         ' 
-        Label14.Location = New Point(231, 379)
+        Label14.Location = New Point(229, 324)
         Label14.Name = "Label14"
         Label14.Size = New Size(47, 22)
         Label14.TabIndex = 38
@@ -254,7 +253,7 @@ Partial Class frmEdit
         ' 
         ' Label15
         ' 
-        Label15.Location = New Point(569, 372)
+        Label15.Location = New Point(567, 317)
         Label15.Name = "Label15"
         Label15.Size = New Size(47, 22)
         Label15.TabIndex = 39
@@ -274,7 +273,7 @@ Partial Class frmEdit
         ' btnReturn
         ' 
         btnReturn.BackColor = Color.Gold
-        btnReturn.Location = New Point(685, 361)
+        btnReturn.Location = New Point(685, 314)
         btnReturn.Name = "btnReturn"
         btnReturn.Size = New Size(75, 40)
         btnReturn.TabIndex = 9
@@ -311,7 +310,7 @@ Partial Class frmEdit
         ' btnClear
         ' 
         btnClear.BackColor = Color.Silver
-        btnClear.Location = New Point(685, 311)
+        btnClear.Location = New Point(685, 264)
         btnClear.Name = "btnClear"
         btnClear.Size = New Size(75, 40)
         btnClear.TabIndex = 8
@@ -412,16 +411,6 @@ Partial Class frmEdit
         rdbPending.Text = "Pending"
         rdbPending.UseVisualStyleBackColor = True
         ' 
-        ' btnUpdate
-        ' 
-        btnUpdate.BackColor = Color.Orange
-        btnUpdate.Location = New Point(685, 263)
-        btnUpdate.Name = "btnUpdate"
-        btnUpdate.Size = New Size(75, 40)
-        btnUpdate.TabIndex = 49
-        btnUpdate.Text = "Update"
-        btnUpdate.UseVisualStyleBackColor = False
-        ' 
         ' frmEdit
         ' 
         AcceptButton = btnSave
@@ -429,8 +418,7 @@ Partial Class frmEdit
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
-        ClientSize = New Size(772, 416)
-        Controls.Add(btnUpdate)
+        ClientSize = New Size(772, 373)
         Controls.Add(gpbStatus)
         Controls.Add(lblICJFormID)
         Controls.Add(gpbType)
@@ -510,5 +498,4 @@ Partial Class frmEdit
     Friend WithEvents gpbStatus As GroupBox
     Friend WithEvents rdbSupervision As RadioButton
     Friend WithEvents rdbPending As RadioButton
-    Friend WithEvents btnUpdate As Button
 End Class

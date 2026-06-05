@@ -96,4 +96,18 @@
 
     End Sub
 
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+
+        'TODO: Consider passing the found record to the edit form 
+
+
+
+
+        Hide()
+        Using f As New frmEdit
+            f.ShowDialog()
+        End Using
+
+    End Sub
 End Class
