@@ -79,7 +79,7 @@ Partial Class frmSearch
         lblDisplay.ForeColor = Color.White
         lblDisplay.Location = New Point(12, 140)
         lblDisplay.Name = "lblDisplay"
-        lblDisplay.Size = New Size(555, 75)
+        lblDisplay.Size = New Size(598, 75)
         lblDisplay.TabIndex = 47
         ' 
         ' btnClear
@@ -120,7 +120,7 @@ Partial Class frmSearch
         gpbType.Controls.Add(rdbICJ)
         gpbType.Controls.Add(rdbICT)
         gpbType.ForeColor = SystemColors.Window
-        gpbType.Location = New Point(420, 9)
+        gpbType.Location = New Point(463, 9)
         gpbType.Name = "gpbType"
         gpbType.Size = New Size(147, 114)
         gpbType.TabIndex = 48
@@ -143,7 +143,7 @@ Partial Class frmSearch
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
-        ClientSize = New Size(584, 287)
+        ClientSize = New Size(625, 287)
         Controls.Add(btnUpdate)
         Controls.Add(gpbType)
         Controls.Add(btnClear)
