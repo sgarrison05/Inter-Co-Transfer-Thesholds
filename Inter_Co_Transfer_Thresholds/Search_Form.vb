@@ -26,25 +26,29 @@
         ' Populates the edit form with data from the found record
         ' Handles both ICT and Interstate column layouts in one place
 
-        f.txbChildName.Text = SafeWord(words, 0)
-        f.txbReceiveCo.Text = SafeWord(words, 1)
-        f.txbSendCo.Text = SafeWord(words, 2)
+        f.IsEditMode = True
+        f.IncomingIsICT = isICT
+
+        f.IncomingOriginalName = SafeWord(words, 0)
+
+        f.incomingChildName = SafeWord(words, 0)
+        f.IncomingReceiving = SafeWord(words, 1)
+        f.incomingSending = SafeWord(words, 2)
 
         If isICT Then
-            f.rdbICT.Checked = True
-            f.cmbType.Text = SafeWord(words, 3)
-            f.cmbOfficer.Text = SafeWord(words, 4)
-            PopulateDates(f, words, startIdx:=5, endIdx:=6)
+            f.incomingType = SafeWord(words, 3)
+            f.incomingOfficer = SafeWord(words, 4)
+            DetermineAndSetDates(f, words, startIdx:=5, endIdx:=6)
         Else
             ' Interstate — no type column, indices shift left
-            f.rdbICJ.Checked = True
-            f.cmbOfficer.Text = SafeWord(words, 3)
-            PopulateDates(f, words, startIdx:=4, endIdx:=5)
+            f.incomingType = String.Empty ' No type for Interstate records
+            f.incomingOfficer = SafeWord(words, 3)
+            DetermineAndSetDates(f, words, startIdx:=4, endIdx:=5)
         End If
 
     End Sub
 
-    Private Sub PopulateDates(f As frmEdit, words() As String, startIdx As Integer, endIdx As Integer)
+    Private Sub DetermineAndSetDates(f As frmEdit, words() As String, startIdx As Integer, endIdx As Integer)
 
         ' Handles date population including Pending and missing date cases
 
@@ -53,26 +57,18 @@
         Dim parsedStart As DateTime
 
         If DateTime.TryParse(startVal, parsedStart) Then
-            f.rdbSupervision.Checked = True
-            f.dtpStart.Enabled = True
-            f.dtpStart.Value = parsedStart
-        Else
-            ' "Pending" or blank — default to today with date picker disabled
-            f.rdbPending.Checked = True
-            f.dtpStart.Enabled = False
-            f.dtpStart.Value = DateTime.Today
-        End If
+            f.IncomingIsPending = False
+            f.IncomingStartDate = parsedStart
 
-        ' Handle end date — may be blank if record is Pending
-        Dim endVal As String = SafeWord(words, endIdx)
-        Dim parsedEnd As DateTime
-
-        If DateTime.TryParse(endVal, parsedEnd) Then
-            f.dtpEnd.Enabled = True
-            f.dtpEnd.Value = parsedEnd
+            Dim endVal As String = SafeWord(words, endIdx)
+            Dim parsedEnd As DateTime
+            f.IncomingEndDate = If(DateTime.TryParse(endVal, parsedEnd),
+                                   parsedEnd,
+                                   DateTime.Today.AddDays(180))
         Else
-            f.dtpEnd.Enabled = False
-            f.dtpEnd.Value = DateTime.Today.AddDays(180)
+            f.IncomingIsPending = True
+            f.IncomingStartDate = DateTime.Today
+            f.IncomingEndDate = DateTime.Today.AddDays(180)
         End If
 
     End Sub
@@ -119,7 +115,7 @@
                 ' Must have at least 3 columns to be a valid data line (Child Name, Receiving Co, Sending Co)
                 If words.Length < 3 Then Continue For
 
-                If sentence.IndexOf(txbLastName.Text, StringComparison.OrdinalIgnoreCase) >= 0 Then
+                If SafeWord(words, 0).IndexOf(txbLastName.Text, StringComparison.OrdinalIgnoreCase) >= 0 Then
 
                     foundWords = words ' Store for potential use in edit form
                     foundIsICT = rdbICT.Checked
@@ -137,7 +133,7 @@
             Next
 
             ' Prefix result with record type for context
-            Dim recordType As String = If(rdbICT.Checked, "[ICT]" & vbTab, "[Interstate]" & vbTab)
+            Dim recordType As String = If(rdbICT.Checked, "[ICT]     ", "[Interstate]     ")
 
             If String.IsNullOrEmpty(display) Then
                 lblDisplay.Text = "Name not found."
