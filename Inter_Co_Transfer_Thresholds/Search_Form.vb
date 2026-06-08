@@ -105,14 +105,6 @@
             Dim myText As String = My.Computer.FileSystem.ReadAllText(targetFile)
             Dim mySentence() As String = Split(myText, vbCrLf)
 
-            ' Minimum columns needed to be a valid data line:
-            ' ICT Pending:        at least 5 (Name, RecvCo, SendCo, Type, Officer)
-            ' ICT Full:           at least 7 (above + StartDate, Threshold)
-            ' Interstate Pending: at least 4 (Name, RecvState, SendState, Officer)
-            ' Interstate Full:    at least 6 (above + StartDate, Threshold)
-            ' Header/separator lines will have far fewer tabs and are safely skipped
-            Dim minColumns As Integer = If(rdbICT.Checked, 6, 5)
-
             For Each sentence As String In mySentence
 
                 'skip blank lines
@@ -120,12 +112,12 @@
 
                 Dim words() As String = Split(sentence, vbTab)
 
-                ' Skip header, separator, and any line too short to be a data record
-                If words.Length < minColumns Then Continue For
-
                 ' Skip lines that don't start with a plausible name (header lines start with "Child Name:" etc.)
                 ' A data line's first word should not contain a colon
                 If words(0).Contains(":"c) OrElse words(0).Trim().StartsWith("-"c) Then Continue For
+
+                ' Must have at least 3 columns to be a valid data line (Child Name, Receiving Co, Sending Co)
+                If words.Length < 3 Then Continue For
 
                 If sentence.IndexOf(txbLastName.Text, StringComparison.OrdinalIgnoreCase) >= 0 Then
 
@@ -134,18 +126,18 @@
 
                     'Put the words back together with padding for display on form
                     If rdbICT.Checked Then
-                        display = String.Join(" ".PadRight(5), words(0), words(3),
-                                                               words(4), words(6))
+                        display = String.Join(" ".PadRight(5), SafeWord(words, 0), SafeWord(words, 3),
+                                                               SafeWord(words, 4), SafeWord(words, 5))
                     Else
-                        display = String.Join(" ".PadRight(5), words(0), words(3),
-                                                               words(4), words(5))
+                        display = String.Join(" ".PadRight(5), SafeWord(words, 0), SafeWord(words, 3),
+                                                               SafeWord(words, 4), SafeWord(words, 4))
                     End If
                     Exit For
                 End If
             Next
 
             ' Prefix result with record type for context
-            Dim recordType As String = If(rdbICT.Checked, "[ICT] ", "[Interstate] ")
+            Dim recordType As String = If(rdbICT.Checked, "[ICT]" & vbTab, "[Interstate]" & vbTab)
 
             If String.IsNullOrEmpty(display) Then
                 lblDisplay.Text = "Name not found."
