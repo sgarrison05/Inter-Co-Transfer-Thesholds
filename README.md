@@ -26,3 +26,5 @@ v1.1.0 - Added functionality to to update transfer thresholds preview on load.
 v2.0.0 - Added the ability to create and work with Interstate Compact on Juveniles.
 
 v2.1.0 - Extended ability to work with Interstate Ccmpact on Juveniles to include the ability to delete and search.
+
+v3.0.0 - Added the ability to edit transfers in ICT and ICJ as well as work with pending and under supervision.
