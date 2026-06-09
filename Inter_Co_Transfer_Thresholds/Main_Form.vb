@@ -109,8 +109,8 @@ Public Class frmMain
 
                 ElseIf line.Contains("/"c) Then
 
-                ' This is a data line — parse and refresh days remaining
-                Dim words() As String = Split(line, vbTab)
+                    ' This is a data line — parse and refresh days remaining
+                    Dim words() As String = Split(line, vbTab)
 
                     ' Parse both threshold dates — abort with error if either is malformed
                     Dim dteICTThresh As Date
