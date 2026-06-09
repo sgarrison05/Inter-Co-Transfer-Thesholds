@@ -184,7 +184,7 @@ Public Class frmMain
         Try
             Dim myText As String = My.Computer.FileSystem.ReadAllText(ictfile)
             Dim mySentence() As String = Split(myText, vbCrLf)
-            Dim listing As Integer = 1  ' Counter for each record
+            Dim listing As Integer = 0  ' Counter for each record
             Dim recieve As Integer = 0  ' Counter for receiving County
             Dim sent As Integer = 0     ' Counter for sending County
             Dim dteICTThresh As Date
@@ -207,7 +207,8 @@ Public Class frmMain
                         sent += 1
                     End If
 
-                    lblICTListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+                    lblICTListing.Text &= (listing + 1).ToString & ".)  " & display & vbCrLf
+                    listing += 1
 
                 ElseIf sentence.Contains("/"c) Then
 
@@ -237,7 +238,7 @@ Public Class frmMain
                         sent += 1
                     End If
 
-                    lblICTListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+                    lblICTListing.Text &= (listing + 1).ToString & ".)  " & display & vbCrLf
                     listing += 1
 
                 End If
@@ -261,7 +262,7 @@ Public Class frmMain
 
             Dim myText As String = My.Computer.FileSystem.ReadAllText(icjfile)
             Dim mySentence() As String = Split(myText, vbCrLf)
-            Dim listing As Integer = 1
+            Dim listing As Integer = 0 ' Total Counter
             Dim receive As Integer = 0
             Dim sent As Integer = 0
             Dim dteThreshold As Date
@@ -284,7 +285,8 @@ Public Class frmMain
                         sent += 1
                     End If
 
-                    lblICJListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+                    lblICJListing.Text &= (listing + 1).ToString & ".)  " & display & vbCrLf
+                    listing += 1
 
                 ElseIf sentence.Contains("/"c) Then
 
@@ -310,13 +312,13 @@ Public Class frmMain
                         sent += 1
                     End If
 
-                    lblICJListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+                    lblICJListing.Text &= (listing + 1).ToString & ".)  " & display & vbCrLf
                     listing += 1
 
                 End If
             Next
 
-            lblTotICJChildren.Text = (listing - 1).ToString
+            lblTotICJChildren.Text = (listing).ToString
             lblTotICJReceived.Text = receive.ToString
             lblTotICJSent.Text = sent.ToString
 
