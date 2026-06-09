@@ -283,9 +283,9 @@ Partial Class frmMain
         lblICJListingID.ForeColor = Color.Blue
         lblICJListingID.Location = New Point(12, 322)
         lblICJListingID.Name = "lblICJListingID"
-        lblICJListingID.Size = New Size(503, 32)
+        lblICJListingID.Size = New Size(644, 32)
         lblICJListingID.TabIndex = 30
-        lblICJListingID.Text = "Listing of Inter State Compact Supervision:"
+        lblICJListingID.Text = "Listing of Interstate Compact on Juveniles Supervision:"
         ' 
         ' lblNinety
         ' 
