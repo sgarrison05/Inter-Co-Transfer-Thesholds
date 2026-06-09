@@ -92,7 +92,6 @@ Public Class frmEdit
         ClearForm()
         cmbType.Items.Clear()
         cmbOfficer.Items.Clear()
-        Me.DialogResult = DialogResult.Cancel
         Me.Close()
 
     End Sub
@@ -179,8 +178,7 @@ Public Class frmEdit
             MessageBox.Show("Record for " & childName & " has been saved.",
                             "Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Me.DialogResult = DialogResult.OK
-            Me.Close()
+            ClearForm()
 
         Catch ex As Exception
             MessageBox.Show("Error Saving Record: " & ex.Message,
@@ -267,11 +265,7 @@ Public Class frmEdit
                     sendingText.PadRight(17) & vbTab &
                     typeOfTransfer.PadRight(22) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    dteStart = "Pending".PadRight(3) & vbTab &
-                    dteEnd = "N/A".PadRight(7) & vbTab &
-                    dteProgress = "N/A".PadRight(7) & vbTab &
-                    lblDaysRemainProg.Text.PadLeft(7) & " days" & Space(4) & vbTab &
-                    lblDaysRemainTrns.Text.PadLeft(7) & " days" & vbCrLf, True)
+                    dteStart = "Pending".PadRight(3) & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
@@ -279,15 +273,10 @@ Public Class frmEdit
                     receivingText.PadRight(17) & vbTab &
                     sendingText.PadRight(17) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    dteStart = "Pending".PadRight(3) & vbTab &
-                    dteEnd = "N/A".PadRight(7) & vbTab &
-                    dteProgress = "N/A".PadRight(7) & vbTab &
-                    lblDaysRemainProg.Text.PadLeft(7) & " days" & Space(4) & vbTab &
-                    lblDaysRemainTrns.Text.PadLeft(7) & " days" & vbCrLf, True)
+                    dteStart = "Pending".PadRight(3) & vbCrLf, True)
             End If
 
         Else
-
             If rdbICT.Checked Then
                 My.Computer.FileSystem.WriteAllText(filepath,
                     childName.PadRight(20) & vbTab &
@@ -298,8 +287,8 @@ Public Class frmEdit
                     dteStart.ToString("MM/dd/yyyy") & vbTab &
                     dteEnd.ToString("MM/dd/yyyy") & vbTab &
                     dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                    lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
-                    lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+                    lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
+                    lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
@@ -310,8 +299,8 @@ Public Class frmEdit
                     dteStart.ToString("MM/dd/yyyy") & vbTab &
                     dteEnd.ToString("MM/dd/yyyy") & vbTab &
                     dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                    lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
-                    lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+                    lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
+                    lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
             End If
         End If
 

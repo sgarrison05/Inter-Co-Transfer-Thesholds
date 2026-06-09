@@ -165,8 +165,8 @@
                 dteStart.ToString("MM/dd/yyyy") & vbTab &
                 dteEnd.ToString("MM/dd/yyyy") & vbTab &
                 dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
-                lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+                lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
+                lblDaysRemainTrns.Text.Replace(" days", "").Trim().Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
@@ -177,8 +177,8 @@
                 dteStart.ToString("MM/dd/yyyy") & vbTab &
                 dteEnd.ToString("MM/dd/yyyy") & vbTab &
                 dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                lblDaysRemainProg.Text.PadLeft(3) & " days" & Space(4) & vbTab &
-                lblDaysRemainTrns.Text.PadLeft(3) & " days" & vbCrLf, True)
+                lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
+                lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
             End If
         End If
 

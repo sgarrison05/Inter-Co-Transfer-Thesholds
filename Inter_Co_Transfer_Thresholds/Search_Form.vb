@@ -161,8 +161,9 @@
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
 
         CleanForm()
-        Me.Close()
         frmMain.Show()
+        frmMain.btnRefresh.PerformClick() ' Refresh main form data when returning
+        Me.Close()
 
     End Sub
 
@@ -194,18 +195,14 @@
             Return
         End If
 
-        ' Populate edit form and only close if edit was confirmed
         Using f As New frmEdit()
             PopulateEditForm(f, foundWords, foundIsICT)
-            If f.ShowDialog() = DialogResult.OK Then
-                CleanForm()
-                Me.Close()
-                frmMain.lblICJListing.Text = String.Empty
-                frmMain.lblICTListing.Text = String.Empty
-                frmMain.btnRefresh.PerformClick()
-                frmMain.Show()
-            End If
+            f.ShowDialog()
         End Using
+
+        CleanForm()
+
+        btnReturn.PerformClick() ' Return to main form and refresh data after editing
     End Sub
 
 End Class

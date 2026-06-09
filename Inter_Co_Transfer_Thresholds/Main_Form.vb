@@ -243,7 +243,7 @@ Public Class frmMain
                 End If
             Next
 
-            lblTotICTChildren.Text = (listing - 1).ToString
+            lblTotICTChildren.Text = listing.ToString
             lblTotICTReceived.Text = recieve.ToString
             lblTotICTSent.Text = sent.ToString
 
