@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEntry
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmEdit
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmEntry
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Label9 = New Label()
         Label8 = New Label()
@@ -65,7 +65,7 @@ Partial Class frmEntry
         ' Label9
         ' 
         Label9.AutoSize = True
-        Label9.Location = New Point(503, 305)
+        Label9.Location = New Point(501, 299)
         Label9.Name = "Label9"
         Label9.Size = New Size(97, 15)
         Label9.TabIndex = 26
@@ -74,7 +74,7 @@ Partial Class frmEntry
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(170, 305)
+        Label8.Location = New Point(168, 299)
         Label8.Name = "Label8"
         Label8.Size = New Size(119, 15)
         Label8.TabIndex = 25
@@ -119,7 +119,7 @@ Partial Class frmEntry
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(359, 305)
+        Label3.Location = New Point(357, 299)
         Label3.Name = "Label3"
         Label3.Size = New Size(106, 15)
         Label3.TabIndex = 20
@@ -128,7 +128,7 @@ Partial Class frmEntry
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(15, 305)
+        Label2.Location = New Point(13, 299)
         Label2.Name = "Label2"
         Label2.Size = New Size(120, 15)
         Label2.TabIndex = 19
@@ -206,7 +206,8 @@ Partial Class frmEntry
         ' 
         ' lblProgRptDate
         ' 
-        lblProgRptDate.Location = New Point(18, 330)
+        lblProgRptDate.BorderStyle = BorderStyle.FixedSingle
+        lblProgRptDate.Location = New Point(16, 323)
         lblProgRptDate.Name = "lblProgRptDate"
         lblProgRptDate.Size = New Size(103, 23)
         lblProgRptDate.TabIndex = 34
@@ -214,8 +215,9 @@ Partial Class frmEntry
         ' 
         ' lblDaysRemainProg
         ' 
+        lblDaysRemainProg.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainProg.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainProg.Location = New Point(174, 330)
+        lblDaysRemainProg.Location = New Point(171, 323)
         lblDaysRemainProg.Name = "lblDaysRemainProg"
         lblDaysRemainProg.Size = New Size(57, 23)
         lblDaysRemainProg.TabIndex = 35
@@ -223,7 +225,8 @@ Partial Class frmEntry
         ' 
         ' lblTransThreshold
         ' 
-        lblTransThreshold.Location = New Point(362, 330)
+        lblTransThreshold.BorderStyle = BorderStyle.FixedSingle
+        lblTransThreshold.Location = New Point(360, 323)
         lblTransThreshold.Name = "lblTransThreshold"
         lblTransThreshold.Size = New Size(103, 23)
         lblTransThreshold.TabIndex = 36
@@ -231,8 +234,9 @@ Partial Class frmEntry
         ' 
         ' lblDaysRemainTrns
         ' 
+        lblDaysRemainTrns.BorderStyle = BorderStyle.FixedSingle
         lblDaysRemainTrns.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        lblDaysRemainTrns.Location = New Point(509, 330)
+        lblDaysRemainTrns.Location = New Point(504, 323)
         lblDaysRemainTrns.Name = "lblDaysRemainTrns"
         lblDaysRemainTrns.Size = New Size(57, 23)
         lblDaysRemainTrns.TabIndex = 37
@@ -240,7 +244,7 @@ Partial Class frmEntry
         ' 
         ' Label14
         ' 
-        Label14.Location = New Point(231, 327)
+        Label14.Location = New Point(229, 324)
         Label14.Name = "Label14"
         Label14.Size = New Size(47, 22)
         Label14.TabIndex = 38
@@ -249,7 +253,7 @@ Partial Class frmEntry
         ' 
         ' Label15
         ' 
-        Label15.Location = New Point(566, 327)
+        Label15.Location = New Point(567, 317)
         Label15.Name = "Label15"
         Label15.Size = New Size(47, 22)
         Label15.TabIndex = 39
@@ -259,7 +263,7 @@ Partial Class frmEntry
         ' btnSave
         ' 
         btnSave.BackColor = Color.FromArgb(CByte(0), CByte(192), CByte(0))
-        btnSave.Location = New Point(685, 217)
+        btnSave.Location = New Point(685, 216)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(75, 40)
         btnSave.TabIndex = 7
@@ -269,7 +273,7 @@ Partial Class frmEntry
         ' btnReturn
         ' 
         btnReturn.BackColor = Color.Gold
-        btnReturn.Location = New Point(685, 313)
+        btnReturn.Location = New Point(685, 314)
         btnReturn.Name = "btnReturn"
         btnReturn.Size = New Size(75, 40)
         btnReturn.TabIndex = 9
@@ -306,7 +310,7 @@ Partial Class frmEntry
         ' btnClear
         ' 
         btnClear.BackColor = Color.Silver
-        btnClear.Location = New Point(685, 263)
+        btnClear.Location = New Point(685, 264)
         btnClear.Name = "btnClear"
         btnClear.Size = New Size(75, 40)
         btnClear.TabIndex = 8
@@ -320,9 +324,9 @@ Partial Class frmEntry
         lblICTFormID.ForeColor = Color.RoyalBlue
         lblICTFormID.Location = New Point(16, 9)
         lblICTFormID.Name = "lblICTFormID"
-        lblICTFormID.Size = New Size(256, 25)
+        lblICTFormID.Size = New Size(242, 25)
         lblICTFormID.TabIndex = 45
-        lblICTFormID.Text = "Inter County Transfer Entry"
+        lblICTFormID.Text = "Inter County Transfer Edit" & vbCrLf
         lblICTFormID.Visible = False
         ' 
         ' gpbType
@@ -336,12 +340,12 @@ Partial Class frmEntry
         gpbType.Size = New Size(147, 89)
         gpbType.TabIndex = 46
         gpbType.TabStop = False
-        gpbType.Text = "Type of Record to Enter"
+        gpbType.Text = " Type of Record to Enter"
         ' 
         ' rdbICJ
         ' 
         rdbICJ.AutoSize = True
-        rdbICJ.Location = New Point(6, 58)
+        rdbICJ.Location = New Point(6, 61)
         rdbICJ.Name = "rdbICJ"
         rdbICJ.Size = New Size(126, 19)
         rdbICJ.TabIndex = 1
@@ -352,7 +356,7 @@ Partial Class frmEntry
         ' rdbICT
         ' 
         rdbICT.AutoSize = True
-        rdbICT.Location = New Point(6, 25)
+        rdbICT.Location = New Point(6, 29)
         rdbICT.Name = "rdbICT"
         rdbICT.Size = New Size(135, 19)
         rdbICT.TabIndex = 0
@@ -367,9 +371,9 @@ Partial Class frmEntry
         lblICJFormID.ForeColor = Color.Maroon
         lblICJFormID.Location = New Point(16, 9)
         lblICJFormID.Name = "lblICJFormID"
-        lblICJFormID.Size = New Size(348, 25)
+        lblICJFormID.Size = New Size(334, 25)
         lblICJFormID.TabIndex = 47
-        lblICJFormID.Text = "Interstate Compact on Juveniles Entry"
+        lblICJFormID.Text = "Interstate Compact on Juveniles Edit" & vbCrLf
         lblICJFormID.Visible = False
         ' 
         ' gpbStatus
@@ -378,10 +382,10 @@ Partial Class frmEntry
         gpbStatus.Controls.Add(rdbSupervision)
         gpbStatus.Controls.Add(rdbPending)
         gpbStatus.ForeColor = SystemColors.Window
-        gpbStatus.Location = New Point(613, 110)
+        gpbStatus.Location = New Point(613, 111)
         gpbStatus.Name = "gpbStatus"
         gpbStatus.Size = New Size(147, 92)
-        gpbStatus.TabIndex = 49
+        gpbStatus.TabIndex = 48
         gpbStatus.TabStop = False
         gpbStatus.Text = "Status"
         ' 
@@ -407,14 +411,14 @@ Partial Class frmEntry
         rdbPending.Text = "Pending"
         rdbPending.UseVisualStyleBackColor = True
         ' 
-        ' frmEntry
+        ' frmEdit
         ' 
         AcceptButton = btnSave
         AccessibleRole = AccessibleRole.Caret
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
-        ClientSize = New Size(772, 369)
+        ClientSize = New Size(772, 373)
         Controls.Add(gpbStatus)
         Controls.Add(lblICJFormID)
         Controls.Add(gpbType)
@@ -448,9 +452,9 @@ Partial Class frmEntry
         Controls.Add(Label1)
         Controls.Add(lblChildNameID)
         FormBorderStyle = FormBorderStyle.FixedSingle
-        Name = "frmEntry"
+        Name = "frmEdit"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Entry Form"
+        Text = "Edit Form"
         gpbType.ResumeLayout(False)
         gpbType.PerformLayout()
         gpbStatus.ResumeLayout(False)

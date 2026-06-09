@@ -1,4 +1,18 @@
-﻿Public Class frmEntry
+﻿Imports System.IO
+
+Public Class frmEdit
+
+    Public Property IncomingChildName As String = String.Empty
+    Public Property IncomingReceiving As String = String.Empty
+    Public Property IncomingSending As String = String.Empty
+    Public Property IncomingType As String = String.Empty
+    Public Property IncomingOfficer As String = String.Empty
+    Public Property IncomingIsICT As Boolean = True
+    Public Property IncomingIsPending As Boolean = True
+    Public Property IncomingStartDate As DateTime = DateTime.Today
+    Public Property IncomingEndDate As DateTime = DateTime.Today.AddDays(180)
+    Public Property IncomingOriginalName As String = String.Empty ' For tracking original name in edits
+    Public Property IsEditMode As Boolean = False  ' False = new entry, True = editing existing
 
     Public childName As String
     Public sendingText As String
@@ -11,6 +25,7 @@
 
     Private Sub frmEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+
         rdbICT.Checked = True
         rdbPending.Checked = True
         lblICTFormID.Visible = True
@@ -18,6 +33,48 @@
 
         RefillCombo()
         FillData()
+
+    End Sub
+
+    Private Sub frmEdit_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        If Not IsEditMode Then Return
+
+        ' --- Apply ICT vs ICJ ---
+        If IncomingIsICT Then
+            rdbICT.Checked = True
+            rdbICT_Click(Nothing, Nothing)
+        Else
+            rdbICJ.Checked = True
+            rdbICJ_Click(Nothing, Nothing)
+        End If
+
+        ' --- Apply basic fields ---
+        txbChildName.Text = IncomingChildName
+        txbReceiveCo.Text = IncomingReceiving
+        txbSendCo.Text = IncomingSending
+
+        ' --- Apply type and officer ---
+        If IncomingIsICT Then
+            Dim typeIdx As Integer = cmbType.FindStringExact(IncomingType)
+            cmbType.SelectedIndex = If(typeIdx >= 0, typeIdx, 0)
+        End If
+
+        Dim officerIdx As Integer = cmbOfficer.FindStringExact(IncomingOfficer)
+        cmbOfficer.SelectedIndex = If(officerIdx >= 0, officerIdx, 0)
+
+        ' --- Apply pending vs supervision ---
+        If IncomingIsPending Then
+            rdbPending.Checked = True
+            rdbPending_Click(Nothing, Nothing)
+        Else
+            rdbSupervision.Checked = True
+            dtpStart.Enabled = True
+            dtpEnd.Enabled = True
+            dtpStart.Value = IncomingStartDate
+            dtpEnd.Value = IncomingEndDate
+            rdbSupervision_Click(Nothing, Nothing)
+        End If
 
     End Sub
 
@@ -35,10 +92,6 @@
         ClearForm()
         cmbType.Items.Clear()
         cmbOfficer.Items.Clear()
-        frmMain.lblICTListing.Text = String.Empty
-        frmMain.lblICJListing.Text = String.Empty
-        frmMain.Show()
-        frmMain.btnRefresh.PerformClick()
         Me.Close()
 
     End Sub
@@ -107,15 +160,18 @@
 
             If My.Computer.FileSystem.FileExists(targetFile) Then
 
+                If IsEditMode AndAlso Not String.IsNullOrWhiteSpace(IncomingOriginalName) Then
+                    If Not DeleteOriginalRecord(targetFile, IncomingOriginalName) Then
+                        ' Abort if delete failed — do not write duplicate
+                        Return
+                    End If
+                End If
                 WriteDataLine(targetFile)
-
             Else
-
                 'Creates the Directory/File and writes the header and first line of data
                 My.Computer.FileSystem.CreateDirectory(frmMain.tdirectory)
                 WriteHeader(targetFile)
                 WriteDataLine(targetFile)
-
             End If
 
             ' Confirm successful save to user
@@ -131,6 +187,73 @@
 
     End Sub
 
+    Private Function DeleteOriginalRecord(filepath As String, originalName As String) As Boolean
+
+        Dim tempPath As String = Path.Combine(Path.GetDirectoryName(filepath),
+                                              Path.GetFileNameWithoutExtension(filepath) & ".tmp" &
+                                              Path.GetExtension(filepath))
+        Try
+
+            Dim readtxt As String = File.ReadAllText(filepath)
+            Dim newLineIndex As Integer = readtxt.IndexOf(ControlChars.NewLine, 0)
+            Dim entryIndex As Integer = 0
+            Dim recordFound As Boolean = False
+
+            ' Remove any leftover temp file from a previous failed run
+            If File.Exists(tempPath) Then File.Delete(tempPath)
+
+            Do Until newLineIndex = -1
+
+                Dim entry As String = readtxt.Substring(entryIndex, (newLineIndex - entryIndex) + 1)
+
+                ' Skip the line that matches the original name — this removes the old record
+                If entry.IndexOf(originalName, StringComparison.OrdinalIgnoreCase) >= 0 AndAlso
+                   Not entry.Contains(":"c) AndAlso Not entry.Trim().StartsWith("-"c) Then
+                    recordFound = True
+                Else
+                    My.Computer.FileSystem.WriteAllText(tempPath, entry, True)
+                End If
+
+                entryIndex = newLineIndex + 1
+                newLineIndex = readtxt.IndexOf(ControlChars.NewLine, entryIndex)
+
+            Loop
+
+            ' Handle any remaining content after the last newline
+            If entryIndex < readtxt.Length Then
+                Dim remainingLine As String = readtxt.Substring(entryIndex)
+                If remainingLine.Length > 0 Then
+                    If remainingLine.IndexOf(originalName, StringComparison.OrdinalIgnoreCase) >= 0 AndAlso
+                       Not remainingLine.Contains(":"c) AndAlso Not remainingLine.Trim().StartsWith("-"c) Then
+                        recordFound = True
+                    Else
+                        My.Computer.FileSystem.WriteAllText(tempPath, remainingLine, True)
+                    End If
+                End If
+            End If
+
+            If recordFound Then
+                File.Delete(filepath)
+                File.Move(tempPath, filepath)
+                Return True
+            Else
+                ' Original not found — discard temp and abort
+                If File.Exists(tempPath) Then File.Delete(tempPath)
+                MessageBox.Show("Original record for " & originalName & " could not be found for update." &
+                                vbCrLf & "The record was not changed.",
+                                "Update", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
+        Catch ex As Exception
+            If File.Exists(tempPath) Then File.Delete(tempPath)
+            MessageBox.Show("Error updating record: " & ex.Message,
+                            "Entry", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End Try
+
+    End Function
+
     Private Sub WriteDataLine(filepath As String)
 
         If rdbPending.Checked Then
@@ -142,7 +265,7 @@
                     sendingText.PadRight(17) & vbTab &
                     typeOfTransfer.PadRight(22) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    "Pending".PadRight(3) & vbCrLf, True)
+                    dteStart = "Pending".PadRight(3) & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
@@ -150,35 +273,34 @@
                     receivingText.PadRight(17) & vbTab &
                     sendingText.PadRight(17) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    "Pending".PadRight(3) & vbCrLf, True)
+                    dteStart = "Pending".PadRight(3) & vbCrLf, True)
             End If
 
         Else
-
             If rdbICT.Checked Then
                 My.Computer.FileSystem.WriteAllText(filepath,
-                childName.PadRight(20) & vbTab &
-                receivingText.PadRight(17) & vbTab &
-                sendingText.PadRight(17) & vbTab &
-                typeOfTransfer.PadRight(22) & vbTab &
-                officer.PadRight(10) & vbTab &
-                dteStart.ToString("MM/dd/yyyy") & vbTab &
-                dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
-                lblDaysRemainTrns.Text.Replace(" days", "").Trim().Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
+                    childName.PadRight(20) & vbTab &
+                    receivingText.PadRight(17) & vbTab &
+                    sendingText.PadRight(17) & vbTab &
+                    typeOfTransfer.PadRight(22) & vbTab &
+                    officer.PadRight(10) & vbTab &
+                    dteStart.ToString("MM/dd/yyyy") & vbTab &
+                    dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                    dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                    lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
+                    lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
-                childName.PadRight(20) & vbTab &
-                receivingText.PadRight(17) & vbTab &
-                sendingText.PadRight(17) & vbTab &
-                officer.PadRight(10) & vbTab &
-                dteStart.ToString("MM/dd/yyyy") & vbTab &
-                dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
-                lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
+                    childName.PadRight(20) & vbTab &
+                    receivingText.PadRight(17) & vbTab &
+                    sendingText.PadRight(17) & vbTab &
+                    officer.PadRight(10) & vbTab &
+                    dteStart.ToString("MM/dd/yyyy") & vbTab &
+                    dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                    dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                    lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
+                    lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
             End If
         End If
 
@@ -242,18 +364,16 @@
         txbChildName.Clear()
         txbReceiveCo.Clear()
         txbSendCo.Clear()
-        dtpStart.Enabled = False
-        dtpEnd.Enabled = False
-        lblProgRptDate.Text = "Pending"
-        lblTransThreshold.Text = "Pending"
-        lblDaysRemainProg.Text = "N/A"
-        lblDaysRemainTrns.Text = "N/A"
+        lblProgRptDate.Text = ""
+        lblTransThreshold.Text = ""
+        lblDaysRemainProg.Text = ""
+        lblDaysRemainTrns.Text = ""
         cmbOfficer.SelectedIndex = 0
         cmbType.SelectedIndex = 0
         dtpStart.Value = Date.Today
         dtpEnd.Value = Date.Today.AddDays(180)
 
-        ' Reset form to default to ICT and Pending
+        ' Reset form to default to ICT
         rdbICT.Checked = True
         rdbPending.Checked = True
         lblICTFormID.Visible = True
@@ -286,7 +406,6 @@
             lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
             lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
             lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
-
         Else
             dtpStart.Enabled = False
             dtpEnd.Enabled = False
@@ -294,6 +413,7 @@
             lblTransThreshold.Text = "Pending"
             lblDaysRemainProg.Text = "N/A"
             lblDaysRemainTrns.Text = "N/A"
+            Return
 
         End If
 
@@ -405,7 +525,6 @@
         lblDaysRemainProg.Text = "N/A"
         lblDaysRemainTrns.Text = "N/A"
 
-
     End Sub
 
     Private Sub rdbSupervision_Click(sender As Object, e As EventArgs) Handles rdbSupervision.Click
@@ -422,6 +541,6 @@
         lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
         lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
         lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
-    End Sub
 
+    End Sub
 End Class

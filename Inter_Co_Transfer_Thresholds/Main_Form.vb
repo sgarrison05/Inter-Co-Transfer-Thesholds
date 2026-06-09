@@ -103,7 +103,11 @@ Public Class frmMain
 
             For Each line As String In lines
 
-                If line.Contains("/"c) Then
+                If line.Contains("Pending") Then
+                    ' This is a header line — write as-is
+                    My.Computer.FileSystem.WriteAllText(tempPath, line & vbCrLf, True)
+
+                ElseIf line.Contains("/"c) Then
 
                     ' This is a data line — parse and refresh days remaining
                     Dim words() As String = Split(line, vbTab)
@@ -180,7 +184,7 @@ Public Class frmMain
         Try
             Dim myText As String = My.Computer.FileSystem.ReadAllText(ictfile)
             Dim mySentence() As String = Split(myText, vbCrLf)
-            Dim listing As Integer = 1  ' Counter for each record
+            Dim listing As Integer = 0  ' Counter for each record
             Dim recieve As Integer = 0  ' Counter for receiving County
             Dim sent As Integer = 0     ' Counter for sending County
             Dim dteICTThresh As Date
@@ -188,7 +192,25 @@ Public Class frmMain
             Dim display As String
 
             For Each sentence As String In mySentence
-                If sentence.Contains("/"c) Then
+
+                If sentence.Contains("Pending") Then
+                    Dim words() = Split(sentence, vbTab)
+
+                    display = String.Join(" ".PadRight(5), words)
+
+                    'Compute numbers of sending/receiving counties for summary at bottom of form
+                    If words(1).TrimEnd = "Orange" Then
+                        recieve += 1
+                    End If
+
+                    If words(2).TrimEnd = "Orange" Then
+                        sent += 1
+                    End If
+
+                    lblICTListing.Text &= (listing + 1).ToString & ".)  " & display & vbCrLf
+                    listing += 1
+
+                ElseIf sentence.Contains("/"c) Then
 
                     Dim words() = Split(sentence, vbTab)
 
@@ -205,7 +227,6 @@ Public Class frmMain
                     words(9) = ictDaysRefresh.ToString.PadLeft(3) & " days"
 
                     'Put the words back together with padding for display on form
-
                     display = String.Join(" ".PadRight(5), words)
 
                     'Compute numbers of sending/receiving counties for summary at bottom of form
@@ -217,13 +238,13 @@ Public Class frmMain
                         sent += 1
                     End If
 
-                    lblICTListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+                    lblICTListing.Text &= (listing + 1).ToString & ".)  " & display & vbCrLf
                     listing += 1
 
                 End If
             Next
 
-            lblTotICTChildren.Text = (listing - 1).ToString
+            lblTotICTChildren.Text = listing.ToString
             lblTotICTReceived.Text = recieve.ToString
             lblTotICTSent.Text = sent.ToString
 
@@ -241,7 +262,7 @@ Public Class frmMain
 
             Dim myText As String = My.Computer.FileSystem.ReadAllText(icjfile)
             Dim mySentence() As String = Split(myText, vbCrLf)
-            Dim listing As Integer = 1
+            Dim listing As Integer = 0 ' Total Counter
             Dim receive As Integer = 0
             Dim sent As Integer = 0
             Dim dteThreshold As Date
@@ -249,7 +270,25 @@ Public Class frmMain
             Dim display As String
 
             For Each sentence As String In mySentence
-                If sentence.Contains("/"c) Then
+
+                If sentence.Contains("Pending") Then
+                    Dim words() = Split(sentence, vbTab)
+
+                    display = String.Join(" ".PadRight(5), words)
+
+                    'Compute numbers of sending/receiving states for summary at bottom of form
+                    If words(1).TrimEnd = "Texas" Then
+                        receive += 1
+                    End If
+
+                    If words(2).TrimEnd = "Texas" Then
+                        sent += 1
+                    End If
+
+                    lblICJListing.Text &= (listing + 1).ToString & ".)  " & display & vbCrLf
+                    listing += 1
+
+                ElseIf sentence.Contains("/"c) Then
 
                     Dim words() = Split(sentence, vbTab)
 
@@ -273,13 +312,13 @@ Public Class frmMain
                         sent += 1
                     End If
 
-                    lblICJListing.Text &= listing.ToString & ".)  " & display & vbCrLf
+                    lblICJListing.Text &= (listing + 1).ToString & ".)  " & display & vbCrLf
                     listing += 1
 
                 End If
             Next
 
-            lblTotICJChildren.Text = (listing - 1).ToString
+            lblTotICJChildren.Text = (listing).ToString
             lblTotICJReceived.Text = receive.ToString
             lblTotICJSent.Text = sent.ToString
 
