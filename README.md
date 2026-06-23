@@ -15,11 +15,11 @@ to monitor and report on the transfer thresholds, ensuring compliance with progr
 
 ![image](assets/Screenshot_Delete_Form.png)
 
-#### Versions:
-
 3.) **Searching**: Users can search for specific clients or transfer records to quickly access relevant information.
 
-3.) **Preview with Update**: The main form provides a preview of the current transfer thresholds with updated timeframes.
+4.) **Preview with Update**: The main form provides a preview of the current transfer thresholds with updated timeframes.
+
+#### Versions:
 
 v1.0.0 - Initial release with basic functionalities for adding, deleting, and searching clients, as well as previewing transfer threshold.
 
