@@ -2,8 +2,8 @@
 'Purpose:       To manage progress reports and thresholds for inter-county transfers
 'Created:       October 31, 2025
 'By:            Shon Garrison
-'Last Updated:  June 2026
-'Version: 3.0.1
+'Last Updated:  July 2026
+'Version: 3.0.2
 
 Option Explicit On
 Imports System.Globalization
