@@ -265,7 +265,7 @@ Public Class frmEdit
                     sendingText.PadRight(17) & vbTab &
                     typeOfTransfer.PadRight(22) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    dteStart = "Pending".PadRight(3) & vbCrLf, True)
+                    "Pending".PadRight(3) & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
@@ -273,7 +273,7 @@ Public Class frmEdit
                     receivingText.PadRight(17) & vbTab &
                     sendingText.PadRight(17) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    dteStart = "Pending".PadRight(3) & vbCrLf, True)
+                    "Pending".PadRight(3) & vbCrLf, True)
             End If
 
         Else
