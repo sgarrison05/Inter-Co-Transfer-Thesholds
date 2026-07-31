@@ -3,12 +3,18 @@ Imports System.Text
 
 Public Class frmDelete
 
+#Region "-----------------    Form Events   --------------------"
+
     Private Sub frmDelete_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         rdbICT.Checked = True
         txbLastName.Focus()
 
     End Sub
+
+#End Region
+
+#Region "-----------------    Helper Methods   --------------------"
 
     Private Sub DeleteRecord(filepath As String, name As String)
 
@@ -97,6 +103,10 @@ Public Class frmDelete
 
     End Sub
 
+    #End Region
+
+#Region "-----------------    Button Events   --------------------"
+
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
 
         Dim lastName As String = txbLastName.Text.Trim()
@@ -146,5 +156,7 @@ Public Class frmDelete
         Me.Close()
 
     End Sub
+
+#End Region
 
 End Class
