@@ -4,12 +4,18 @@
     Private foundWords As String() = Nothing
     Private foundIsICT As Boolean = True
 
+#Region "-----------------    Form Events   --------------------"
+
     Private Sub frmSearch_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         rdbICT.Checked = True
         txbLastName.Focus()
 
     End Sub
+
+#End Region
+
+#Region "-----------------    Helper Methods   --------------------"
 
     Private Function SafeWord(words() As String, index As Integer) As String
 
@@ -158,6 +164,10 @@
 
     End Sub
 
+#End Region
+
+#Region "-----------------    Button Events   --------------------"
+
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
 
         CleanForm()
@@ -204,5 +214,7 @@
 
         btnReturn.PerformClick() ' Return to main form and refresh data after editing
     End Sub
+
+#End Region
 
 End Class

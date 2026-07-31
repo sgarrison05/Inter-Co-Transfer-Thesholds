@@ -19,7 +19,7 @@ Public Class frmMain
     Public Shared ReadOnly ictfile As String = Path.Combine(tdirectory, "ICT_Thresholds.txt")
     Public Shared ReadOnly icjfile As String = Path.Combine(tdirectory, "ICJ_Thresholds.txt")
 
-    '------------------------------ Form Events --------------------------------------------------
+#Region "------------------------------ Form Events --------------------------------------------------"
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -77,8 +77,9 @@ Public Class frmMain
             End If
         End If
     End Sub
+#End Region
 
-    '------------------------------ Private Subroutines  ---------------------------------------
+#Region "------------------------------ Private Subroutines  ---------------------------------------"
 
     Private Function RefreshFile(filepath As String, isInterstate As Boolean) As Boolean
 
@@ -328,7 +329,9 @@ Public Class frmMain
         End Try
     End Sub
 
-    '------------------------------ Button Events ----------------------------------------------
+#End Region
+
+#Region "------------------------------ Button Events ----------------------------------------------"
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
 
@@ -381,5 +384,6 @@ Public Class frmMain
             f.ShowDialog()
         End Using
     End Sub
+#End Region
 
 End Class

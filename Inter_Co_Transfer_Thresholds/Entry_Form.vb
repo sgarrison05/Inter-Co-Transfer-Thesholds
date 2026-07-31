@@ -9,6 +9,8 @@
     Private dteEnd As Date
     Private dteProgress As Date
 
+#Region "-----------------    Form Events   --------------------"
+
     Private Sub frmEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         rdbICT.Checked = True
@@ -21,40 +23,9 @@
 
     End Sub
 
-    Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
+#End Region
 
-        ' Warn user if fields have data before closing
-        If Not String.IsNullOrWhiteSpace(txbChildName.Text) Then
-            Dim confirm As DialogResult = MessageBox.Show(
-                "You have unsaved data. Are you sure you want to return?",
-                "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button2)
-            If confirm = DialogResult.No Then Return
-        End If
-
-        ClearForm()
-        cmbType.Items.Clear()
-        cmbOfficer.Items.Clear()
-        frmMain.lblICTListing.Text = String.Empty
-        frmMain.lblICJListing.Text = String.Empty
-        frmMain.Show()
-        frmMain.btnRefresh.PerformClick()
-        Me.Close()
-
-    End Sub
-
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
-        CreateEntry()
-
-    End Sub
-
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-
-        ClearForm()
-        txbChildName.Focus()
-
-    End Sub
+#Region "-----------------    Helper Methods   --------------------"
 
     Private Sub CreateEntry()
 
@@ -362,6 +333,45 @@
 
     End Sub
 
+#End Region
+
+#Region "-----------------    Button Events   --------------------"
+
+    Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
+
+        ' Warn user if fields have data before closing
+        If Not String.IsNullOrWhiteSpace(txbChildName.Text) Then
+            Dim confirm As DialogResult = MessageBox.Show(
+                "You have unsaved data. Are you sure you want to return?",
+                "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2)
+            If confirm = DialogResult.No Then Return
+        End If
+
+        ClearForm()
+        cmbType.Items.Clear()
+        cmbOfficer.Items.Clear()
+        frmMain.lblICTListing.Text = String.Empty
+        frmMain.lblICJListing.Text = String.Empty
+        frmMain.Show()
+        frmMain.btnRefresh.PerformClick()
+        Me.Close()
+
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
+        CreateEntry()
+
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+
+        ClearForm()
+        txbChildName.Focus()
+
+    End Sub
+
     Private Sub rdbICT_Click(sender As Object, e As EventArgs) Handles rdbICT.Click
 
         lblICTFormID.Visible = True
@@ -423,5 +433,7 @@
         lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
         lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
     End Sub
+
+#End Region
 
 End Class

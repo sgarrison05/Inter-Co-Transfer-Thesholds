@@ -23,6 +23,7 @@ Public Class frmEdit
     Private dteEnd As Date
     Private dteProgress As Date
 
+#Region "-------------------------   Form Events   -----------------------"
     Private Sub frmEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
 
 
@@ -78,6 +79,9 @@ Public Class frmEdit
 
     End Sub
 
+#End Region
+
+#Region "-------------------------   Button Events   -----------------------"
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
 
         ' Warn user if fields have data before closing
@@ -95,6 +99,10 @@ Public Class frmEdit
         Me.Close()
 
     End Sub
+
+#End Region
+
+#Region "-------------------------   Methods   -----------------------"
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
@@ -439,6 +447,10 @@ Public Class frmEdit
 
     End Sub
 
+#End Region
+
+#Region "-------------------------   Text Changed Events   -----------------------"
+
     Private Sub dtpStart_TextChanged(sender As Object, e As EventArgs) Handles dtpStart.TextChanged
 
         FillData()
@@ -543,4 +555,7 @@ Public Class frmEdit
         lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
 
     End Sub
+
+#End Region
+
 End Class
