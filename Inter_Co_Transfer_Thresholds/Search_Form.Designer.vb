@@ -152,6 +152,7 @@ Partial Class frmSearch
         Controls.Add(btnReturn)
         Controls.Add(txbLastName)
         Controls.Add(lblChildNameID)
+        MaximizeBox = False
         Name = "frmSearch"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Search for Child"

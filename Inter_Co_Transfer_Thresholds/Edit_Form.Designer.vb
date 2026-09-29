@@ -448,6 +448,7 @@ Partial Class frmEdit
         Controls.Add(Label1)
         Controls.Add(lblChildNameID)
         FormBorderStyle = FormBorderStyle.FixedSingle
+        MaximizeBox = False
         Name = "frmEdit"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Edit Form"

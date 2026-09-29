@@ -346,6 +346,7 @@ Partial Class frmMain
         Controls.Add(lblICTListing)
         Controls.Add(lblICTListingID)
         FormBorderStyle = FormBorderStyle.FixedSingle
+        MaximizeBox = False
         Name = "frmMain"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Inter County Transfer Thresholds"

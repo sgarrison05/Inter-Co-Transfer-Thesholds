@@ -128,6 +128,7 @@ Partial Class frmDelete
         Controls.Add(btnReturn)
         Controls.Add(txbLastName)
         Controls.Add(lblChildNameID)
+        MaximizeBox = False
         Name = "frmDelete"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Delete Child"

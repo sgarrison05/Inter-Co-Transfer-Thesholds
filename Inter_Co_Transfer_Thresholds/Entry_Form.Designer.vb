@@ -448,6 +448,7 @@ Partial Class frmEntry
         Controls.Add(Label1)
         Controls.Add(lblChildNameID)
         FormBorderStyle = FormBorderStyle.FixedSingle
+        MinimizeBox = False
         Name = "frmEntry"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Entry Form"
