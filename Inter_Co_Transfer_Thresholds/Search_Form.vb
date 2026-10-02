@@ -33,16 +33,18 @@
 
         f.incomingChildName = SafeWord(words, 0)
         f.IncomingReceiving = SafeWord(words, 1)
-        f.incomingSending = SafeWord(words, 2)
+        f.IncomingSending = SafeWord(words, 2)
 
         If isICT Then
             f.incomingType = SafeWord(words, 3)
-            f.incomingOfficer = SafeWord(words, 4)
+            f.IncomingOfficer = SafeWord(words, 4)
+            f.IncomingProgRptDays = SafeWord(words, 8) ' Pass prog report days to restore checkbox
             DetermineAndSetDates(f, words, startIdx:=5, endIdx:=6)
         Else
             ' Interstate — no type column, indices shift left
             f.incomingType = String.Empty ' No type for Interstate records
-            f.incomingOfficer = SafeWord(words, 3)
+            f.IncomingOfficer = SafeWord(words, 3)
+            f.IncomingProgRptDays = SafeWord(words, 7) ' Pass prog report days to restore checkbox
             DetermineAndSetDates(f, words, startIdx:=4, endIdx:=5)
         End If
 

@@ -7,6 +7,7 @@ Public Class frmEdit
     Public Property IncomingSending As String = String.Empty
     Public Property IncomingType As String = String.Empty
     Public Property IncomingOfficer As String = String.Empty
+    Public Property IncomingProgRptDays As String = String.Empty ' Used to restore checkbox state
     Public Property IncomingIsICT As Boolean = True
     Public Property IncomingIsPending As Boolean = True
     Public Property IncomingStartDate As DateTime = DateTime.Today
@@ -14,6 +15,7 @@ Public Class frmEdit
     Public Property IncomingOriginalName As String = String.Empty ' For tracking original name in edits
     Public Property IsEditMode As Boolean = False  ' False = new entry, True = editing existing
 
+    Public isProgRptCompleted As Boolean ' Tracks progress report completion state
     Public childName As String
     Public sendingText As String
     Public receivingText As String
@@ -30,6 +32,7 @@ Public Class frmEdit
         rdbPending.Checked = True
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
+        ckbProgRpt.Checked = False ' Default to unchecked on load
 
         RefillCombo()
         FillData()
@@ -75,6 +78,16 @@ Public Class frmEdit
             dtpEnd.Value = IncomingEndDate
             rdbSupervision_Click(Nothing, Nothing)
         End If
+
+        ' Restore progress report completed checkbox state (#new)
+        ' If the stored value is "Completed" check the box and update UI accordingly
+        If IncomingProgRptDays.Trim().Equals("Completed", StringComparison.OrdinalIgnoreCase) Then
+            ckbProgRpt.Checked = True
+            chkProgRptCompleted_CheckChanged(Nothing, Nothing)
+        Else
+            ckbProgRpt.Checked = False
+        End If
+
 
     End Sub
 
@@ -147,12 +160,9 @@ Public Class frmEdit
         receivingText = txbReceiveCo.Text
         sendingText = txbSendCo.Text
         officer = cmbOfficer.Text
+        isProgRptCompleted = ckbProgRpt.Checked ' Capture CheckBox State
 
-        If rdbICT.Checked Then
-            typeOfTransfer = cmbType.Text
-        Else
-            typeOfTransfer = String.Empty ' No transfer type for ICJ, set to empty string
-        End If
+        typeOfTransfer = If(rdbICT.Checked, cmbType.Text, String.Empty)
 
         Dim targetFile As String = If(rdbICT.Checked, frmMain.ictfile, frmMain.icjfile)
 
@@ -256,6 +266,16 @@ Public Class frmEdit
 
     Private Sub WriteDataLine(filepath As String)
 
+        Dim progRptValue As String
+
+        If isProgRptCompleted Then
+            progRptValue = "Completed"
+        Else
+            progRptValue = lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days"
+        End If
+
+        Dim threshValue As String = lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days"
+
         If rdbPending.Checked Then
 
             If rdbICT.Checked Then
@@ -277,33 +297,33 @@ Public Class frmEdit
             End If
 
         Else
+
             If rdbICT.Checked Then
                 My.Computer.FileSystem.WriteAllText(filepath,
-                    childName.PadRight(20) & vbTab &
-                    receivingText.PadRight(17) & vbTab &
-                    sendingText.PadRight(17) & vbTab &
-                    typeOfTransfer.PadRight(22) & vbTab &
-                    officer.PadRight(10) & vbTab &
-                    dteStart.ToString("MM/dd/yyyy") & vbTab &
-                    dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                    dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                    lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
-                    lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
+                        childName.PadRight(20) & vbTab &
+                        receivingText.PadRight(17) & vbTab &
+                        sendingText.PadRight(17) & vbTab &
+                        typeOfTransfer.PadRight(22) & vbTab &
+                        officer.PadRight(10) & vbTab &
+                        dteStart.ToString("MM/dd/yyyy") & vbTab &
+                        dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                        dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                        progRptValue & Space(4) & vbTab &
+                        threshValue & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
-                    childName.PadRight(20) & vbTab &
-                    receivingText.PadRight(17) & vbTab &
-                    sendingText.PadRight(17) & vbTab &
-                    officer.PadRight(10) & vbTab &
-                    dteStart.ToString("MM/dd/yyyy") & vbTab &
-                    dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                    dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                    lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
-                    lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
+                        childName.PadRight(20) & vbTab &
+                        receivingText.PadRight(17) & vbTab &
+                        sendingText.PadRight(17) & vbTab &
+                        officer.PadRight(10) & vbTab &
+                        dteStart.ToString("MM/dd/yyyy") & vbTab &
+                        dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                        dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                        progRptValue & Space(4) & vbTab &
+                        threshValue & vbCrLf, True)
             End If
         End If
-
     End Sub
 
     Private Sub WriteHeader(filepath As String)
@@ -388,6 +408,7 @@ Public Class frmEdit
         txbReceiveCo.ForeColor = Color.Black
         txbSendCo.BackColor = Color.White
         txbSendCo.ForeColor = Color.Black
+        ckbProgRpt.Checked = False ' Reset checkbox on clear
 
         txbChildName.Focus()
 
@@ -436,6 +457,31 @@ Public Class frmEdit
         cmbType.Items.Add("Int Det Sent Prob")
         cmbType.Items.Add("Interim Inter Co Trans")
         cmbType.SelectedIndex = 0
+
+    End Sub
+
+    Public Sub chkProgRptCompleted_CheckChanged(sender As Object, e As EventArgs) Handles ckbProgRpt.CheckedChanged
+
+        If ckbProgRpt.Checked Then
+            lblProgRptDate.Text = "Completed"
+            lblProgRptDate.ForeColor = Color.Gray
+            lblDaysRemainProg.Hide()
+            Label14.Hide()
+
+        Else
+            lblProgRptDate.ForeColor = Color.Black
+            lblProgRptDate.Text = dteProgress.ToString("MM/dd/yyyy")
+            lblDaysRemainProg.Show()
+            Label14.Show()
+
+            ' Recalculate if in supervision mode, otherwise restore Pending display
+            If rdbSupervision.Checked Then
+                FillData()
+            ElseIf rdbPending.Checked Then
+                lblDaysRemainProg.Text = "N/A"
+            End If
+
+        End If
 
     End Sub
 
@@ -543,4 +589,5 @@ Public Class frmEdit
         lblDaysRemainTrns.Text = dteEnd.Subtract(Date.Now).Days.ToString
 
     End Sub
+
 End Class

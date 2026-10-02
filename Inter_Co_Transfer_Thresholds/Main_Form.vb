@@ -7,7 +7,6 @@
 
 Option Explicit On
 Imports System.Globalization
-
 Imports System.IO
 Imports System.Text
 Imports System.Windows
@@ -117,7 +116,6 @@ Public Class frmMain
                     Dim dteProgRptThresh As Date
 
                     If Not Date.TryParse(words(idxThreshold).TrimEnd, dteICTThresh) Then
-
                         MessageBox.Show("Invalid ICT Threshold date found in record: " & words(0).Trim & vbCrLf &
                                         "Value: " & words(idxThreshold).TrimEnd & vbCrLf & vbCrLf &
                                         "File refresh has been aborted. Please correct the record and try again.",
@@ -126,11 +124,11 @@ Public Class frmMain
                         ' Clean up temp file if partially written
                         If File.Exists(tempPath) Then File.Delete(tempPath)
                         Return False
-
                     End If
 
-                    If Not Date.TryParse(words(idxProgRpt).TrimEnd, dteProgRptThresh) Then
+                    Dim dteProgRpt As Date
 
+                    If Not Date.TryParse(words(idxProgRpt).TrimEnd, dteProgRptThresh) Then
                         MessageBox.Show("Invalid Progress Report date found in record: " & words(0).Trim & vbCrLf &
                                         "Value: " & words(idxProgRpt).TrimEnd & vbCrLf & vbCrLf &
                                         "File refresh has been aborted. Please correct the record and try again.",
@@ -138,15 +136,20 @@ Public Class frmMain
                         ' Clean up temp file if partially written
                         If File.Exists(tempPath) Then File.Delete(tempPath)
                         Return False
-
                     End If
 
                     ' Recalculate both days remaining values
                     Dim progRptDaysRefresh As Integer = dteProgRptThresh.Subtract(Date.Now).Days
                     Dim ictDaysRefresh As Integer = dteICTThresh.Subtract(Date.Now).Days
 
-                    ' Inject refreshed values back into the word array
-                    words(idxProgDays) = progRptDaysRefresh.ToString.PadLeft(3) & " days"
+                    ' Only recalculate prog rpt days if Not already marked Completed
+                    If words(idxProgDays).Trim().Equals("Completed", StringComparison.OrdinalIgnoreCase) Then
+                        words(idxProgDays) = "Completed"  ' Preserve as-is
+                    Else
+                        Dim progDaysRefresh As Integer = dteProgRpt.Subtract(Date.Now).Days
+                        words(idxProgDays) = progDaysRefresh.ToString.PadLeft(3) & " days"
+                    End If
+
                     words(idxThreshDays) = ictDaysRefresh.ToString.PadLeft(3) & " days"
 
                     ' Rebuild the updated line and write to temp file
@@ -164,7 +167,6 @@ Public Class frmMain
             ' Replace original file with updated temp file
             File.Delete(filepath)
             File.Move(tempPath, filepath)
-
             Return True
 
         Catch ex As Exception
@@ -219,11 +221,18 @@ Public Class frmMain
                     dteProgRptThresh = CDate(words(7).TrimEnd)
 
                     'get updated days remaining in progress report and program
-                    Dim progRptDaysRefresh As Integer = dteProgRptThresh.Subtract(Date.Now).Days
+                    Dim progRptDaysRefresh As Integer
                     Dim ictDaysRefresh As Integer = dteICTThresh.Subtract(Date.Now).Days
 
+                    ' Preserve Completed — do not recalculate prog rpt days (#new)
+                    If words(8).Trim().Equals("Completed", StringComparison.OrdinalIgnoreCase) Then
+                        words(8) = "Completed"
+                    Else
+                        progRptDaysRefresh = dteProgRptThresh.Subtract(Date.Now).Days
+                        words(8) = progRptDaysRefresh.ToString.PadLeft(3) & " days"
+                    End If
+
                     'inject refreshed days remaining into the appropriate array index for display on form
-                    words(8) = progRptDaysRefresh.ToString.PadLeft(3) & " days"
                     words(9) = ictDaysRefresh.ToString.PadLeft(3) & " days"
 
                     'Put the words back together with padding for display on form
@@ -296,10 +305,17 @@ Public Class frmMain
                     dteThreshold = CDate(words(5).TrimEnd)
                     dteProgRpt = CDate(words(6).TrimEnd)
 
-                    Dim progDaysRefresh As Integer = dteProgRpt.Subtract(Date.Now).Days
+                    Dim progDaysRefresh As Integer
                     Dim threshDaysRefresh As Integer = dteThreshold.Subtract(Date.Now).Days
 
-                    words(7) = progDaysRefresh.ToString.PadLeft(3) & " days"
+                    ' Preserve Completed — do not recalculate prog rpt days (#new)
+                    If words(7).Trim().Equals("Completed", StringComparison.OrdinalIgnoreCase) Then
+                        words(7) = "Completed"
+                    Else
+                        progDaysRefresh = dteProgRpt.Subtract(Date.Now).Days
+                        words(7) = progDaysRefresh.ToString.PadLeft(3) & " days"
+                    End If
+
                     words(8) = threshDaysRefresh.ToString.PadLeft(3) & " days"
 
                     display = String.Join(" ".PadRight(5), words)

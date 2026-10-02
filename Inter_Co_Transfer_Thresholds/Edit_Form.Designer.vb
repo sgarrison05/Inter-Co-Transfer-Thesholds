@@ -58,6 +58,7 @@ Partial Class frmEdit
         gpbStatus = New GroupBox()
         rdbSupervision = New RadioButton()
         rdbPending = New RadioButton()
+        ckbProgRpt = New CheckBox()
         gpbType.SuspendLayout()
         gpbStatus.SuspendLayout()
         SuspendLayout()
@@ -411,6 +412,18 @@ Partial Class frmEdit
         rdbPending.Text = "Pending"
         rdbPending.UseVisualStyleBackColor = True
         ' 
+        ' ckbProgRpt
+        ' 
+        ckbProgRpt.AutoSize = True
+        ckbProgRpt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        ckbProgRpt.Location = New Point(395, 232)
+        ckbProgRpt.Name = "ckbProgRpt"
+        ckbProgRpt.Size = New Size(184, 25)
+        ckbProgRpt.TabIndex = 49
+        ckbProgRpt.Text = "Prog Report Complete"
+        ckbProgRpt.TextAlign = ContentAlignment.MiddleCenter
+        ckbProgRpt.UseVisualStyleBackColor = True
+        ' 
         ' frmEdit
         ' 
         AcceptButton = btnSave
@@ -419,6 +432,7 @@ Partial Class frmEdit
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = btnReturn
         ClientSize = New Size(772, 373)
+        Controls.Add(ckbProgRpt)
         Controls.Add(gpbStatus)
         Controls.Add(lblICJFormID)
         Controls.Add(gpbType)
@@ -498,4 +512,5 @@ Partial Class frmEdit
     Friend WithEvents gpbStatus As GroupBox
     Friend WithEvents rdbSupervision As RadioButton
     Friend WithEvents rdbPending As RadioButton
+    Friend WithEvents ckbProgRpt As CheckBox
 End Class
