@@ -93,7 +93,10 @@
             MessageBox.Show("Record for " & childName & " has been saved.",
                             "Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+            frmMain.Show()
             ClearForm()
+            frmMain.btnRefresh.PerformClick()
+            Me.Close()
 
         Catch ex As Exception
             MessageBox.Show("Error Saving Record: " & ex.Message,

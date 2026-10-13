@@ -200,7 +200,10 @@ End Sub
             MessageBox.Show("Record for " & childName & " has been saved.",
                             "Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+            frmMain.Show()
             ClearForm()
+            frmMain.btnRefresh.PerformClick()
+            Me.Close()
 
         Catch ex As Exception
             MessageBox.Show("Error Saving Record: " & ex.Message,
@@ -279,11 +282,14 @@ End Sub
     Private Sub WriteDataLine(filepath As String)
 
         Dim progRptValue As String
+        Dim progRptSuffix As String
 
         If isProgRptCompleted Then
             progRptValue = "Completed"
+            progRptSuffix = String.Empty
         Else
             progRptValue = lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days"
+            progRptSuffix = Space(4)
         End If
 
         Dim threshValue As String = lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days"
