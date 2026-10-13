@@ -89,7 +89,7 @@ Public Class frmEdit
         Else
             ckbProgRpt.Checked = False
         End If
-End Sub
+    End Sub
 
 #End Region
 
@@ -113,10 +113,6 @@ End Sub
 
     End Sub
 
-#End Region
-
-#Region "-------------------------   Methods   -----------------------"
-
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         CreateEntry()
@@ -129,6 +125,10 @@ End Sub
         txbChildName.Focus()
 
     End Sub
+
+#End Region
+
+#Region "-------------------------   Methods   -----------------------"
 
     Private Sub CreateEntry()
 
@@ -481,7 +481,7 @@ End Sub
 
 #Region "-------------------------   Text Changed Events   -----------------------"
 
-Public Sub chkProgRptCompleted_CheckChanged(sender As Object, e As EventArgs) Handles ckbProgRpt.CheckedChanged
+    Public Sub chkProgRptCompleted_CheckChanged(sender As Object, e As EventArgs) Handles ckbProgRpt.CheckedChanged
 
         If ckbProgRpt.Checked Then
             lblProgRptDate.Text = "Completed"

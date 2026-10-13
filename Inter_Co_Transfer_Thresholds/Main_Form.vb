@@ -3,7 +3,7 @@
 'Created:       October 31, 2025
 'By:            Shon Garrison
 'Last Updated:  October 2026
-'Version: 3.1.1
+'Version: 3.1.2
 
 Option Explicit On
 Imports System.Globalization
