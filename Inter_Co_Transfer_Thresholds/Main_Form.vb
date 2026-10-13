@@ -326,7 +326,7 @@ Public Class frmMain
                         words(7) = "Completed"
                     Else
                         progDaysRefresh = dteProgRpt.Subtract(Date.Now).Days
-                        words(7) = progDaysRefresh.ToString.PadLeft(3) & " days"
+                        words(7) = progDaysRefresh.ToString.PadLeft(4) & " days"
                     End If
 
                     words(8) = threshDaysRefresh.ToString.PadLeft(3) & " days"
