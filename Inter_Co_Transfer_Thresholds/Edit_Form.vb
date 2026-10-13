@@ -267,11 +267,14 @@ Public Class frmEdit
     Private Sub WriteDataLine(filepath As String)
 
         Dim progRptValue As String
+        Dim progRptSuffix As String
 
         If isProgRptCompleted Then
             progRptValue = "Completed"
+            progRptSuffix = String.Empty
         Else
             progRptValue = lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days"
+            progRptSuffix = Space(4)
         End If
 
         Dim threshValue As String = lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days"

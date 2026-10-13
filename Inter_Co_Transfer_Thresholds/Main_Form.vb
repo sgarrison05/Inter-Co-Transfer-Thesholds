@@ -111,9 +111,11 @@ Public Class frmMain
                     ' This is a data line — parse and refresh days remaining
                     Dim words() As String = Split(line, vbTab)
 
+                    Dim preserveProgDays As Boolean = words(idxProgDays).Trim().Equals(
+                        "Completed", StringComparison.OrdinalIgnoreCase)
+
                     ' Parse both threshold dates — abort with error if either is malformed
                     Dim dteICTThresh As Date
-                    Dim dteProgRptThresh As Date
 
                     If Not Date.TryParse(words(idxThreshold).TrimEnd, dteICTThresh) Then
                         MessageBox.Show("Invalid ICT Threshold date found in record: " & words(0).Trim & vbCrLf &
@@ -127,6 +129,7 @@ Public Class frmMain
                     End If
 
                     Dim dteProgRpt As Date
+                    Dim dteProgRptThresh As Date
 
                     If Not Date.TryParse(words(idxProgRpt).TrimEnd, dteProgRptThresh) Then
                         MessageBox.Show("Invalid Progress Report date found in record: " & words(0).Trim & vbCrLf &
@@ -138,19 +141,28 @@ Public Class frmMain
                         Return False
                     End If
 
+                    If Not preserveProgDays Then
+                        If Not Date.TryParse(words(idxProgRpt).TrimEnd, dteProgRpt) Then
+                            MessageBox.Show("Invalid Progress Report date found in record: " & words(0).Trim & vbCrLf &
+                                            "Value: " & words(idxProgRpt).TrimEnd & vbCrLf & vbCrLf &
+                                            "File refresh has been aborted. Please correct the record and try again.",
+                                            title, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            If File.Exists(tempPath) Then File.Delete(tempPath)
+                            Return False
+                        End If
+                    End If
+
                     ' Recalculate both days remaining values
                     Dim progRptDaysRefresh As Integer = dteProgRptThresh.Subtract(Date.Now).Days
-                    Dim ictDaysRefresh As Integer = dteICTThresh.Subtract(Date.Now).Days
+                    words(idxThreshDays) = progRptDaysRefresh.ToString.PadLeft(3) & " days"
 
                     ' Only recalculate prog rpt days if Not already marked Completed
-                    If words(idxProgDays).Trim().Equals("Completed", StringComparison.OrdinalIgnoreCase) Then
+                    If preserveProgDays Then
                         words(idxProgDays) = "Completed"  ' Preserve as-is
                     Else
                         Dim progDaysRefresh As Integer = dteProgRpt.Subtract(Date.Now).Days
                         words(idxProgDays) = progDaysRefresh.ToString.PadLeft(3) & " days"
                     End If
-
-                    words(idxThreshDays) = ictDaysRefresh.ToString.PadLeft(3) & " days"
 
                     ' Rebuild the updated line and write to temp file
                     Dim updatedLine As String = String.Join(vbTab, words)
