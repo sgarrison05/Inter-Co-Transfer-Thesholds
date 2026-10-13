@@ -241,7 +241,7 @@ Public Class frmMain
                         words(8) = "Completed"
                     Else
                         progRptDaysRefresh = dteProgRptThresh.Subtract(Date.Now).Days
-                        words(8) = progRptDaysRefresh.ToString.PadLeft(3) & " days"
+                        words(8) = progRptDaysRefresh.ToString.PadLeft(4) & " days"
                     End If
 
                     'inject refreshed days remaining into the appropriate array index for display on form

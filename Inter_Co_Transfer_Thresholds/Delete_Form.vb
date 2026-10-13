@@ -125,7 +125,10 @@ Public Class frmDelete
 
         If confirm = DialogResult.Yes Then
             DeleteRecord(targetFile, lastName)
+            frmMain.Show()
             CleanForm()
+            frmMain.btnRefresh.PerformClick()
+            Me.Close()
         End If
 
     End Sub
