@@ -23,7 +23,7 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         lblICTListingID = New Label()
-        lblICTListing = New Label()
+        lvICT = New ListView()
         btnAdd = New Button()
         btnDelete = New Button()
         lblDateID = New Label()
@@ -36,9 +36,9 @@ Partial Class frmMain
         Label8 = New Label()
         Label9 = New Label()
         brnClose = New Button()
-        btnSearch = New Button()
+        btnUpdate = New Button()
         btnRefresh = New Button()
-        lblICJListing = New Label()
+        lvInterstate = New ListView()
         Label1 = New Label()
         Label2 = New Label()
         Label3 = New Label()
@@ -62,15 +62,19 @@ Partial Class frmMain
         lblICTListingID.TabIndex = 0
         lblICTListingID.Text = "Listing of Inter County Transfer Supervision:" & vbCrLf
         ' 
-        ' lblICTListing
+        ' lvICT
         ' 
-        lblICTListing.BackColor = SystemColors.ActiveCaptionText
-        lblICTListing.Font = New Font("Cascadia Mono", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblICTListing.ForeColor = SystemColors.Control
-        lblICTListing.Location = New Point(12, 36)
-        lblICTListing.Name = "lblICTListing"
-        lblICTListing.Size = New Size(1110, 213)
-        lblICTListing.TabIndex = 1
+        lvICT.BackColor = SystemColors.Desktop
+        lvICT.ForeColor = SystemColors.Info
+        lvICT.FullRowSelect = True
+        lvICT.GridLines = True
+        lvICT.Location = New Point(12, 36)
+        lvICT.MultiSelect = False
+        lvICT.Name = "lvICT"
+        lvICT.Size = New Size(1110, 213)
+        lvICT.TabIndex = 1
+        lvICT.UseCompatibleStateImageBehavior = False
+        lvICT.View = View.Details
         ' 
         ' btnAdd
         ' 
@@ -95,7 +99,7 @@ Partial Class frmMain
         ' lblDateID
         ' 
         lblDateID.AutoSize = True
-        lblDateID.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDateID.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDateID.Location = New Point(18, 592)
         lblDateID.Name = "lblDateID"
         lblDateID.Size = New Size(80, 15)
@@ -104,7 +108,7 @@ Partial Class frmMain
         ' 
         ' lblTotICTChildren
         ' 
-        lblTotICTChildren.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTChildren.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICTChildren.Location = New Point(17, 282)
         lblTotICTChildren.Name = "lblTotICTChildren"
         lblTotICTChildren.Size = New Size(102, 23)
@@ -113,7 +117,7 @@ Partial Class frmMain
         ' 
         ' lblTotICTReceived
         ' 
-        lblTotICTReceived.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTReceived.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICTReceived.Location = New Point(137, 282)
         lblTotICTReceived.Name = "lblTotICTReceived"
         lblTotICTReceived.Size = New Size(102, 23)
@@ -122,7 +126,7 @@ Partial Class frmMain
         ' 
         ' lblTotICTSent
         ' 
-        lblTotICTSent.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotICTSent.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTotICTSent.Location = New Point(264, 282)
         lblTotICTSent.Name = "lblTotICTSent"
         lblTotICTSent.Size = New Size(102, 23)
@@ -132,7 +136,7 @@ Partial Class frmMain
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label5.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
         Label5.Location = New Point(12, 263)
         Label5.Name = "Label5"
         Label5.Size = New Size(107, 15)
@@ -142,17 +146,17 @@ Partial Class frmMain
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label6.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
         Label6.Location = New Point(137, 263)
         Label6.Name = "Label6"
-        Label6.Size = New Size(106, 15)
+        Label6.Size = New Size(113, 15)
         Label6.TabIndex = 13
-        Label6.Text = "Total ICT Recived:"
+        Label6.Text = "Total ICT Received:"
         ' 
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label7.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
         Label7.Location = New Point(264, 263)
         Label7.Name = "Label7"
         Label7.Size = New Size(87, 15)
@@ -162,7 +166,7 @@ Partial Class frmMain
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label8.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
         Label8.Location = New Point(193, 592)
         Label8.Name = "Label8"
         Label8.Size = New Size(119, 15)
@@ -172,7 +176,7 @@ Partial Class frmMain
         ' Label9
         ' 
         Label9.AutoSize = True
-        Label9.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label9.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
         Label9.Location = New Point(373, 592)
         Label9.Name = "Label9"
         Label9.Size = New Size(126, 15)
@@ -189,15 +193,15 @@ Partial Class frmMain
         brnClose.Text = "Close"
         brnClose.UseVisualStyleBackColor = False
         ' 
-        ' btnSearch
+        ' btnUpdate
         ' 
-        btnSearch.BackColor = Color.Gold
-        btnSearch.Location = New Point(935, 498)
-        btnSearch.Name = "btnSearch"
-        btnSearch.Size = New Size(75, 39)
-        btnSearch.TabIndex = 1
-        btnSearch.Text = "Search"
-        btnSearch.UseVisualStyleBackColor = False
+        btnUpdate.BackColor = Color.Gold
+        btnUpdate.Location = New Point(935, 498)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(75, 39)
+        btnUpdate.TabIndex = 1
+        btnUpdate.Text = "Update"
+        btnUpdate.UseVisualStyleBackColor = False
         ' 
         ' btnRefresh
         ' 
@@ -209,20 +213,24 @@ Partial Class frmMain
         btnRefresh.Text = "Refresh"
         btnRefresh.UseVisualStyleBackColor = False
         ' 
-        ' lblICJListing
+        ' lvInterstate
         ' 
-        lblICJListing.BackColor = SystemColors.ActiveCaptionText
-        lblICJListing.Font = New Font("Cascadia Mono", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblICJListing.ForeColor = SystemColors.Control
-        lblICJListing.Location = New Point(12, 358)
-        lblICJListing.Name = "lblICJListing"
-        lblICJListing.Size = New Size(1110, 127)
-        lblICJListing.TabIndex = 20
+        lvInterstate.BackColor = SystemColors.Desktop
+        lvInterstate.ForeColor = SystemColors.Info
+        lvInterstate.FullRowSelect = True
+        lvInterstate.GridLines = True
+        lvInterstate.Location = New Point(12, 358)
+        lvInterstate.MultiSelect = False
+        lvInterstate.Name = "lvInterstate"
+        lvInterstate.Size = New Size(1110, 127)
+        lvInterstate.TabIndex = 20
+        lvInterstate.UseCompatibleStateImageBehavior = False
+        lvInterstate.View = View.Details
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label1.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
         Label1.Location = New Point(264, 498)
         Label1.Name = "Label1"
         Label1.Size = New Size(85, 15)
@@ -232,12 +240,12 @@ Partial Class frmMain
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        Label2.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
         Label2.Location = New Point(137, 498)
         Label2.Name = "Label2"
-        Label2.Size = New Size(104, 15)
+        Label2.Size = New Size(111, 15)
         Label2.TabIndex = 28
-        Label2.Text = "Total ICJ Recived:"
+        Label2.Text = "Total ICJ Received:"
         ' 
         ' Label3
         ' 
@@ -328,9 +336,9 @@ Partial Class frmMain
         Controls.Add(lblTotICJSent)
         Controls.Add(lblTotICJReceived)
         Controls.Add(lblTotICJChildren)
-        Controls.Add(lblICJListing)
+        Controls.Add(lvInterstate)
         Controls.Add(btnRefresh)
-        Controls.Add(btnSearch)
+        Controls.Add(btnUpdate)
         Controls.Add(Label9)
         Controls.Add(Label8)
         Controls.Add(Label7)
@@ -343,7 +351,7 @@ Partial Class frmMain
         Controls.Add(brnClose)
         Controls.Add(btnDelete)
         Controls.Add(btnAdd)
-        Controls.Add(lblICTListing)
+        Controls.Add(lvICT)
         Controls.Add(lblICTListingID)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Name = "frmMain"
@@ -354,7 +362,7 @@ Partial Class frmMain
     End Sub
 
     Friend WithEvents lblICTListingID As Label
-    Friend WithEvents lblICTListing As Label
+    Friend WithEvents lvICT As ListView
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents lblDateID As Label
@@ -367,9 +375,9 @@ Partial Class frmMain
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents brnClose As Button
-    Friend WithEvents btnSearch As Button
+    Friend WithEvents btnUpdate As Button
     Friend WithEvents btnRefresh As Button
-    Friend WithEvents lblICJListing As Label
+    Friend WithEvents lvInterstate As ListView
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label

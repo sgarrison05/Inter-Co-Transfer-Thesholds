@@ -1,4 +1,4 @@
-﻿Public Class frmEntry
+Public Class frmEntry
 
     Public childName As String
     Public sendingText As String
@@ -21,6 +21,8 @@
 
     End Sub
 
+    ' frmMain hides while this form is open and refreshes itself when it closes,
+    ' so Return only needs to confirm and close.
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
 
         ' Warn user if fields have data before closing
@@ -32,13 +34,6 @@
             If confirm = DialogResult.No Then Return
         End If
 
-        ClearForm()
-        cmbType.Items.Clear()
-        cmbOfficer.Items.Clear()
-        frmMain.lblICTListing.Text = String.Empty
-        frmMain.lblICJListing.Text = String.Empty
-        frmMain.Show()
-        frmMain.btnRefresh.PerformClick()
         Me.Close()
 
     End Sub
@@ -122,9 +117,7 @@
             MessageBox.Show("Record for " & childName & " has been saved.",
                             "Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            frmMain.Show()
-            ClearForm()
-            frmMain.btnRefresh.PerformClick()
+            ' Close the form — frmMain shows itself and refreshes both lists
             Me.Close()
 
         Catch ex As Exception
@@ -169,7 +162,7 @@
                 dteEnd.ToString("MM/dd/yyyy") & vbTab &
                 dteProgress.ToString("MM/dd/yyyy") & vbTab &
                 lblDaysRemainProg.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbTab &
-                lblDaysRemainTrns.Text.Replace(" days", "").Trim().Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
+                lblDaysRemainTrns.Text.Replace(" days", "").Trim().PadLeft(3) & " days" & vbCrLf, True)
             Else
                 ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
@@ -330,11 +323,11 @@
 
     Private Sub txbReceiveCo_TextChanged(sender As Object, e As EventArgs) Handles txbReceiveCo.TextChanged
 
-        If rdbICT.Checked And txbReceiveCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
+        If rdbICT.Checked AndAlso txbReceiveCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
             txbReceiveCo.BackColor = Color.Orange
             txbReceiveCo.ForeColor = Color.Black
 
-        ElseIf rdbICJ.Checked And txbReceiveCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
+        ElseIf rdbICJ.Checked AndAlso txbReceiveCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
             txbReceiveCo.BackColor = Color.Maroon
             txbReceiveCo.ForeColor = Color.White
 

@@ -1,49 +1,51 @@
-﻿Imports System.IO
-
 Public Class frmEdit
 
+    ' --- Public staging properties set by frmMain before ShowDialog ---
     Public Property IncomingChildName As String = String.Empty
     Public Property IncomingReceiving As String = String.Empty
     Public Property IncomingSending As String = String.Empty
     Public Property IncomingType As String = String.Empty
     Public Property IncomingOfficer As String = String.Empty
-    Public Property IncomingProgRptDays As String = String.Empty ' Used to restore checkbox state
     Public Property IncomingIsICT As Boolean = True
     Public Property IncomingIsPending As Boolean = True
     Public Property IncomingStartDate As DateTime = DateTime.Today
     Public Property IncomingEndDate As DateTime = DateTime.Today.AddDays(180)
-    Public Property IncomingOriginalName As String = String.Empty ' For tracking original name in edits
-    Public Property IsEditMode As Boolean = False  ' False = new entry, True = editing existing
+    Public Property IncomingProgRptDays As String = String.Empty
+    ' The exact file line of the record being edited — used to remove the original after saving
+    Public Property IncomingOriginalLine As String = String.Empty
+    Public Property IsEditMode As Boolean = False
 
-    Public isProgRptCompleted As Boolean ' Tracks progress report completion state
+    ' --- Internal fields ---
     Public childName As String
     Public sendingText As String
     Public receivingText As String
     Public typeOfTransfer As String
     Public officer As String
+    Public isProgRptCompleted As Boolean
     Private dteStart As Date
     Private dteEnd As Date
     Private dteProgress As Date
 
+    '------------------------------ Form Events --------------------------------------------------
+
     Private Sub frmEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-
+        RefillCombo()
         rdbICT.Checked = True
         rdbPending.Checked = True
         lblICTFormID.Visible = True
         lblICJFormID.Visible = False
-        ckbProgRpt.Checked = False ' Default to unchecked on load
-
-        RefillCombo()
+        ckbProgRpt.Checked = False
         FillData()
 
     End Sub
 
+    ' Shown fires AFTER Load completes — safe to apply incoming data here
     Private Sub frmEdit_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
         If Not IsEditMode Then Return
 
-        ' --- Apply ICT vs ICJ ---
+        ' Apply ICT vs ICJ
         If IncomingIsICT Then
             rdbICT.Checked = True
             rdbICT_Click(Nothing, Nothing)
@@ -52,12 +54,12 @@ Public Class frmEdit
             rdbICJ_Click(Nothing, Nothing)
         End If
 
-        ' --- Apply basic fields ---
+        ' Apply basic fields
         txbChildName.Text = IncomingChildName
         txbReceiveCo.Text = IncomingReceiving
         txbSendCo.Text = IncomingSending
 
-        ' --- Apply type and officer ---
+        ' Apply type and officer
         If IncomingIsICT Then
             Dim typeIdx As Integer = cmbType.FindStringExact(IncomingType)
             cmbType.SelectedIndex = If(typeIdx >= 0, typeIdx, 0)
@@ -66,7 +68,7 @@ Public Class frmEdit
         Dim officerIdx As Integer = cmbOfficer.FindStringExact(IncomingOfficer)
         cmbOfficer.SelectedIndex = If(officerIdx >= 0, officerIdx, 0)
 
-        ' --- Apply pending vs supervision ---
+        ' Apply pending vs supervision
         If IncomingIsPending Then
             rdbPending.Checked = True
             rdbPending_Click(Nothing, Nothing)
@@ -79,21 +81,21 @@ Public Class frmEdit
             rdbSupervision_Click(Nothing, Nothing)
         End If
 
-        ' Restore progress report completed checkbox state (#new)
-        ' If the stored value is "Completed" check the box and update UI accordingly
+        ' Restore progress report completed checkbox state
         If IncomingProgRptDays.Trim().Equals("Completed", StringComparison.OrdinalIgnoreCase) Then
             ckbProgRpt.Checked = True
-            chkProgRptCompleted_CheckChanged(Nothing, Nothing)
+            ckbProgRpt_CheckedChanged(Nothing, Nothing)
         Else
             ckbProgRpt.Checked = False
         End If
 
-
     End Sub
 
+    '------------------------------ Button Events ------------------------------------------------
+
+    ' frmMain refreshes itself when this dialog closes, so Return only needs to close
     Private Sub btnReturn_Click(sender As Object, e As EventArgs) Handles btnReturn.Click
 
-        ' Warn user if fields have data before closing
         If Not String.IsNullOrWhiteSpace(txbChildName.Text) Then
             Dim confirm As DialogResult = MessageBox.Show(
                 "You have unsaved data. Are you sure you want to return?",
@@ -102,9 +104,6 @@ Public Class frmEdit
             If confirm = DialogResult.No Then Return
         End If
 
-        ClearForm()
-        cmbType.Items.Clear()
-        cmbOfficer.Items.Clear()
         Me.Close()
 
     End Sub
@@ -112,6 +111,8 @@ Public Class frmEdit
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         CreateEntry()
+        ClearForm()
+        Me.Close()
 
     End Sub
 
@@ -122,11 +123,13 @@ Public Class frmEdit
 
     End Sub
 
+    '------------------------------ Private Subroutines ------------------------------------------
+
     Private Sub CreateEntry()
 
         If String.IsNullOrWhiteSpace(txbChildName.Text) Then
             MessageBox.Show("Please enter a child name.",
-                    "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txbChildName.Focus()
             Return
         End If
@@ -140,7 +143,6 @@ Public Class frmEdit
             Return
         End If
 
-        'Only validate transfer type for ICT records
         If rdbICT.Checked AndAlso cmbType.SelectedIndex = 0 Then
             MessageBox.Show("Please select a transfer type.",
                             "Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -155,120 +157,61 @@ Public Class frmEdit
             Return
         End If
 
-        ' Assign field values to variables
+        ' Assign field values
         childName = txbChildName.Text
         receivingText = txbReceiveCo.Text
         sendingText = txbSendCo.Text
         officer = cmbOfficer.Text
-        isProgRptCompleted = ckbProgRpt.Checked ' Capture CheckBox State
-
         typeOfTransfer = If(rdbICT.Checked, cmbType.Text, String.Empty)
+        isProgRptCompleted = ckbProgRpt.Checked
 
         Dim targetFile As String = If(rdbICT.Checked, frmMain.ictfile, frmMain.icjfile)
 
         Try
 
-            If My.Computer.FileSystem.FileExists(targetFile) Then
-
-                If IsEditMode AndAlso Not String.IsNullOrWhiteSpace(IncomingOriginalName) Then
-                    If Not DeleteOriginalRecord(targetFile, IncomingOriginalName) Then
-                        ' Abort if delete failed — do not write duplicate
-                        Return
-                    End If
-                End If
-                WriteDataLine(targetFile)
-            Else
-                'Creates the Directory/File and writes the header and first line of data
+            ' Write the updated record FIRST so a failure can never lose data
+            If Not My.Computer.FileSystem.FileExists(targetFile) Then
                 My.Computer.FileSystem.CreateDirectory(frmMain.tdirectory)
                 WriteHeader(targetFile)
-                WriteDataLine(targetFile)
             End If
 
-            ' Confirm successful save to user
-            MessageBox.Show("Record for " & childName & " has been saved.",
-                            "Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            WriteDataLine(targetFile)
 
-            frmMain.Show()
+            Dim savedMessage As String = "Record for " & childName & " has been saved."
+
+            ' Edit mode — remove the original line (exact match). It may live in the other file
+            ' if the user switched between ICT and Interstate while editing.
+            If IsEditMode AndAlso Not String.IsNullOrWhiteSpace(IncomingOriginalLine) Then
+
+                Dim originalFile As String = If(IncomingIsICT, frmMain.ictfile, frmMain.icjfile)
+                Dim problem As String = String.Empty
+
+                If Not frmMain.TryDeleteLine(originalFile, IncomingOriginalLine, problem) Then
+                    savedMessage = "The updated record for " & childName & " was saved, but the original " &
+                                   "entry could not be removed:" & vbCrLf & problem & vbCrLf & vbCrLf &
+                                   "Please delete the old entry from the main screen."
+                End If
+
+                ' This edit is finished — a second save on this form must not try to remove it again
+                IsEditMode = False
+                IncomingOriginalLine = String.Empty
+
+            End If
+
+            MessageBox.Show(savedMessage, "Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
             ClearForm()
-            frmMain.btnRefresh.PerformClick()
-            Me.Close()
 
         Catch ex As Exception
-            MessageBox.Show("Error Saving Record: " & ex.Message,
+            MessageBox.Show("Error saving record: " & ex.Message,
                             "Entry", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
     End Sub
 
-    Private Function DeleteOriginalRecord(filepath As String, originalName As String) As Boolean
-
-        Dim tempPath As String = Path.Combine(Path.GetDirectoryName(filepath),
-                                              Path.GetFileNameWithoutExtension(filepath) & ".tmp" &
-                                              Path.GetExtension(filepath))
-        Try
-
-            Dim readtxt As String = File.ReadAllText(filepath)
-            Dim newLineIndex As Integer = readtxt.IndexOf(ControlChars.NewLine, 0)
-            Dim entryIndex As Integer = 0
-            Dim recordFound As Boolean = False
-
-            ' Remove any leftover temp file from a previous failed run
-            If File.Exists(tempPath) Then File.Delete(tempPath)
-
-            Do Until newLineIndex = -1
-
-                Dim entry As String = readtxt.Substring(entryIndex, (newLineIndex - entryIndex) + 1)
-
-                ' Skip the line that matches the original name — this removes the old record
-                If entry.IndexOf(originalName, StringComparison.OrdinalIgnoreCase) >= 0 AndAlso
-                   Not entry.Contains(":"c) AndAlso Not entry.Trim().StartsWith("-"c) Then
-                    recordFound = True
-                Else
-                    My.Computer.FileSystem.WriteAllText(tempPath, entry, True)
-                End If
-
-                entryIndex = newLineIndex + 1
-                newLineIndex = readtxt.IndexOf(ControlChars.NewLine, entryIndex)
-
-            Loop
-
-            ' Handle any remaining content after the last newline
-            If entryIndex < readtxt.Length Then
-                Dim remainingLine As String = readtxt.Substring(entryIndex)
-                If remainingLine.Length > 0 Then
-                    If remainingLine.IndexOf(originalName, StringComparison.OrdinalIgnoreCase) >= 0 AndAlso
-                       Not remainingLine.Contains(":"c) AndAlso Not remainingLine.Trim().StartsWith("-"c) Then
-                        recordFound = True
-                    Else
-                        My.Computer.FileSystem.WriteAllText(tempPath, remainingLine, True)
-                    End If
-                End If
-            End If
-
-            If recordFound Then
-                File.Delete(filepath)
-                File.Move(tempPath, filepath)
-                Return True
-            Else
-                ' Original not found — discard temp and abort
-                If File.Exists(tempPath) Then File.Delete(tempPath)
-                MessageBox.Show("Original record for " & originalName & " could not be found for update." &
-                                vbCrLf & "The record was not changed.",
-                                "Update", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return False
-            End If
-
-        Catch ex As Exception
-            If File.Exists(tempPath) Then File.Delete(tempPath)
-            MessageBox.Show("Error updating record: " & ex.Message,
-                            "Entry", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        End Try
-
-    End Function
-
     Private Sub WriteDataLine(filepath As String)
 
+        ' "Completed" carries no trailing padding; numeric values keep the original spacing
         Dim progRptValue As String
         Dim progRptSuffix As String
 
@@ -291,50 +234,58 @@ Public Class frmEdit
                     sendingText.PadRight(17) & vbTab &
                     typeOfTransfer.PadRight(22) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    "Pending".PadRight(3) & vbCrLf, True)
+                    "Pending".PadRight(10) & vbTab &
+                    "N/A".PadRight(10) & vbTab &
+                    "N/A".PadRight(10) & vbTab &
+                    "N/A".PadLeft(7) & " days" & Space(4) & vbTab &
+                    "N/A".PadLeft(7) & " days" & vbCrLf, True)
             Else
-                ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
                     childName.PadRight(20) & vbTab &
                     receivingText.PadRight(17) & vbTab &
                     sendingText.PadRight(17) & vbTab &
                     officer.PadRight(10) & vbTab &
-                    "Pending".PadRight(3) & vbCrLf, True)
+                    "Pending".PadRight(10) & vbTab &
+                    "N/A".PadRight(10) & vbTab &
+                    "N/A".PadRight(10) & vbTab &
+                    "N/A".PadLeft(7) & " days" & Space(4) & vbTab &
+                    "N/A".PadLeft(7) & " days" & vbCrLf, True)
             End If
 
         Else
 
             If rdbICT.Checked Then
                 My.Computer.FileSystem.WriteAllText(filepath,
-                        childName.PadRight(20) & vbTab &
-                        receivingText.PadRight(17) & vbTab &
-                        sendingText.PadRight(17) & vbTab &
-                        typeOfTransfer.PadRight(22) & vbTab &
-                        officer.PadRight(10) & vbTab &
-                        dteStart.ToString("MM/dd/yyyy") & vbTab &
-                        dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                        dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                        progRptValue & Space(4) & vbTab &
-                        threshValue & vbCrLf, True)
+                    childName.PadRight(20) & vbTab &
+                    receivingText.PadRight(17) & vbTab &
+                    sendingText.PadRight(17) & vbTab &
+                    typeOfTransfer.PadRight(22) & vbTab &
+                    officer.PadRight(10) & vbTab &
+                    dteStart.ToString("MM/dd/yyyy") & vbTab &
+                    dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                    dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                    progRptValue & progRptSuffix & vbTab &
+                    threshValue & vbCrLf, True)
             Else
-                ' Interstate — no typeOfTransfer column
                 My.Computer.FileSystem.WriteAllText(filepath,
-                        childName.PadRight(20) & vbTab &
-                        receivingText.PadRight(17) & vbTab &
-                        sendingText.PadRight(17) & vbTab &
-                        officer.PadRight(10) & vbTab &
-                        dteStart.ToString("MM/dd/yyyy") & vbTab &
-                        dteEnd.ToString("MM/dd/yyyy") & vbTab &
-                        dteProgress.ToString("MM/dd/yyyy") & vbTab &
-                        progRptValue & Space(4) & vbTab &
-                        threshValue & vbCrLf, True)
+                    childName.PadRight(20) & vbTab &
+                    receivingText.PadRight(17) & vbTab &
+                    sendingText.PadRight(17) & vbTab &
+                    officer.PadRight(10) & vbTab &
+                    dteStart.ToString("MM/dd/yyyy") & vbTab &
+                    dteEnd.ToString("MM/dd/yyyy") & vbTab &
+                    dteProgress.ToString("MM/dd/yyyy") & vbTab &
+                    progRptValue & progRptSuffix & vbTab &
+                    threshValue & vbCrLf, True)
             End If
+
         End If
+
     End Sub
 
     Private Sub WriteHeader(filepath As String)
-        If rdbICT.Checked Then
 
+        If rdbICT.Checked Then
             My.Computer.FileSystem.WriteAllText(filepath,
                                                 "Child Name:".PadRight(20) & vbTab &
                                                 "Receiving County:" & vbTab &
@@ -357,9 +308,7 @@ Public Class frmEdit
                                                 "----------".PadRight(14) & vbTab &
                                                 "----------" & ControlChars.NewLine,
                                                 True)
-
         Else
-
             My.Computer.FileSystem.WriteAllText(filepath,
                                                 "Child Name:".PadRight(20) & vbTab &
                                                 "Receiving State:" & vbTab &
@@ -380,7 +329,6 @@ Public Class frmEdit
                                                 "----------".PadRight(14) & vbTab &
                                                 "----------" & ControlChars.NewLine,
                                                 True)
-
         End If
 
     End Sub
@@ -398,8 +346,6 @@ Public Class frmEdit
         cmbType.SelectedIndex = 0
         dtpStart.Value = Date.Today
         dtpEnd.Value = Date.Today.AddDays(180)
-
-        ' Reset form to default to ICT
         rdbICT.Checked = True
         rdbPending.Checked = True
         lblICTFormID.Visible = True
@@ -408,14 +354,11 @@ Public Class frmEdit
         cmbType.Visible = True
         lblReceiveID.Text = "Receiving County:"
         lblSendID.Text = "Sending County:"
-
-        ' Reset text box colors
         txbReceiveCo.BackColor = Color.White
         txbReceiveCo.ForeColor = Color.Black
         txbSendCo.BackColor = Color.White
         txbSendCo.ForeColor = Color.Black
-        ckbProgRpt.Checked = False ' Reset checkbox on clear
-
+        ckbProgRpt.Checked = False
         txbChildName.Focus()
 
     End Sub
@@ -426,9 +369,7 @@ Public Class frmEdit
             dteStart = CDate(dtpStart.Value)
             dteProgress = CDate(dteStart.AddDays(90))
             dteEnd = CDate(dteStart.AddDays(180))
-
             dtpEnd.Value = dteEnd
-
             lblProgRptDate.Text = dteProgress.ToString("MM/dd/yyyy")
             lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
             lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
@@ -440,15 +381,12 @@ Public Class frmEdit
             lblTransThreshold.Text = "Pending"
             lblDaysRemainProg.Text = "N/A"
             lblDaysRemainTrns.Text = "N/A"
-            Return
-
         End If
 
     End Sub
 
     Private Sub RefillCombo()
 
-        'Add officers to combo box
         cmbOfficer.Items.Add("[Select Officer]")
         cmbOfficer.Items.Add("Garrison")
         cmbOfficer.Items.Add("Anderson")
@@ -456,7 +394,6 @@ Public Class frmEdit
         cmbOfficer.Items.Add("Childress")
         cmbOfficer.SelectedIndex = 0
 
-        'Add transfer types to combo box
         cmbType.Items.Add("[Select Type]")
         cmbType.Items.Add("Int Probation")
         cmbType.Items.Add("Int Deferred")
@@ -466,27 +403,22 @@ Public Class frmEdit
 
     End Sub
 
-    Public Sub chkProgRptCompleted_CheckChanged(sender As Object, e As EventArgs) Handles ckbProgRpt.CheckedChanged
+    '------------------------------ Control Events -----------------------------------------------
+
+    Private Sub ckbProgRpt_CheckedChanged(sender As Object, e As EventArgs) Handles ckbProgRpt.CheckedChanged
 
         If ckbProgRpt.Checked Then
-            lblProgRptDate.Text = "Completed"
+            lblDaysRemainProg.Text = "Completed"
             lblProgRptDate.ForeColor = Color.Gray
-            lblDaysRemainProg.Hide()
-            Label14.Hide()
-
+            lblDaysRemainProg.ForeColor = Color.Gray
         Else
             lblProgRptDate.ForeColor = Color.Black
-            lblProgRptDate.Text = dteProgress.ToString("MM/dd/yyyy")
-            lblDaysRemainProg.Show()
-            Label14.Show()
-
-            ' Recalculate if in supervision mode, otherwise restore Pending display
+            lblDaysRemainProg.ForeColor = Color.Black
             If rdbSupervision.Checked Then
                 FillData()
             ElseIf rdbPending.Checked Then
                 lblDaysRemainProg.Text = "N/A"
             End If
-
         End If
 
     End Sub
@@ -499,18 +431,15 @@ Public Class frmEdit
 
     Private Sub txbReceiveCo_TextChanged(sender As Object, e As EventArgs) Handles txbReceiveCo.TextChanged
 
-        If rdbICT.Checked And txbReceiveCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
+        If rdbICT.Checked AndAlso txbReceiveCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
             txbReceiveCo.BackColor = Color.Orange
             txbReceiveCo.ForeColor = Color.Black
-
-        ElseIf rdbICJ.Checked And txbReceiveCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
+        ElseIf rdbICJ.Checked AndAlso txbReceiveCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
             txbReceiveCo.BackColor = Color.Maroon
             txbReceiveCo.ForeColor = Color.White
-
         Else
             txbReceiveCo.BackColor = Color.White
             txbReceiveCo.ForeColor = Color.Black
-
         End If
 
     End Sub
@@ -520,17 +449,13 @@ Public Class frmEdit
         If rdbICT.Checked AndAlso txbSendCo.Text.Trim().Equals("Orange", StringComparison.OrdinalIgnoreCase) Then
             txbSendCo.BackColor = Color.Orange
             txbSendCo.ForeColor = Color.Black
-
         ElseIf rdbICJ.Checked AndAlso txbSendCo.Text.Trim().Equals("Texas", StringComparison.OrdinalIgnoreCase) Then
             txbSendCo.BackColor = Color.Maroon
             txbSendCo.ForeColor = Color.White
-
         Else
             txbSendCo.BackColor = Color.White
             txbSendCo.ForeColor = Color.Black
-
         End If
-
 
     End Sub
 
@@ -542,8 +467,6 @@ Public Class frmEdit
         cmbType.Visible = True
         lblReceiveID.Text = "Receiving County:"
         lblSendID.Text = "Sending County:"
-
-        ' Reset in case click changes type:
         txbReceiveCo.BackColor = Color.White
         txbReceiveCo.ForeColor = Color.Black
         txbSendCo.BackColor = Color.White
@@ -559,8 +482,6 @@ Public Class frmEdit
         cmbType.Visible = False
         lblReceiveID.Text = "Receiving State:"
         lblSendID.Text = "Sending State:"
-
-        ' Reset in case click changes type:
         txbReceiveCo.BackColor = Color.White
         txbReceiveCo.ForeColor = Color.Black
         txbSendCo.BackColor = Color.White
@@ -586,9 +507,7 @@ Public Class frmEdit
         dteStart = CDate(dtpStart.Value)
         dteProgress = CDate(dteStart.AddDays(90))
         dteEnd = CDate(dteStart.AddDays(180))
-
         dtpEnd.Value = dteEnd
-
         lblProgRptDate.Text = dteProgress.ToString("MM/dd/yyyy")
         lblTransThreshold.Text = dteEnd.ToString("MM/dd/yyyy")
         lblDaysRemainProg.Text = dteProgress.Subtract(Date.Now).Days.ToString
