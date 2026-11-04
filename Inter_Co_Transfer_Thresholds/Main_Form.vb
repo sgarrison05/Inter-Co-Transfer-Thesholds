@@ -18,7 +18,7 @@ Public Class frmMain
     Private Const homeCounty As String = "Orange"   ' ICT records
     Private Const homeState As String = "Texas"     ' Interstate records
 
-    Public Shared ReadOnly tdirectory As String = Path.Combine("D:\Temp", "Transfers")
+    Public Shared ReadOnly tdirectory As String = Path.Combine("C:\", "Transfers")
     Public Shared ReadOnly ictfile As String = Path.Combine(tdirectory, "ICT_Thresholds.txt")
     Public Shared ReadOnly icjfile As String = Path.Combine(tdirectory, "Interstate_Thresholds.txt")
 
