@@ -82,7 +82,7 @@ Public Class frmMain
         lv.FullRowSelect = True
         lv.MultiSelect = False
         lv.HideSelection = False   ' Keep the selected row highlighted when a button has focus
-        lv.GridLines = True
+        lv.GridLines = False
 
         lv.Columns.Clear()
         lv.Columns.Add("#", 35)
